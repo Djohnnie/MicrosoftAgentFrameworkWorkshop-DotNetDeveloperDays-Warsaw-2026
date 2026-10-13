@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/0. Introduction/" />
+  <Folder Name="/0. Introduction/001. Tokenization demo/">
+    <Project Path="exercise-001\TokenVisualizer.csproj" />
+  </Folder>
+  <Folder Name="/1. From LLM calls to agents/" />
+  <Folder Name="/2. Giving agents capabilities - tools and MCP/" />
+  <Folder Name="/3. Orchestrating agents and workflows/" />
+  <Folder Name="/4. Making agents reliable and production-ready/" />
+</Solution>

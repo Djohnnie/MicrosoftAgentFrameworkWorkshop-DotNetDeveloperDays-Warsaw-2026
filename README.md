@@ -17,12 +17,34 @@ deck with [`_tools\svg_to_pptx.ps1`](_tools/svg_to_pptx.ps1).
 
 [![Introduction section](_slides/slide-05.svg)](_slides/slide-05.svg)
 
-[![Part 1 section](_slides/slide-06.svg)](_slides/slide-06.svg)
+[![The evolution of AI](_slides/slide-06.svg)](_slides/slide-06.svg)
 
-[![Part 2 section](_slides/slide-07.svg)](_slides/slide-07.svg)
+[![Types of machine learning](_slides/slide-07.svg)](_slides/slide-07.svg)
 
-[![Part 3 section](_slides/slide-08.svg)](_slides/slide-08.svg)
+[![The reinforcement loop](_slides/slide-08.svg)](_slides/slide-08.svg)
 
-[![Part 4 section](_slides/slide-09.svg)](_slides/slide-09.svg)
+[![AI is not one thing](_slides/slide-09.svg)](_slides/slide-09.svg)
 
-[![Thank-you slide with workshop QR code](_slides/slide-10.svg)](_slides/slide-10.svg)
+[![What is a model?](_slides/slide-10.svg)](_slides/slide-10.svg)
+
+[![How LLMs work](_slides/slide-11.svg)](_slides/slide-11.svg)
+
+[![Exercise 001: Tokenization demo](_slides/slide-12.svg)](_slides/slide-12.svg)
+
+[![Why LLMs hallucinate](_slides/slide-13.svg)](_slides/slide-13.svg)
+
+[![RAG: giving an LLM the right knowledge](_slides/slide-14.svg)](_slides/slide-14.svg)
+
+[![Beyond chatbots](_slides/slide-15.svg)](_slides/slide-15.svg)
+
+[![Agent orchestration](_slides/slide-16.svg)](_slides/slide-16.svg)
+
+[![Part 1 section](_slides/slide-17.svg)](_slides/slide-17.svg)
+
+[![Part 2 section](_slides/slide-18.svg)](_slides/slide-18.svg)
+
+[![Part 3 section](_slides/slide-19.svg)](_slides/slide-19.svg)
+
+[![Part 4 section](_slides/slide-20.svg)](_slides/slide-20.svg)
+
+[![Thank-you slide with workshop QR code](_slides/slide-21.svg)](_slides/slide-21.svg)

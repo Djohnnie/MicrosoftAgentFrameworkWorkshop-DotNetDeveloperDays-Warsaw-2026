@@ -1,7 +1,8 @@
 # Presentation tools
 
-The ten numbered SVG sources in `_slides` introduce the workshop and
-can be exported as a full-bleed image-based PowerPoint. The
+The 21 numbered SVG sources in `_slides` introduce the workshop and cover
+the AI fundamentals before the workshop sections. They can be exported as a
+full-bleed image-based PowerPoint. The
 tools use PowerShell and Microsoft Edge, with no Python, Node.js, or package
 installation required.
 
@@ -20,7 +21,7 @@ To regenerate only selected slides without touching the others:
 ```
 
 Edit the content and layouts in `build-slides.ps1` and rerun it. It generates
-`slide-01.svg` through `slide-10.svg`, embedding the fonts, conference logo,
+`slide-01.svg` through `slide-21.svg`, embedding the fonts, conference logo,
 Zure icon, speaker photo, and repository QR code from `_resources`. Use
 `-OnlySlides` with slide numbers to regenerate selected slides without
 touching the others.
@@ -30,8 +31,18 @@ important content within the 100-unit horizontal margins and above the footer
 at y=985. Use Raleway 700 for headings and Open Sans for body text. XML-escape
 text when editing the generator.
 
-Slides 2 through 10 include the repository link, Zure icon, and slide number in
+Slides 2 through 21 include the repository link, Zure icon, and slide number in
 the footer; the title slide has no footer.
+
+## Exercise slide template
+
+Slide 12 uses `ExerciseBody` in `build-slides.ps1`: a hands-on banner, exercise
+number badge, three numbered action cards, a clickable project path, and a
+takeaway. Reuse this helper for future exercises, supplying the exercise
+number, title, subtitle, repository-relative project path, exactly three step
+titles/detail arrays, and a short takeaway. Keep card details to two short
+lines and the title short enough to fit beside the decorative code icon.
+Pass the resulting body to `SaveSlide` with the new slide number.
 
 ## Export PowerPoint
 

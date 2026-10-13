@@ -13,10 +13,16 @@
     .label{font-size:20px;letter-spacing:3px;font-weight:700;fill:#ff6a3f}
     .agenda-time{font-weight:700;fill:#ff6a3f}
     .agenda-pause{fill:#a6a6a6}
+    .accent{fill:#ff6a3f;font-weight:700}
+    .muted{fill:#999999}
+    .diagram-arrow{fill:none;stroke:#ff6a3f;stroke-width:4;marker-end:url(#arrowhead)}
   </style>
   <linearGradient id="accent" x1="0" y1="1" x2="1" y2="0">
     <stop stop-color="#bd0926"/><stop offset="1" stop-color="#ff6a3f"/>
   </linearGradient>
+  <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+    <path d="M0 0L10 5L0 10Z" fill="#ff6a3f"/>
+  </marker>
 </defs>
 <rect width="1920" height="1080" fill="#161616"/>
 <rect width="1920" height="8" fill="url(#accent)"/>

@@ -418,6 +418,9 @@ FodyWeavers.xsd
 # Local History for Visual Studio Code
 .history/
 
+# Local exercise configuration can contain Foundry API keys.
+/exercises/exercise-001/Properties/launchSettings.json
+
 # Built Visual Studio Code Extensions
 *.vsix
 
