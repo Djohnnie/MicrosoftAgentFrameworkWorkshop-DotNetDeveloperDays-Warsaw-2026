@@ -2,7 +2,9 @@
 
 This is a .NET DeveloperDays Warsaw 2026 workshop, not a production application.
 The implemented exercises are independent .NET 10 console applications in
-`exercises\exercises.slnx`. Part 1 deliberately progresses through small,
+`exercises\exercises.slnx`. Labs live in `labs\labs.slnx` (separate solution,
+same numbered part folders) under `labs\lab-NNN` with `starter` and `solution`
+subfolders. Part 1 deliberately progresses through small,
 participant-friendly examples rather than a shared application framework.
 
 The root `README.md` is the slide-by-slide workshop guide. Exercise READMEs
@@ -17,6 +19,9 @@ Run commands from the repository root in PowerShell:
 ```powershell
 # Build all exercises.
 dotnet build .\exercises\exercises.slnx
+
+# Build all labs (starter and solution projects).
+dotnet build .\labs\labs.slnx
 
 # Build or run only the exercise being changed.
 dotnet build .\exercises\exercise-106\ChatbotAgent.csproj
@@ -64,6 +69,15 @@ interactive terminal; the simpler Part 1 loops also accept piped input.
   `StoredOutputEnabled = false` disables server-side Responses storage.
   `DebugHistory` reads the actual session with `TryGetInMemoryChatHistory`.
   History is local, but inference still sends it to Foundry.
+- **Lab 100:** DevDays Buddy builds on 106. `agenda.json` (conference info plus
+  every Tuesday/Wednesday slot with day, date, times, room, type, level,
+  description, and speakers with name/title/description, scraped from the
+  Sessionize agenda on developerdays.eu) is an `EmbeddedResource` with
+  `LogicalName="agenda.json"`; the raw JSON is interpolated into the agent
+  instructions. Spectre.Console 0.57.2 adds a banner, status spinner, answer
+  panels, and an `agenda` table; input uses `Console.ReadLine`, so piped input
+  works. The starter has the packages, the same `agenda.json`, and TODOs only.
+  Keep both `agenda.json` copies identical; no tools in Part 1 labs.
 
 Keep Part 1 code short enough for participants to type. Preserve each
 exercise's teaching boundary: do not add history to 101, agents to 101-105,
@@ -81,16 +95,18 @@ these clients into `AIProjectClient` or enable project-level agent APIs.
 Local `Properties\launchSettings.json` profiles are optional and explicitly
 ignored per exercise in `.gitignore`. They may contain real API keys: do not
 print their contents, embed their values in documentation, or commit them.
-When adding a cloud exercise, add its profile path to `.gitignore` before
+When adding a cloud exercise or lab, add its profile path to `.gitignore` before
 copying local configuration.
 
-Package versions differ intentionally. Exercises 001 and 101-104 use OpenAI
-2.8.0; 101-104 use Microsoft.Extensions.AI/OpenAI 10.3.0. Exercise 106 uses
-Microsoft.Agents.AI 1.0.0, the OpenAI adapter 10.4.0, and OpenAI 2.9.1:
-its model is passed to `AsIChatClient(model)`, not the ResponsesClient
-constructor. Mixing the older adapter with 106's AI abstractions can build
-but fail at runtime. Exercise 105 uses OllamaSharp 5.5.0 and its transitive
-AI dependencies. Do not homogenize these versions without checking SDK
+Exercises 001, 101-104, 106, and the lab 100 solution use OpenAI 2.14.0;
+101-104 use Microsoft.Extensions.AI/OpenAI 10.11.0; 106 and the lab 100
+solution use Microsoft.Agents.AI 1.24.0 with the OpenAI adapter 10.11.0 (the
+lab 100 starter still references 106's older 1.0.0/10.4.0/2.9.1 versions).
+In 2.14.0, `ResponsesClient` takes `ResponsesClientOptions` (not
+`OpenAIClientOptions`) and no model: pass the deployment to
+`AsIChatClient(model)`, or set `CreateResponseOptions.Model` when using the
+SDK directly (001). Exercise 105 uses OllamaSharp 5.5.0 and its transitive
+AI dependencies. Do not change these versions without checking SDK
 signatures and runtime compatibility. Responses exercises suppress `OPENAI001`.
 
 Console labels are `[USER]:` and `[ASSISTANT]:`; exercise 103 includes the
@@ -99,7 +115,8 @@ EOF or case-insensitive `quit`. Only 001 implements `clear`.
 
 ## Keeping exercises and presentation synchronized
 
-A new exercise includes a project, a README, a solution-folder entry, a
+A new exercise or lab includes a project, a README, a solution-folder entry
+(`exercises.slnx` for exercises, `labs.slnx` for labs), a
 slide, and a link to its README directly below that slide image in the root
 README. Keep code snippets, package descriptions, and history claims aligned
 with the implementation.
@@ -121,7 +138,8 @@ Raleway 700 headings, Open Sans body text, 100-unit horizontal margins,
 and a footer at y=985. Fonts and graphics are embedded from `_resources`.
 See `_tools\README.md` for layout and export details.
 
-Current exercise slides are 001 at 12 and 101-106 at 20-25; section dividers
+Current exercise slides are 001 at 12 and 101-106 at 20-25, and lab 100 is at
+26 (`ExerciseBody -badge 'LAB'`, header `LAB 100`); section dividers
 and closing slides follow them. Adding slides requires updating generator
 numbering, the shifted SVG outputs, root README headings/image references,
 and the deck, as well as slide-count references in tool documentation.

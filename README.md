@@ -202,29 +202,38 @@ Run `qwen2.5:7b` locally with Ollama and replace exercise 102's Foundry client w
 
 Wrap the Foundry-backed `IChatClient` in an `AIAgent` using `ChatClientAgentOptions`, `InMemoryChatHistoryProvider`, and `ChatOptions.Instructions` for a cheerful persona whose age stays at 10. `RawRepresentationFactory` sets `CreateResponseOptions.StoredOutputEnabled = false` so history is kept in the local session, not continued through stored server responses. Create one `AgentSession` before the loop and pass it to each `RunAsync` call. After every reply, `DebugHistory` uses `TryGetInMemoryChatHistory` to print the actual local messages; they are still sent to Foundry for inference. This is the final exercise of Part 1; tools and workflows come later.
 
-### Slide 26 - Part 2: Giving agents capabilities: tools and MCP
+### Slide 26 - Lab 100: DevDays Buddy
 ![Slide 26](_slides/slide-26.svg)
+
+[Lab 100 README](labs/lab-100/README.md)
+
+> **TL;DR:** Build an agent that answers questions about the .NET DeveloperDays Warsaw 2026 agenda.
+
+Combine everything from Part 1 in a lab with an empty `starter` and a possible `solution`. The conference description and the full Tuesday and Wednesday agenda—day, time, room, session title and description, and speaker names and descriptions—are hard-coded in `agenda.json`, compiled in as an embedded resource, and placed in the agent instructions as context. One `AgentSession` keeps follow-up questions in context, and Spectre.Console adds a banner, a thinking spinner, answer panels, and an `agenda` table. The whole agenda is sent with every request, which motivates the tools in Part 2.
+
+### Slide 27 - Part 2: Giving agents capabilities: tools and MCP
+![Slide 27](_slides/slide-27.svg)
 
 > **TL;DR:** Give agents tools and MCP capabilities so they can look up information instead of guessing.
 
 Part 2 grounds an agent's responses by connecting it to tools that search a session catalog or check schedule availability and conflicts. The model decides when to call a focused capability, while application code performs the actual lookup and validation. MCP can expose a capability through a server or connect the agent to one.
 
-### Slide 27 - Part 3: Orchestrating agents and workflows
-![Slide 27](_slides/slide-27.svg)
+### Slide 28 - Part 3: Orchestrating agents and workflows
+![Slide 28](_slides/slide-28.svg)
 
 > **TL;DR:** Coordinate specialist agents and workflows to combine their work into one useful result.
 
 Part 3 splits a larger request between a Session Scout and an Itinerary Planner, then uses an orchestrator or workflow to coordinate their handoffs. The scout finds and explains relevant sessions; the planner uses those actual candidates to build a schedule within the attendee's available time and avoid overlaps. The exercise also compares when this extra coordination helps and when one specialist is enough.
 
-### Slide 28 - Part 4: Making agents reliable and production-ready
-![Slide 28](_slides/slide-28.svg)
+### Slide 29 - Part 4: Making agents reliable and production-ready
+![Slide 29](_slides/slide-29.svg)
 
 > **TL;DR:** Make agents reliable with validation, clear failure handling, logging, and tests.
 
 Part 4 improves agent reliability with input and data validation, understandable error handling, concise logging, and tests for important behavior. It also reinforces that application code—not an unsupported model claim—should verify critical rules such as whether a proposed schedule contains conflicts.
 
-### Slide 29 - Any questions?
-![Slide 29](_slides/slide-29.svg)
+### Slide 30 - Any questions?
+![Slide 30](_slides/slide-30.svg)
 
 > **TL;DR:** You are wrapping up with time for questions and a link to the workshop materials.
 

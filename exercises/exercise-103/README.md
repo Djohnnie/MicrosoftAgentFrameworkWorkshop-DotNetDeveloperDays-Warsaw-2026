@@ -8,7 +8,7 @@
 
 Start with [exercise 102](../exercise-102/README.md)'s chatbot with history and give it a changing persona. The first reply is from a curious, cheerful 10-year-old; subsequent replies use ages **8, 6, 4, 2, 0**, then stay at **0**. A **system message** guides the model's behavior for the current age.
 
-The `IChatClient` setup, `OpenAI` SDK version 2.8.0, `Microsoft.Extensions.AI` / `Microsoft.Extensions.AI.OpenAI` version 10.3.0, `OPENAI001` warning suppression, and conversation loop stay the same. The adapter still calls the Responses API. There is no Agent Framework agent yet.
+The `IChatClient` setup, `OpenAI` SDK version 2.14.0, `Microsoft.Extensions.AI` / `Microsoft.Extensions.AI.OpenAI` version 10.11.0, `OPENAI001` warning suppression, and conversation loop stay the same. The adapter still calls the Responses API. There is no Agent Framework agent yet.
 
 ## Run it
 

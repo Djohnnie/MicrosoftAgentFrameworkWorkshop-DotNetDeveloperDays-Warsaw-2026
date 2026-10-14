@@ -15,7 +15,7 @@ var model = Environment.GetEnvironmentVariable("FOUNDRY_MODEL_DEPLOYMENT")
 
 ResponsesClient client = new(
     credential: new ApiKeyCredential(key),
-    options: new OpenAIClientOptions
+    options: new ResponsesClientOptions
     {
         Endpoint = new UriBuilder(endpoint) { Path = "/openai/v1" }.Uri
     });

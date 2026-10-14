@@ -13,14 +13,13 @@ var model = Environment.GetEnvironmentVariable("FOUNDRY_MODEL_DEPLOYMENT")
     ?? throw new InvalidOperationException("Set FOUNDRY_MODEL_DEPLOYMENT");
 
 ResponsesClient client = new(
-    model: model,
     credential: new ApiKeyCredential(key),
-    options: new OpenAIClientOptions
+    options: new ResponsesClientOptions
     {
         Endpoint = new UriBuilder(endpoint) { Path = "/openai/v1" }.Uri
     });
 
-using IChatClient chatClient = client.AsIChatClient();
+using IChatClient chatClient = client.AsIChatClient(model);
 
 Console.WriteLine("Simple Chatbot - no history. Type 'quit' to exit.");
 

@@ -64,7 +64,7 @@ function Card([int]$x, [int]$y, [int]$width, [int]$height) {
     ) -join "`n"
 }
 
-function ExerciseBody([string]$exerciseNumber, [string]$title, [string]$subtitle, [string]$projectPath, [string[]]$stepTitles, [string[][]]$stepDetails, [string]$takeaway) {
+function ExerciseBody([string]$exerciseNumber, [string]$title, [string]$subtitle, [string]$projectPath, [string[]]$stepTitles, [string[][]]$stepDetails, [string]$takeaway, [string]$badge = 'EXERCISE') {
     if ($stepTitles.Count -ne 3 -or $stepDetails.Count -ne 3) {
         throw 'Exercise slides require exactly three steps.'
     }
@@ -77,7 +77,7 @@ function ExerciseBody([string]$exerciseNumber, [string]$title, [string]$subtitle
         "<text x='1775' y='335' text-anchor='end' font-size='64' class='heading'>$([Security.SecurityElement]::Escape($title))</text>"
         "<text x='1775' y='401' text-anchor='end' font-size='27' fill='#cccccc'>$([Security.SecurityElement]::Escape($subtitle))</text>"
         '<rect x="130" y="235" width="250" height="170" rx="18" fill="url(#accent)"/>'
-        '<text x="255" y="282" text-anchor="middle" font-size="18" font-weight="700" style="fill:#ffffff;letter-spacing:3px">EXERCISE</text>'
+        "<text x=`"255`" y=`"282`" text-anchor=`"middle`" font-size=`"18`" font-weight=`"700`" style=`"fill:#ffffff;letter-spacing:3px`">$([Security.SecurityElement]::Escape($badge))</text>"
         "<text x='255' y='365' text-anchor='middle' font-size='76' class='heading'>$([Security.SecurityElement]::Escape($exerciseNumber))</text>"
         for ($i = 0; $i -lt 3; $i++) {
             $x = 100 + $i * 590
@@ -469,7 +469,7 @@ $sections = @(
 )
 for ($i = 0; $i -lt $sections.Count; $i++) {
     $section = $sections[$i]
-    $slideNumber = $i + 19 + 6 * [int]($i -gt 0)
+    $slideNumber = $i + 19 + 7 * [int]($i -gt 0)
     $displayTitle = $section.Title.ToUpperInvariant()
     $body = @(
         (Text 100 435 $displayTitle 76 'heading')
@@ -551,6 +551,18 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
             ) `
             -takeaway 'The agent keeps history in a local session; each model call still sends it to Foundry.'
         SaveSlide 'slide-25.svg' 'Exercise 106: Chatbot Agent' 'Part 1 exercise 106: use ChatClientAgentOptions with InMemoryChatHistoryProvider and ChatOptions.Instructions for a fixed cheerful age-10 persona. RawRepresentationFactory sets CreateResponseOptions.StoredOutputEnabled=false. Reuse one AgentSession; DebugHistory inspects actual local messages with TryGetInMemoryChatHistory after each reply. Open exercises\exercise-106.' $body '25' 'EXERCISE 106'
+
+        $body = ExerciseBody -exerciseNumber '100' -badge 'LAB' -title 'DevDays Buddy' `
+            -subtitle 'An agent that knows the conference agenda.' `
+            -projectPath 'labs\lab-100' `
+            -stepTitles @('Embed', 'Ground', 'Spice up') `
+            -stepDetails @(
+                ,@('Embed agenda.json: days, times,', 'sessions, and speakers. Read it', 'with GetManifestResourceStream.')
+                ,@('Put the JSON in the agent', 'instructions; reuse one session', 'for follow-up questions.')
+                ,@('Use Spectre.Console: banner,', 'spinner, answer panels, and', 'an agenda table.')
+            ) `
+            -takeaway 'Context in the instructions grounds answers, but the whole agenda is sent every time.'
+        SaveSlide 'slide-26.svg' 'Lab 100: DevDays Buddy' 'Part 1 lab 100: embed the .NET DeveloperDays Warsaw 2026 agenda as agenda.json, add it to the agent instructions as context, answer attendee questions with one AgentSession, and use Spectre.Console for the UI. Starter and solution in labs\lab-100.' $body '26' 'LAB 100'
     }
 }
 
@@ -559,6 +571,6 @@ $body = @(
     (Text 100 315 'Continue exploring the workshop materials' 30)
     "<a href='$repoUrl'><image x='690' y='370' width='540' height='540' href='$qrCode'/></a>"
 ) -join "`n"
-SaveSlide 'slide-29.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '29' 'THANK YOU'
+SaveSlide 'slide-30.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '30' 'THANK YOU'
 
 Write-Host "Built selected slides in $slides"

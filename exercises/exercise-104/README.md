@@ -33,10 +33,10 @@ Describe the employee you want and press **Enter**. Type `quit` to exit.
 
 ## What changed?
 
-The `ResponsesClient` setup, `OpenAI` 2.8.0, and `Microsoft.Extensions.AI` / `Microsoft.Extensions.AI.OpenAI` 10.3.0 packages are unchanged from exercises 101-103. This exercise uses their generic structured-output helper:
+The `ResponsesClient` setup, `OpenAI` 2.14.0, and `Microsoft.Extensions.AI` / `Microsoft.Extensions.AI.OpenAI` 10.11.0 packages are unchanged from exercises 101-103. This exercise uses their generic structured-output helper:
 
 ```csharp
-using IChatClient chatClient = client.AsIChatClient();
+using IChatClient chatClient = client.AsIChatClient(model);
 
 var response = await chatClient.GetResponseAsync<Employee>(
     $"Generate one fictional adult employee based on this request: {input}. " +

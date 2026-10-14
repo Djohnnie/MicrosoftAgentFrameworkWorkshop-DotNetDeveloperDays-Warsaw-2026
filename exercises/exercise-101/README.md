@@ -25,20 +25,20 @@ Type a message and press **Enter** to see the response. Type `quit` to exit. Eac
 ## What happens in the code
 
 1. `FOUNDRY_ENDPOINT`, `FOUNDRY_API_KEY`, and `FOUNDRY_MODEL_DEPLOYMENT` configure a Foundry `ResponsesClient`. A single `UriBuilder` expression replaces the endpoint's path with `/openai/v1`, so the Foundry project URL from exercise 001 works without an endpoint helper.
-2. `client.AsIChatClient()` adapts the Responses client to `IChatClient`.
+2. `client.AsIChatClient(model)` adapts the Responses client to `IChatClient` for the configured deployment.
 3. `chatClient.GetResponseAsync(input)` sends the current user message to the deployment.
 4. `response.Text` supplies the text to print. No history or previous response ID is passed to the next request.
 
 The core uses the common chat interface:
 
 ```csharp
-using IChatClient chatClient = client.AsIChatClient();
+using IChatClient chatClient = client.AsIChatClient(model);
 
 var response = await chatClient.GetResponseAsync(input);
 Console.WriteLine($"[ASSISTANT]: {response.Text}");
 ```
 
-The project uses `OpenAI` **2.8.0** and `Microsoft.Extensions.AI` / `Microsoft.Extensions.AI.OpenAI` **10.3.0**, matching exercise 104. These versions support the model-taking `ResponsesClient` constructor and its adapter. Agent Framework will build on this model call later; see [Microsoft Learn: Your First Agent](https://learn.microsoft.com/en-us/agent-framework/get-started/your-first-agent?pivots=programming-language-csharp).
+The project uses `OpenAI` **2.14.0** and `Microsoft.Extensions.AI` / `Microsoft.Extensions.AI.OpenAI` **10.11.0**, matching exercise 104. In these versions `ResponsesClient` takes `ResponsesClientOptions` and no model; the deployment name is passed to `AsIChatClient(model)`. Agent Framework will build on this model call later; see [Microsoft Learn: Your First Agent](https://learn.microsoft.com/en-us/agent-framework/get-started/your-first-agent?pivots=programming-language-csharp).
 
 The code is intentionally short enough to type along. Missing environment variables throw a clear exception, and request errors propagate rather than being caught. The `OPENAI001` pragma suppresses the underlying SDK's experimental Responses API diagnostic.
 

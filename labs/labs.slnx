@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/1. From LLM calls to agents/" />
+  <Folder Name="/1. From LLM calls to agents/100. DevDays Buddy agenda agent/" />
+  <Folder Name="/1. From LLM calls to agents/100. DevDays Buddy agenda agent/1. Starter/">
+    <Project Path="lab-100\starter\DevDaysBuddy.Starter.csproj" />
+  </Folder>
+  <Folder Name="/1. From LLM calls to agents/100. DevDays Buddy agenda agent/2. Solution/">
+    <Project Path="lab-100\solution\DevDaysBuddy.csproj" />
+  </Folder>
+  <Folder Name="/2. Giving agents capabilities - tools and MCP/" />
+  <Folder Name="/3. Orchestrating agents and workflows/" />
+  <Folder Name="/4. Making agents reliable and production-ready/" />
+</Solution>

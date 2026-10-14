@@ -1,0 +1,769 @@
+{
+  "conference": {
+    "name": ".NET DeveloperDays 2026 Warsaw",
+    "description": ".NET DeveloperDays is the biggest event in Central and Eastern Europe dedicated exclusively to application development on the .NET platform. It is designed for architects, developers, testers, and project managers using .NET in their work, and for those who want to improve their knowledge and skills in this field. The conference content is 100% English, making it easy for the international audience to attend.",
+    "dates": {
+      "workshops": "2026-10-19",
+      "conference": [
+        "2026-10-20",
+        "2026-10-21"
+      ]
+    },
+    "format": "Hybrid: in-person at the venue or online for remote participants.",
+    "highlights": [
+      "Over 30 sessions during two days of conference, plus all-day pre-conference workshops.",
+      "Learn about the newest solutions, the future of .NET, and visions that may become a reality.",
+      "Networking with many .NET specialists."
+    ],
+    "venue": {
+      "name": "VIZJA PARK Warsaw",
+      "address": "59 Okopowa Street, 01-043 Warsaw, Poland"
+    },
+    "timeZone": "Europe/Warsaw (UTC+02:00)",
+    "rooms": [
+      "Room A",
+      "Room B",
+      "Room C"
+    ],
+    "levels": {
+      "200": "basic concepts",
+      "300": "more advanced, lots of code",
+      "400": "heavy technical content",
+      "500": "their heads will hurt!"
+    },
+    "website": "https://developerdays.eu/warsaw/",
+    "agendaUrl": "https://developerdays.eu/warsaw/conference/"
+  },
+  "agenda": [
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "08:00",
+      "end": "09:00",
+      "room": "All attendees",
+      "type": "break",
+      "title": "Registration"
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "09:10",
+      "end": "10:10",
+      "room": "Room A",
+      "type": "keynote",
+      "title": "Justify What You Didn't Choose",
+      "level": "Keynote",
+      "description": "Every architecture decision has a winner and a set of losers - assuming anyone named the losers in the first place. Often they were never articulated at all, and where they were, we still only record the winner. Within a year nobody can say what was rejected or why, which means nobody can tell whether the decision was reasoned or merely fashionable at the time. You have probably watched this go wrong recently. Work arrives fast from a coding agent, or from a colleague leaning on one, and it looks fine. Nothing needs to break. Someone simply asks why it was done this way, and nobody can answer: not what the alternatives were, not what was traded away, not what would have to change to reverse it. The justification was outsourced along with the work. Agency went with it, and nobody noticed at the time. Oliver Sturm has spent nearly forty years creating software, much of it in rooms where these decisions are made. In this keynote he replays real decisions with their rejected options restored, and argues for a discipline that costs almost nothing: if you can't say what you didn't choose, you haven't chosen.",
+      "speakers": [
+        {
+          "name": "Oliver Sturm",
+          "title": "DevExpress Training Director, Software Architect, Consultant, Trainer, Developer, Author, Docker Captain",
+          "description": "Oliver Sturm is Training Director at DevExpress. In the last 30 years he has gathered vast experience as a software developer and architect, consultant, trainer, speaker and writer. He is a frequent presenter and keynote speaker at international events and lives in rural Scotland. He's been awarded as a Microsoft MVP for 11 years, and he's a Docker Captain."
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "10:10",
+      "end": "10:30",
+      "room": "All attendees",
+      "type": "break",
+      "title": "Coffee Break"
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "10:30",
+      "end": "11:30",
+      "room": "Room A",
+      "type": "session",
+      "title": "What is new in .NET and C#?",
+      "level": "200 (basic concepts)",
+      "description": "November 2025 marked the release of .NET 10 and C# 14 and .NET 11 and C# 15 are already around the corner. In this session, Johnny will talk about what is new in the latest version of .NET and what the future will bring for the .NET platform in general. Expect a number of new .NET 10, .NET 11, C# 14 and C# 15 features and examples of those features.",
+      "speakers": [
+        {
+          "name": "Johnny Hooyberghs",
+          "title": "Passionate Developer at Involved and Microsoft MVP",
+          "description": "Johnny Hooyberghs is a managing partner and consultant for Involved NV, part of the Cronos group, since 2014 focusing on software architecture, backend development and a Microsoft Most Valuable Professional for Azure and Developer Technologies since 2020. Prior to joining Involved as a consultant, he has had experience developing software for the health-care sector since 2008. Johnny has been passionate about software development using the .NET stack, cloud native development using the Microsoft Azure cloud stack and quantum computing. Johnny has spent 10 years of his free time teaching software development courses for the adult education institute CVO Antwerpen and has been enjoying public speaking these past 6 years. When Johnny is not working, he likes to spend his time on self-education, quantum computing, some casual video gaming, travelling the world and visiting as many theme parks as possible."
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "10:30",
+      "end": "11:30",
+      "room": "Room B",
+      "type": "session",
+      "title": "Agentic AI Needs Structure: Coordinated Agents on Clean Architecture",
+      "level": "300 (more advanced, lots of code)",
+      "description": "AI can generate code. But without structure, it generates entropy. As AI becomes embedded in development workflows, the critical question is no longer \"Can agents write code?\" but: Can they work together safely inside a real system? This session, presents a structured approach where Application Infrastructure encodes Clean Architecture decisions directly in code. On top of this foundation, multiple Agent Types collaborate using reusable Agent Skills, forming an engineered development process rather than ad-hoc prompt execution. The focus is on the .NET and C# ecosystem, demonstrating how structured infrastructure and coordinated agents operate within real-world backend systems. The result is not just speed, but consistency, predictability, and long-term system integrity.",
+      "speakers": [
+        {
+          "name": "Florin Coros",
+          "title": "Software Solution Architect | Technical Trainer, at Code Design",
+          "description": "Florin is an accomplished Software Solution Architect and an engaging Technical Trainer with two decades of hands-on experience in complex software development. As the founder of Code Design, he is at the forefront of restoring a focus on robust software design within the industry and ensuring predictability in software development projects. Florin's courses contain the hard learned lessons he gained in his work. They empower professionals to develop the habits which will elevate their design skills. An IDesign trained architect, Florin is dedicated to steering projects towards success across multiple companies. He achieves this by assuming pivotal roles such as Software Architect or Solution Architect, where his active leading has been crucial in the successful realisation of many projects."
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "10:30",
+      "end": "11:30",
+      "room": "Room C",
+      "type": "session",
+      "title": "Build modern CLI tools with .NET",
+      "level": "200 (basic concepts)",
+      "description": "The command line is still an efficient way to interact with software for developers, sysadmins and power users. On top, it's easy to provide CLI tools cross-platform. In this talk, we will look into different possibilities to build CLI tools with .NET, such like System.CommandLine, Spectre.Console or event libraries for creating graphical interfaces in the CLI like Terminal.Gui. Whether you're a seasoned .NET developer looking to expand your skill set or a newcomer curious about the power of the CLI, this session will give you hands-on techniques and a clear roadmap to start writing modern CLI tools with .NET today.",
+      "speakers": [
+        {
+          "name": "Roland König",
+          "title": "Independent Software Engineer | Trainer | Focus on C#, .NET, TypeScript, Avalonia UI, ASP.NET Core, Vue.js",
+          "description": "Roland König is an independent software engineer and trainer. He has been at home in the world of C# / .NET since 2007 and has been focusing with current trends in modern software architecture since 2012. His services range from software architecture consulting and software development to developer trainings and project team leadership. He is also engaged in the developer community as a speaker at conferences, author for professional journals, blogger, developer for open-source projects and co-organizer of DCN (Digital Craftsmanship Nordoberpfalz). In 2025, he was named Avalonia MVP by the Avalonia team. For more information, see https://www.rolandk.net"
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "11:30",
+      "end": "11:50",
+      "room": "All attendees",
+      "type": "break",
+      "title": "Coffee Break"
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "11:50",
+      "end": "12:50",
+      "room": "Room A",
+      "type": "session",
+      "title": "Starting with Microsoft.Extensions.VectorData and RAG",
+      "level": "300 (more advanced, lots of code)",
+      "description": "LLMs are everywhere, but what if you don’t want to build just a plain smart chat, but you want to infuse it with your internal data? And what if the data is changing fast? Microsoft.Extensions.VectorData and RAG might be the correct and easy path for you to solve this.",
+      "speakers": [
+        {
+          "name": "Jiří Činčura",
+          "title": "Jiří Činčura is .NET/C# and Firebird expert. Speaker and blogger. For almost two decades he contributes to open-source. Works as senior software engineer for Microsoft in EF Core/data area.",
+          "description": "https://www.tabsoverspaces.com/about"
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "11:50",
+      "end": "12:50",
+      "room": "Room B",
+      "type": "session",
+      "title": "Demystifying Dependency Injection in .NET",
+      "level": "300 (more advanced, lots of code)",
+      "description": "Dependency injection is everywhere in .NET. Using it seems quite easy. But have you ever wondered if you are using it the right way? In this session, we are going to dive into dependency injection and how to apply it correctly in the different technology stacks like ASP.NET Core and .NET MAUI. You will see live demos where I will break down the problem dependency injection is trying to solve, but also code examples with the different best practices for the different technology stacks. At the end of the talk, you will go home with some theoretical knowledge, but also a lot of practical knowledge on how to apply dependency injection correctly in your own codebase.",
+      "speakers": [
+        {
+          "name": "Johan Smarius",
+          "title": "Microsoft MVP on .NET and DevOps, MCT, Coach/Trainer @ JMAC Software Solutions & Lead Microsoft Development Consultant @ Bergler",
+          "description": "Johan has been developing software since 1996 and has worked with .NET since version 1.0. With extensive experience as a lead developer and architect for .NET solutions, he is deeply passionate about clean coding and test-driven development. At JMAC Software Solutions and Bergler, he designs architectures for .NET solutions and coaches and trains developers in the domain of software engineering in general and Microsoft technologies in particular."
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "11:50",
+      "end": "12:50",
+      "room": "Room C",
+      "type": "session",
+      "title": "AI-First Codebase: How to Set Up Your .NET Project for Working with AI",
+      "level": "300 (more advanced, lots of code)",
+      "description": "Most teams start using AI for coding and quickly run into the same problem: the model doesn't understand the project, generates code that doesn't fit the architecture, and every query burns through a huge context window. The problem rarely lies in the model — it lies in how the codebase is organized. In this session, I'll show how to build a .NET project that makes AI work better, faster, and cheaper. * Project structure as context for the model — how to organize folders, naming conventions, and layers so that AI instantly \"knows\" where it is and what to do, without lengthy prompt descriptions. * Fewer tokens, better results — how to write code, comments, and interfaces so the model needs minimal context to complete a task. Concrete rules with examples from Neario. * CLAUDE.md and similar config files — how to write instructions for the model once and not repeat them in every prompt. What's worth including, and what just burns tokens without value. * Small, focused classes and methods aren't just good practice — they also mean a smaller context window and more precise model output. I'll show what refactoring for AI looks like in practice. * Tests as specification — how to write unit tests that AI can read as documentation and generate code that satisfies them from the start.",
+      "speakers": [
+        {
+          "name": "Michał Pobuta",
+          "title": "Software Engineer at Heineken",
+          "description": "Software Engineer and .NET MAUI Expert with 5 years of experience in this technology. Developing cross-platform mobile applications for various clients. Co-founder of Neario.app, a startup building a social networking application. As former President of the Kernel Scientific Group at AGH University of Kraków, I actively contributed to the tech community by organising educational programs and mentoring the next generation of .NET developers."
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "12:50",
+      "end": "13:50",
+      "room": "All attendees",
+      "type": "break",
+      "title": "Lunch"
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "13:50",
+      "end": "14:50",
+      "room": "Room A",
+      "type": "session",
+      "title": "Röck Yoür Cöde: Stop Guessing—Benchmark Like a Pro",
+      "level": "400 (heavy technical content)",
+      "description": "You think your code is fast? Prove it. Modern .NET developers have more tools than ever—but too many are still guessing when it comes to performance. The result? Slower applications, higher cloud costs, and problems that don’t show up until production. And here’s the kicker: even AI tools like GitHub Copilot can generate code that compiles, works… and performs terribly. If you’re not measuring it, you’re trusting it—and that’s a risk. In this session, veteran engineer and author David McCarter (dotNetDave) shows how to cut through the noise and make performance a data-driven discipline. Using BenchmarkDotNet and the DotNetTips.Spargine.Benchmarking library, you’ll learn how to measure execution time, memory allocation, and scalability the right way. Through live demos and real-world examples, you’ll see just how wrong “common knowledge” about .NET performance can be. You’ll learn how to build benchmarks you can trust, avoid traps like JIT optimizations and setup bias, and turn raw numbers into decisions that matter. Stop guessing. Stop trusting assumptions. Measure it. Prove it. Ship code that performs. Attendees will learn: • How to build accurate, repeatable benchmarks using BenchmarkDotNet • How to eliminate measurement noise and avoid misleading results • How to compare multiple implementations and identify the fastest approach • How to measure memory allocation and understand its impact on performance • How to apply benchmarking in real-world, cloud-based scenarios • How to integrate benchmarking into the development lifecycle before release Don’t miss this high-energy session where you’ll learn to rock your code—and prove it performs like a pro.",
+      "speakers": [
+        {
+          "name": "David McCarter",
+          "title": "Microsoft MVP (Developer Technologies), Software Architect, Speaker, Trainer, Inventor, and Mentor",
+          "description": "David McCarter is an exceptionally seasoned software engineer, a celebrated author, and a captivating speaker with a remarkable track record spanning over two decades within the industry. Holding the distinguished title of Microsoft MVP (Most Valuable Professional), David also serves as a solutions architect, Code Quality Zar, consultant, proficient code reviewer, and the esteemed editor-in-chief of dotNetTips.com. Renowned for his prolific literary contributions, David has graced programming magazines with his insightful articles and penned several illuminating books, including \"Rock Your Code: Coding Standards for Microsoft .NET,\" \"Rock Your Code: Code and App Performance for Microsoft .NET,\" and \"Rock Your Career: Surviving the Technical Interview.\" David commands a powerful presence on the speaking circuit, captivating audiences with his engaging and insightful talks on programming and technical interviewing—all delivered with his signature rock-and-roll flair. He has left an indelible mark on user groups, educational institutions, and prominent conferences worldwide, such as BuildStuff, Øredev, NDC, Copenhagen Developers Festival, Code Camp, SQL Saturday, DevConnections, and VSLive, among others. His instructional legacy even includes a tenure at the University of California, San Diego. Presently, he steers his own software consulting enterprise, McCarter Consulting, further solidifying his esteemed status within the field. Notably, David is the Co-founder and Director of the San Diego .NET Developers Group—a role that earned him the prestigious INETA Community Excellence Award in recognition of his outstanding contributions to the .NET community. He also holds the distinction of being a U.S. patent holder, with his software printing system officially approved by the U.S. Patent Office in May 2008. Beyond the realm of technology, David's talents are diverse and impressive. He has cultivated an award-winning reputation as both a skilled photographer and a gifted guitarist, collaborating with renowned bands like Queensryche, Buckcherry, Geoff Tate, Eric Johnson, Lit, Gary Hoey, P.O.D and many more. David’s photography can be found using this link: https://mccarterphotography.smugmug.com/. In totality, David stands as a multifaceted professional, an abundant reservoir of wisdom and proficiency across the spheres of software engineering, literary pursuits, and public speaking. Microsoft MVP profile is located at: http://bit.ly/davidmvp GitHub repo is located at: https://github.com/RealDotNetDave NuGet packages are located at: https://www.nuget.org/profiles/davidmccarter You can also connect with David on these social media platforms: BlueSky: https://bsky.app/profile/dotnetdave.bsky.social Facebook: https://www.facebook.com/DotNetArmy LinkedIn: https://www.linkedin.com/in/davidmccarter/"
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "13:50",
+      "end": "14:50",
+      "room": "Room B",
+      "type": "session",
+      "title": "The Myth of Message Ordering: What Message Brokers Actually Guarantee",
+      "level": "300 (more advanced, lots of code)",
+      "description": "Modern message brokers promise scalability, reliability, and decoupling—but ordering is where things get complicated. As developers, we assume that messages are processed in the order they were sent. In reality, distributed systems make this surprisingly difficult. Partitions, retries, competing consumers, redelivery, and parallel processing all introduce subtle ways for ordering to break down. In this talk, we will explore how message ordering actually works across some of the popular brokers. More importantly, we’ll examine why strict ordering often conflicts with scalability and resilience. You will learn: - When ordering is guaranteed—and when it isn't - Why retries and failures silently break ordering - How different brokers implement ordering - When strict ordering is necessary and when it is a trap - Practical patterns to design systems that remain correct even when messages arrive out of order By the end, you will understand the trade-offs behind ordered messaging and how to design systems that embrace the realities of distributed systems.",
+      "speakers": [
+        {
+          "name": "Poornima Nayar",
+          "title": ".NET Developer, Microsoft MVP",
+          "description": "Poornima is a .Net developer with over 10 years of experience in .Net. She is passionate about learning new technologies and keeping herself up-to-date with the latest developments in technology. Outside her work, Poornima enjoys music and is undergoing training in Indian Classical music. Based in Langley, UK she mothers a little girl and spends her spare time reading, cooking and watching movies."
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "13:50",
+      "end": "14:50",
+      "room": "Room C",
+      "type": "session",
+      "title": "Transforming Legacy: A Real-World Journey from .NET Framework to .NET 10",
+      "level": "300 (more advanced, lots of code)",
+      "description": "Are you facing the daunting challenge of modernizing a legacy .NET Framework application? Join us as we unveil the detailed roadmap we followed to upgrade a complex, production scale Web Forms application, laden with legacy patterns, into a robust, future-ready solution. This session dives deep into the technical strategies behind our transition to a more modern architecture featuring an MVC-driven public site and a Blazor-powered admin interface. We'll break down our hands-on experiences with codebase analysis, architectural redesign, and best practices for moving from on-premises or IaaS environments to fully managed platform hosting. If you need practical insights and actionable steps for your own modernization projects, this talk is for you.",
+      "speakers": [
+        {
+          "name": "Eric Johansson",
+          "title": "Senior developer at CeriQ, Live coder, Progress Champion and Microsoft MVP",
+          "description": "Eric has a broad experience that covers topics from ZX Basic to .NET. With projects spanning from business applications to nuclear power plant systems he developed the ability to adapt and evolve with the rapid changes in the tech landscape. That knowledge is something that he shares freely as a content creator and public speaker. Eric is passionate about making complex topics accessible to all level of learners, which you can see in his style of teaching in his livestreams, tutorials and conference sessions. Because of this, Eric has been recognized as a Progress Telerik Champion and as a Microsoft MVP. Apart from being a techie, he's also a servant to Zelda, an adorable cat."
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "14:50",
+      "end": "15:15",
+      "room": "All attendees",
+      "type": "break",
+      "title": "Coffee Break"
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "15:15",
+      "end": "16:15",
+      "room": "Room A",
+      "type": "session",
+      "title": "Above the Cloud: Building Data Centers in Space",
+      "level": "300 (more advanced, lots of code)",
+      "description": "The demand for AI data centers has reached a fever pitch - stressing the power grid and people's nerves. Does putting those data centers in space make any sense? Join Richard Campbell as he explores the challenges and potential of putting data centers into orbit. The balance of cost, performance, latency, power, cooling, and reliability makes for a difficult mix - but the potential for the future is significant!",
+      "speakers": [
+        {
+          "name": "Richard Campbell",
+          "title": "Host of .NET Rocks, RunAs Radio and Windows Weekly",
+          "description": "Richard Campbell wrote his first line of code in 1977. His career has spanned the computing industry, both on the hardware and software sides, development, and operations. He was a co-founder of Strangeloop Networks, acquired by Radware in 2013, and was on the board of directors of Telerik, which was acquired by Progress Software in 2014. Today, he is a consultant and advisor to several successful technology firms and hosts three podcasts: .NET Rocks! (www.dotnetrocks.com) for .NET developers, RunAs Radio (www.runasradio.com) for IT Professionals, and Windows Weekly (https://twit.tv/shows/windows-weekly)."
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "15:15",
+      "end": "16:15",
+      "room": "Room B",
+      "type": "session",
+      "title": "No More OOP: Functional DDD Without the Baggage",
+      "level": "300 (more advanced, lots of code)",
+      "description": "DDD tied itself to OOP only because OOP dominated the software world when DDD was born. That was never a deliberate design choice - just the perspective of people building business software on Java and .NET at the time. But let’s face it: OOP adds friction instead of clarity. In this talk, Oliver shows why it’s time to drop the OOP baggage and adopt a functional perspective on DDD: immutability, pure functions, and simple data structures. We’ll challenge the myth that \"anemic\" models are a problem, showing instead how data objects plus pure functions form a clearer and more powerful foundation for domains. We’ll also explore how Event Sourcing thrives in this mindset, producing architectures that are expressive, resilient, and maintainable. With clear code and patterns, we’ll see how domains become easier to model, reason about, and evolve once we stop forcing OOP into DDD.",
+      "speakers": [
+        {
+          "name": "Oliver Sturm",
+          "title": "DevExpress Training Director, Software Architect, Consultant, Trainer, Developer, Author, Docker Captain",
+          "description": "Oliver Sturm is Training Director at DevExpress. In the last 30 years he has gathered vast experience as a software developer and architect, consultant, trainer, speaker and writer. He is a frequent presenter and keynote speaker at international events and lives in rural Scotland. He's been awarded as a Microsoft MVP for 11 years, and he's a Docker Captain."
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "15:15",
+      "end": "16:15",
+      "room": "Room C",
+      "type": "session",
+      "title": "Protecting Single-Page Applications from Cross-Site Scripting: State of the Union",
+      "level": "400 (heavy technical content)",
+      "description": "Although cross-site scripting (XSS) has been around for over 25 years, it continues to pose a significant threat to web applications, including those built entirely with JavaScript and running within the browser. Numerous defense-in-depth measures have been introduced to assist developers in mitigating these risks:: Content Security Policy, Trusted Types API, HTML Sanitizer API, and the built-in XSS protection features found in single-page application (SPA) frameworks, among others. While many of these solutions complement one another, they don’t all benefit from consistent browser support. In this presentation, we will examine the available options, their strengths and weaknesses, explore recent developments, and devise a strategy to minimize the risk of XSS attacks.",
+      "speakers": [
+        {
+          "name": "Christian Wenz",
+          "title": "CEO, Actition GmbH",
+          "description": "Christian Wenz is a consultant, software architect and entrepreneur specializing in web technologies and security. A prolific writer, he has authored or co-authored over 100 books for various publishers. Christian’s work spans both open-source and proprietary web technologies, a unique combination that has earned him recognition as a Microsoft MVP for Developer Technologies and the distinction of being the lead author of the Zend PHP certification. He is also credited in several open-source projects for his contributions. In addition to his writing and technical endeavors, Christian is a frequent speaker at developer conferences worldwide, where he shares his expertise in web technologies."
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "16:15",
+      "end": "16:40",
+      "room": "All attendees",
+      "type": "break",
+      "title": "Coffee Break"
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "16:40",
+      "end": "17:40",
+      "room": "Room A",
+      "type": "session",
+      "title": "You Don’t Know C#",
+      "level": "300 (more advanced, lots of code)",
+      "description": "Gotcha! The C# programming language and the .NET development platform have evolved significantly over two and a half decades. But considering the complexity of the solutions we are crafting, it is not unlikely that errors and misuses can silently creep into our daily work. And with a yearly release cadence, it is very hard to keep track of all the innovations at our fingertips. Are you aware of the effects of ConfigureAwait in asynchronous programming with async and await? Do you know the potential pitfalls that come along with struct-based high-performance types like ImmutableArray? Can you think of nullability-related footguns of the good old Array? What does an unsafe context really mean these days? In this live coding session, we will uncover the answers to these and many more questions. You will walk away with a deeper understanding of the semantics of both common and esoteric syntactic C# sugar. Empowered by this knowledge, you will be able to detect functional traps and performance problems. We will help you develop an eye for safe and sound .NET library and application code without sacrificing speed or memory efficiency.",
+      "speakers": [
+        {
+          "name": "Stefan Pölz",
+          "title": "I C# .NET; @Sentry by day; @FlashOWare by night",
+          "description": "Stefan's passion is to practice Clean Code and test-driven development in order to build maintainable high-performance software in an ever-evolving team, supported by tools from the .NET Ecosystem. He loves to attend and speak at public developer events, co-organize local community gatherings, stream live programming sessions, and author open source projects, complementing his expertise in professional software development. As Microsoft MVP (Developer Technologies), JetBrains Community Contributor (.NET) and co-organizer of DotNetDevs.at, it's his ambition to share knowledge about everything C#."
+        },
+        {
+          "name": "Angie Kadnar",
+          "title": "C# Clean Coder – .NET Senior Software Engineer Lead",
+          "description": "Angelika’s focus is on applying Clean Code principles and test-driven development to build maintainable and sustainable software within evolving, collaborative teams. With a background in C# and software architecture, she is particularly interested in improving existing systems through thoughtful refactoring and consistent design, supported by practices from the .NET ecosystem. She values clear communication, shared ownership, and continuous improvement, contributing to teams that care about long-term product quality and engineering excellence."
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "16:40",
+      "end": "17:40",
+      "room": "Room B",
+      "type": "session",
+      "title": "Don't Trust the Browser: Secure SPAs with BFF",
+      "level": "300 (more advanced, lots of code)",
+      "description": "OpenIdConnect and OAuth are the industry standards to protect both frontend and backends applications with tokens. Sending tokens to the browser is like trusting a bunch of lions to keep a cow safe. So why do we do it in our Single Page Applications using the implicit flow for example? Don't. BFF or Backend For Frontend solves this problem. Come and find out how this works using ASP.NET Core on the server and Blazor WebAssembly on the browser side.",
+      "speakers": [
+        {
+          "name": "Roland Guijt",
+          "title": "Microsoft MVP, Pluralsight author, ASP.NET insider",
+          "description": "Roland is a Microsoft MVP, ASP.NET Insider and Pluralsight author enjoying a constant curiosity around new techniques in software development. His focus is on all things .NET and browser technologies. As a long-time trainer and speaker, he led many courses on these topics and spoke about these topics at many international conferences. He's currently working with Duende software to help building out their products."
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "16:40",
+      "end": "17:40",
+      "room": "Room C",
+      "type": "session",
+      "title": "Aspire Beyond the Introduction",
+      "level": "300 (more advanced, lots of code)",
+      "description": "You have probably already seen a bunch of introductions to Aspire. Maybe to the point where it is getting a bit boring, even if it is cool! In this talk, we will take it a step further and look into some more advanced topics around Aspire. The things that takes it from a cool demo, to a really helpful tool for you development. The focus of the talk, is to cover what is really happening when you use it. Knowledge that lets you know how to tweak it to your need, when you needs aren't covered out of the box. It will also cover how you can build your own extensions to Aspire, to allow you to use it for your custom applications, or projects that aren't already supported by the community. Things like creating your own Aspire resources and custom commands.",
+      "speakers": [
+        {
+          "name": "Chris Klug",
+          "title": "Chief Over‑Engineering Officer",
+          "description": "Chris Klug has been building software professionally since sometime around 2000, back when .NET was new, CSS was a suggestion, and Roy Fielding’s REST paper had just been published. Since then he has written code for everything from model agencies to online sports betting to professional sail racing, because staying in one industry sounded far too boring. He has been a Microsoft MVP for something like 15 years (depending on when he last updated this abstract), which either means he knows a thing or two or that he just talks a lot. Possibly both, but we all know the latter is a given. These days he works at Active Solution in Stockholm, helping clients solve problems and build better systems. When he is not writing code, Chris is usually geeking out on some form of extreme sport like skydiving, kitesurfing, snowboarding, mountain biking, or wing foiling. He loves learning new things and spends way too much time thinking about weird stuff most people never even notice."
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "17:40",
+      "end": "18:00",
+      "room": "All attendees",
+      "type": "break",
+      "title": "Coffee Break"
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "18:00",
+      "end": "19:00",
+      "room": "Room A",
+      "type": "keynote",
+      "title": "After the AI Hype: What’s Real, What’s Next",
+      "level": "Keynote",
+      "description": "Artificial Intelligence dominates the headlines—and it’s clear we’re in the middle of a major hype cycle. But beneath the buzz, genuine innovations are delivering tangible value. So what’s real, what’s exaggerated, and what’s next? Join Richard Campbell for an insightful look at the current AI surge, why it matters, and where the real success stories are happening today. Explore the opportunities, the challenges, and the eventual end of the hype cycle—so you can separate the promise from the noise and prepare for the future of AI in business and development.",
+      "speakers": [
+        {
+          "name": "Richard Campbell",
+          "title": "Host of .NET Rocks, RunAs Radio and Windows Weekly",
+          "description": "Richard Campbell wrote his first line of code in 1977. His career has spanned the computing industry, both on the hardware and software sides, development, and operations. He was a co-founder of Strangeloop Networks, acquired by Radware in 2013, and was on the board of directors of Telerik, which was acquired by Progress Software in 2014. Today, he is a consultant and advisor to several successful technology firms and hosts three podcasts: .NET Rocks! (www.dotnetrocks.com) for .NET developers, RunAs Radio (www.runasradio.com) for IT Professionals, and Windows Weekly (https://twit.tv/shows/windows-weekly)."
+        }
+      ]
+    },
+    {
+      "day": "Tuesday",
+      "date": "2026-10-20",
+      "start": "19:00",
+      "end": "23:00",
+      "room": "All attendees",
+      "type": "break",
+      "title": "Party - grab a beer with us!"
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "09:00",
+      "end": "09:30",
+      "room": "All attendees",
+      "type": "break",
+      "title": "Doors open"
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "09:30",
+      "end": "10:30",
+      "room": "Room A",
+      "type": "session",
+      "title": "Observability in .NET 10",
+      "level": "300 (more advanced, lots of code)",
+      "description": "Both ASP.NET Core and .NET MAUI added new built-in metrics for Identity, Blazor, and layout performance monitoring in .NET 10. It's high time to take a closer look at observability (or \"o11y\" to use a fancy numeronym) for local debugging and monitoring of production environments. This live-coding session covers not only the three pillars of observability — logs, metrics, and (distributed) traces — but also its implementation in .NET in general and specific application models in particular. Moreover, we uncover the OpenTelemetry (OTel) standard, observe processes locally through CLI-based .NET tools and Aspire dashboards, and monitor deployed applications via Sentry. The insights gained from this talk will help you to gain insights into your every .NET app to make error detection less painful and perhaps even aid in preventing problems in the first place.",
+      "speakers": [
+        {
+          "name": "Stefan Pölz",
+          "title": "I C# .NET; @Sentry by day; @FlashOWare by night",
+          "description": "Stefan's passion is to practice Clean Code and test-driven development in order to build maintainable high-performance software in an ever-evolving team, supported by tools from the .NET Ecosystem. He loves to attend and speak at public developer events, co-organize local community gatherings, stream live programming sessions, and author open source projects, complementing his expertise in professional software development. As Microsoft MVP (Developer Technologies), JetBrains Community Contributor (.NET) and co-organizer of DotNetDevs.at, it's his ambition to share knowledge about everything C#."
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "09:30",
+      "end": "10:30",
+      "room": "Room B",
+      "type": "session",
+      "title": "Roslyn 101: Source Generators, Diagnostic Analyzers and CodeFix Providers",
+      "level": "400 (heavy technical content)",
+      "description": "Have you ever spent so much time writing boilerplate code? Or debugged code and wished there was a hint from the compiler? Well, .NET Source generators and Diagnostic Analyzers are here to help you out! In this session, we will demystify Roslyn Compiler APIs, a powerful toolset that allows you to generate code at compile time and analyze your codebase for potential issues. Through a practical example, we are looking into how to design and create a source generator and what are the best practices for them, how we could avoid reflection and more. You'll learn about syntax trees, semantic models, and symbols. We'll create diagnostic analyzers helping our developer team to catch gotchas early, and we will provide Code Fix Providers suggesting alternative approaches for already written code to encourage best practices in our team. This session is designed for intermediate to advanced .NET developers, team leads, and architects who want to improve developer experience and code maintainability. By the end of this session, attendees will have a solid understanding and practical knowledge of how to leverage Roslyn Compiler APIs to automate code generation, enforce coding standards, and enhance the overall development experience.",
+      "speakers": [
+        {
+          "name": "Shahab Ganji",
+          "title": "Lead Coding Architect, SQUER Solutions GmbH",
+          "description": "Shahab is a seasoned software engineer with more than 20 years of experience, specializing in software architecture and event driven systems. He thrives on challenges and enjoys mentoring others. With excellent communication skills, he fosters autonomous teamwork and emphasizes respect within the team. Embracing change is his motto, advocating for collaborative environments where everyone's contributions are valued."
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "09:30",
+      "end": "10:30",
+      "room": "Room C",
+      "type": "session",
+      "title": "Monolith or Microservices? Designing Deploy-Time Flexibility for Modular Systems",
+      "level": "400 (heavy technical content)",
+      "description": "Designing Modular Systems poses the critical challenge of determining which services should be deployed together in the same process and which should be deployed separately. Sometimes, you want to maintain a modular development approach, like in microservices, while opting for a monolithic deployment to optimize performance, reduce costs, or simplify infrastructure complexity. There are also cases where a service needs to be deployed in the same process with others to maximize performance and at the same time in another process, for other clients, to ensure reliability and availability. In this session, I will present the design solution to these challenges. I will show real-life project examples of how to achieve the flexibility to decide only at deployment time, without changing the code, which services communicate in the same process and which use inter-process communication. I will also do a code demo on how it works.",
+      "speakers": [
+        {
+          "name": "Florin Coros",
+          "title": "Software Solution Architect | Technical Trainer, at Code Design",
+          "description": "Florin is an accomplished Software Solution Architect and an engaging Technical Trainer with two decades of hands-on experience in complex software development. As the founder of Code Design, he is at the forefront of restoring a focus on robust software design within the industry and ensuring predictability in software development projects. Florin's courses contain the hard learned lessons he gained in his work. They empower professionals to develop the habits which will elevate their design skills. An IDesign trained architect, Florin is dedicated to steering projects towards success across multiple companies. He achieves this by assuming pivotal roles such as Software Architect or Solution Architect, where his active leading has been crucial in the successful realisation of many projects."
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "10:30",
+      "end": "10:50",
+      "room": "All attendees",
+      "type": "break",
+      "title": "Coffee Break"
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "10:50",
+      "end": "11:50",
+      "room": "Room A",
+      "type": "session",
+      "title": "LLMs in the Event-Sourced World: Commands, Projections and Sagas",
+      "level": "300 (more advanced, lots of code)",
+      "description": "Event-sourced systems thrive on strict boundaries, deterministic rules, and crystal-clear histories. Large language models thrive on ambiguity, messy inputs, and human-like reasoning. Oliver will show how the two worlds collide - in a good way. We’ll explore natural-language command suggestions that never bypass validation, projections enriched with summaries and insights, event-stream analysis that explains how outcomes were reached, and LLMs advising sagas while domain logic stays firmly in charge. Expect practical demos and lots of source code!",
+      "speakers": [
+        {
+          "name": "Oliver Sturm",
+          "title": "DevExpress Training Director, Software Architect, Consultant, Trainer, Developer, Author, Docker Captain",
+          "description": "Oliver Sturm is Training Director at DevExpress. In the last 30 years he has gathered vast experience as a software developer and architect, consultant, trainer, speaker and writer. He is a frequent presenter and keynote speaker at international events and lives in rural Scotland. He's been awarded as a Microsoft MVP for 11 years, and he's a Docker Captain."
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "10:50",
+      "end": "11:50",
+      "room": "Room B",
+      "type": "session",
+      "title": "Say goodbye to passwords with the help of passkeys",
+      "level": "200 (basic concepts)",
+      "description": "Weak passwords are still one of the biggest problems in the security environment. Multifactor authentication increases security, but also makes the login process more time-consuming for the user. So what can be done? One possible alternative is to completely eliminate passwords with the new Passkeys standard. Big players like Google, Microsoft, Apple and many others are behind Passkeys and are integrating them into their products. In this presentation, we will take a closer look at the concepts behind Passkeys and compare it with older authentication variants. We will also look at the advantages and disadvantages of Passkeys.",
+      "speakers": [
+        {
+          "name": "Roland König",
+          "title": "Independent Software Engineer | Trainer | Focus on C#, .NET, TypeScript, Avalonia UI, ASP.NET Core, Vue.js",
+          "description": "Roland König is an independent software engineer and trainer. He has been at home in the world of C# / .NET since 2007 and has been focusing with current trends in modern software architecture since 2012. His services range from software architecture consulting and software development to developer trainings and project team leadership. He is also engaged in the developer community as a speaker at conferences, author for professional journals, blogger, developer for open-source projects and co-organizer of DCN (Digital Craftsmanship Nordoberpfalz). In 2025, he was named Avalonia MVP by the Avalonia team. For more information, see https://www.rolandk.net"
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "10:50",
+      "end": "11:50",
+      "room": "Room C",
+      "type": "session",
+      "title": "Indiana Jones and the Temple of Legacy Code",
+      "level": "300 (more advanced, lots of code)",
+      "description": "Legacy systems are like ancient temples: full of mystery, danger, and long-forgotten knowledge. One wrong move and the whole thing might collapse. But somewhere deep inside lie years of embedded business logic, customer trust, and operational quirks that no rewrite can replace. In this talk, we'll don the fedora and take up the whip as we explore techniques for exploring legacy codebases without triggering the traps. We'll dig into Source control archaeology, safe refactoring strategies, introducing tests in a hostile environment, and recognizing \"cursed\" files with high churn or hidden dependencies. Whether you're maintaining a dusty monolith or inheriting a mystery repo, this session will equip you with tools and tactics to escape with the real treasure: Knowledge of how to extract business value and gradually modernize.",
+      "speakers": [
+        {
+          "name": "William Brander",
+          "title": "Distributed Systems Bricklayer",
+          "description": "A professional geek, William works for Particular Software writing amazing software like NServiceBus. Passionate about the web, he is engaged in a sordid love affair with JavaScript, and spends most of his free time trying to convince others of it’s beauty and elegance. When not behind his laptop hacking away, this amateur beer enthusiast can often be found playing boardgames or drinking cold-brew coffee."
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "11:50",
+      "end": "12:10",
+      "room": "All attendees",
+      "type": "break",
+      "title": "Coffee Break"
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "12:10",
+      "end": "13:10",
+      "room": "Room A",
+      "type": "session",
+      "title": "Web Application Security Revisited: The 2025 OWASP Top Ten and ASP.NET Core/Blazor",
+      "level": "300 (more advanced, lots of code)",
+      "description": "Since 2003, the Open Web Application Security Project curates a list of the top ten security risks for web applications. It serves as a de facto standard and is referenced in many security guidelines worldwide. After several delays, the 2025 list was finally released at the end of last year. Time to take a look: what's new, what has changed, and to get an up-to-date refresh on how to create secure web applications and prevent the top ten issues from happening, focusing on Microsoft's web stack. We will also discuss whether the list is still relevant, and what is missing from that list. Many code samples will demonstrate those risks, and countermeasures, to keep your applications secure.",
+      "speakers": [
+        {
+          "name": "Christian Wenz",
+          "title": "CEO, Actition GmbH",
+          "description": "Christian Wenz is a consultant, software architect and entrepreneur specializing in web technologies and security. A prolific writer, he has authored or co-authored over 100 books for various publishers. Christian’s work spans both open-source and proprietary web technologies, a unique combination that has earned him recognition as a Microsoft MVP for Developer Technologies and the distinction of being the lead author of the Zend PHP certification. He is also credited in several open-source projects for his contributions. In addition to his writing and technical endeavors, Christian is a frequent speaker at developer conferences worldwide, where he shares his expertise in web technologies."
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "12:10",
+      "end": "13:10",
+      "room": "Room B",
+      "type": "session",
+      "title": "Bulletproof .NET MAUI: Building Apps That Don't Crash",
+      "level": "400 (heavy technical content)",
+      "description": "Every mobile app crashes at some point. The question isn't \"whether\" — it's \"how often\" and \"whether you even know about it.\" In this session, I'll show concrete patterns and tools that make .NET MAUI apps crash significantly less often, and ensure that when they do crash, you know before your users do. * The most common causes of crashes and ANRs in MAUI — unhandled exceptions, blocking the main thread, async/await pitfalls, memory leaks, race conditions during navigation. Each case shown with an example of bad and good code. * A global safety net: how to hook into AppDomain, TaskScheduler, and platform handlers (Android/iOS) so no exception disappears silently. * Production observability — Sentry and Firebase Crashlytics in MAUI, stack trace symbolication, breadcrumbs, device tags. Without this, you're flying blind. * Crash-resistant patterns — a BaseViewModel with a safe execution wrapper, lifecycle cancellation to prevent operations from firing after navigation, all async operations cancellable via CancellationToken. * Trimming and AOT as a silent crash factory — why your app works in Debug but blows up in Release, and how to configure CI to catch it before your users do.",
+      "speakers": [
+        {
+          "name": "Michał Pobuta",
+          "title": "Software Engineer at Heineken",
+          "description": "Software Engineer and .NET MAUI Expert with 5 years of experience in this technology. Developing cross-platform mobile applications for various clients. Co-founder of Neario.app, a startup building a social networking application. As former President of the Kernel Scientific Group at AGH University of Kraków, I actively contributed to the tech community by organising educational programs and mentoring the next generation of .NET developers."
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "12:10",
+      "end": "13:10",
+      "room": "Room C",
+      "type": "session",
+      "title": "Qubits Are Vectors Too: The Math Behind Quantum Computing",
+      "level": "400 (heavy technical content)",
+      "description": "Quantum computing can sound like a strange mix of physics, magic, and very confident people drawing circles on whiteboards. But behind the mystery, qubits are vectors, quantum gates are matrices, and quantum programs are powered by some beautifully weird linear algebra. In this somewhat interactive session, we will take a mathematical deep dive into the foundations of quantum computing and connect them directly to Microsoft Q#. We will explore how qubit states live in Hilbert vector spaces, why the Bloch sphere is more than just a fancy quantum disco ball, and how matrix multiplication describes the operations that change quantum states. We will start with the math and gradually turn it into code. You will see how vectors represent qubit states, how common quantum gates can be written as matrices, and how those gates transform states through linear algebra. Along the way, we will connect the theory to practical Q# examples so the math becomes something you can run, inspect, and experiment with. As a bonus, you will also get a peek behind the curtain at how quantum computer manufacturers create “drivers” or “adapters” that translate mathematical operations from a higher-level quantum programming language into actual quantum operations based on their physical architecture. No magic. No handwaving. No quantum unicorns. Just vectors, matrices, qubits, and a healthy amount of “wait, that actually makes sense.”",
+      "speakers": [
+        {
+          "name": "Johnny Hooyberghs",
+          "title": "Passionate Developer at Involved and Microsoft MVP",
+          "description": "Johnny Hooyberghs is a managing partner and consultant for Involved NV, part of the Cronos group, since 2014 focusing on software architecture, backend development and a Microsoft Most Valuable Professional for Azure and Developer Technologies since 2020. Prior to joining Involved as a consultant, he has had experience developing software for the health-care sector since 2008. Johnny has been passionate about software development using the .NET stack, cloud native development using the Microsoft Azure cloud stack and quantum computing. Johnny has spent 10 years of his free time teaching software development courses for the adult education institute CVO Antwerpen and has been enjoying public speaking these past 6 years. When Johnny is not working, he likes to spend his time on self-education, quantum computing, some casual video gaming, travelling the world and visiting as many theme parks as possible."
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "13:10",
+      "end": "14:10",
+      "room": "All attendees",
+      "type": "break",
+      "title": "Lunch"
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "14:10",
+      "end": "15:10",
+      "room": "Room A",
+      "type": "session",
+      "title": "A Fistful of .NET Performance Tips & Tricks",
+      "level": "300 (more advanced, lots of code)",
+      "description": "With every yearly release, .NET is constantly evolving, from backend to frontend, from development through deployment. One of the central non-functional features of the platform is performance. A common discussion is the contrast between performance and readability. But with modern C#, this does not have to be a tradeoff. We can have our proverbial cake and eat it, too. The more important question, however, is whether a code change actually does improve the complexity in time and space. This live coding session is not only designed to serve as a kick-off to performance awareness but also provides various tools and techniques you can apply to measure, compare, and evaluate different implementations by efficiency. Backed by practical examples, we will show how the combination of Alternate-Lookup and Span<> yields zero-overhead mapping, as well as how Collection Expressions grant one-shot initialization that reduces memory allocations on the managed heap, and much more. Additionally, we will deliver evidence of the reduction in CPU and GC pressure via profiling and benchmarking. Empowered by the latest idioms of the C# programming language and supported by libraries and analyzers from the .NET ecosystem, we will uncover high-performance syntax and inspect the semantics of it, laying the foundation for achieving maximum scalability without sacrificing reliability or testability.",
+      "speakers": [
+        {
+          "name": "Stefan Pölz",
+          "title": "I C# .NET; @Sentry by day; @FlashOWare by night",
+          "description": "Stefan's passion is to practice Clean Code and test-driven development in order to build maintainable high-performance software in an ever-evolving team, supported by tools from the .NET Ecosystem. He loves to attend and speak at public developer events, co-organize local community gatherings, stream live programming sessions, and author open source projects, complementing his expertise in professional software development. As Microsoft MVP (Developer Technologies), JetBrains Community Contributor (.NET) and co-organizer of DotNetDevs.at, it's his ambition to share knowledge about everything C#."
+        },
+        {
+          "name": "Angie Kadnar",
+          "title": "C# Clean Coder – .NET Senior Software Engineer Lead",
+          "description": "Angelika’s focus is on applying Clean Code principles and test-driven development to build maintainable and sustainable software within evolving, collaborative teams. With a background in C# and software architecture, she is particularly interested in improving existing systems through thoughtful refactoring and consistent design, supported by practices from the .NET ecosystem. She values clear communication, shared ownership, and continuous improvement, contributing to teams that care about long-term product quality and engineering excellence."
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "14:10",
+      "end": "15:10",
+      "room": "Room B",
+      "type": "session",
+      "title": "Modern cross-platform applications with .NET and Avalonia UI",
+      "level": "200 (basic concepts)",
+      "description": "There is a long list of possible frontend frameworks that .NET development teams can choose from. One very exciting candidate is Avalonia UI. Originally launched as a cross-platform alternative to WPF for Windows, macOS and Linux, it now also offers support for mobile platforms (Android, iOS), for the browser (via WebAssembly) and, as a unique selling point, also for embedded Linux. Due to the many supported platforms and the comparable approach to rendering, Avalonia UI could also be called the flutter for .NET developers. Similar to the older WPF, Avalonia UI relies on XAML, it prefers the MVVM pattern, can be adapted to individual visual requirements via styles, has a special focus on performance and is well integrated into current IDEs such as Microsoft Visual Studio and JetBrains Rider. These features make the framework especially interesting for teams that have prior knowledge of WPF or Windows.Forms or are even looking for a migration path for these applications into the cross-platform world. In this session I would like to show what Avalonia UI has to offer today. I will also bring along various sample applications that we can use to discuss the advantages and disadvantages of the framework.",
+      "speakers": [
+        {
+          "name": "Roland König",
+          "title": "Independent Software Engineer | Trainer | Focus on C#, .NET, TypeScript, Avalonia UI, ASP.NET Core, Vue.js",
+          "description": "Roland König is an independent software engineer and trainer. He has been at home in the world of C# / .NET since 2007 and has been focusing with current trends in modern software architecture since 2012. His services range from software architecture consulting and software development to developer trainings and project team leadership. He is also engaged in the developer community as a speaker at conferences, author for professional journals, blogger, developer for open-source projects and co-organizer of DCN (Digital Craftsmanship Nordoberpfalz). In 2025, he was named Avalonia MVP by the Avalonia team. For more information, see https://www.rolandk.net"
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "14:10",
+      "end": "15:10",
+      "room": "Room C",
+      "type": "session",
+      "title": "From Chaos to Order - Using the Repository Pattern the Right Way",
+      "level": "300 (more advanced, lots of code)",
+      "description": "Is your data access layer an untamed jungle of code? Do you wish testing and maintaining your application could be simpler? Join us for an interactive, beginner-friendly session where we’ll demystify the Repository pattern and show you how to use it with confidence. You’ll learn how to bring order to your data logic and increase your project’s reliability. We’ll break down the Repository pattern step by step and introduce the Unit of Work pattern for bulletproof data consistency. Get ready for real-world code samples, clear explanations, and practical strategies you can apply right away. By the end, you’ll have a blueprint for your own repository implementation—and a toolkit for transforming chaos into a clean, testable codebase.",
+      "speakers": [
+        {
+          "name": "Eric Johansson",
+          "title": "Senior developer at CeriQ, Live coder, Progress Champion and Microsoft MVP",
+          "description": "Eric has a broad experience that covers topics from ZX Basic to .NET. With projects spanning from business applications to nuclear power plant systems he developed the ability to adapt and evolve with the rapid changes in the tech landscape. That knowledge is something that he shares freely as a content creator and public speaker. Eric is passionate about making complex topics accessible to all level of learners, which you can see in his style of teaching in his livestreams, tutorials and conference sessions. Because of this, Eric has been recognized as a Progress Telerik Champion and as a Microsoft MVP. Apart from being a techie, he's also a servant to Zelda, an adorable cat."
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "15:10",
+      "end": "15:30",
+      "room": "All attendees",
+      "type": "break",
+      "title": "Coffee Break"
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "15:30",
+      "end": "16:30",
+      "room": "Room A",
+      "type": "session",
+      "title": "Weird C# features you (don't) need to know about",
+      "level": "500 (their heads will hurt!)",
+      "description": "C# is a mature language with a surface most developers know well - but beneath it lurk features that are obscure, misunderstood, or simply bizarre. This talk digs into the dark corners.",
+      "speakers": [
+        {
+          "name": "Jiří Činčura",
+          "title": "Jiří Činčura is .NET/C# and Firebird expert. Speaker and blogger. For almost two decades he contributes to open-source. Works as senior software engineer for Microsoft in EF Core/data area.",
+          "description": "https://www.tabsoverspaces.com/about"
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "15:30",
+      "end": "16:30",
+      "room": "Room B",
+      "type": "session",
+      "title": "ASP.NET Core Authentication - The Dirty Details",
+      "level": "400 (heavy technical content)",
+      "description": "Think you understand ASP.NET Core authentication? Adorable. In this session, we’ll peel back the nice, developer-friendly abstractions you normally work with and dive head‑first into the tangled \"stuff\" lurking underneath. We’ll go crawling through handlers, schemes, events, and the various moving parts that somehow work together to decide (how the system decides) who you are and what you can do. This talk won’t just show you _how_ things work, but also _why_ they often work, and why understanding the internals can save you hours of “why is this happening?” therapy. Expect a deeply technical (level 300–400) exploration that embraces the weird corners of the authentication pipeline most developers never see. Sure, knowing these details will not change your day to day life, but they will make you a more confident, better equipped developer and maybe even give you a few things to laugh about the next time authentication goes sideways. And if you have ever been trapped in a login loop that felt like the system had decided to gaslight you personally, you will walk away knowing exactly why it happened.",
+      "speakers": [
+        {
+          "name": "Chris Klug",
+          "title": "Chief Over‑Engineering Officer",
+          "description": "Chris Klug has been building software professionally since sometime around 2000, back when .NET was new, CSS was a suggestion, and Roy Fielding’s REST paper had just been published. Since then he has written code for everything from model agencies to online sports betting to professional sail racing, because staying in one industry sounded far too boring. He has been a Microsoft MVP for something like 15 years (depending on when he last updated this abstract), which either means he knows a thing or two or that he just talks a lot. Possibly both, but we all know the latter is a given. These days he works at Active Solution in Stockholm, helping clients solve problems and build better systems. When he is not writing code, Chris is usually geeking out on some form of extreme sport like skydiving, kitesurfing, snowboarding, mountain biking, or wing foiling. He loves learning new things and spends way too much time thinking about weird stuff most people never even notice."
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "15:30",
+      "end": "16:30",
+      "room": "Room C",
+      "type": "session",
+      "title": "A reflection on GenAI generated unit tests in C#",
+      "level": "300 (more advanced, lots of code)",
+      "description": "Many developers use GenAI like GitHub Copilot to generate their unit tests. For most developers, having just decent code coverage is enough, and the quality of the unit tests relative to the test theory is not examined. In this talk, we will, however, do just that. Based on some working code, we will generate unit tests and check the generated tests for compliance with the test theory. Do not expect a lot of code. We will spend the better part of the talk in code. In the session, we will use C#, xUnit and GitHub Copilot/JetBrains Junie, but the information is usable across multiple programming languages and agentic coding tools. At the end of the session, you will leave with enough knowledge to identify the gap between the generated test code and the test theory, and have some insights into how to steer the agentic coding tools to generate better test code.",
+      "speakers": [
+        {
+          "name": "Johan Smarius",
+          "title": "Microsoft MVP on .NET and DevOps, MCT, Coach/Trainer @ JMAC Software Solutions & Lead Microsoft Development Consultant @ Bergler",
+          "description": "Johan has been developing software since 1996 and has worked with .NET since version 1.0. With extensive experience as a lead developer and architect for .NET solutions, he is deeply passionate about clean coding and test-driven development. At JMAC Software Solutions and Bergler, he designs architectures for .NET solutions and coaches and trains developers in the domain of software engineering in general and Microsoft technologies in particular."
+        }
+      ]
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "16:30",
+      "end": "16:50",
+      "room": "All attendees",
+      "type": "break",
+      "title": "Coffee Break"
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-10-21",
+      "start": "16:50",
+      "end": "17:50",
+      "room": "Room A",
+      "type": "keynote",
+      "title": "Software Engineering Goes to 11: The Rock ’n’ Roll Commandments for Code That Rocks",
+      "level": "Keynote",
+      "description": "Great software has a lot in common with great rock ’n’ roll. You don’t walk on stage without rehearsing, you don’t record an album without structure, and you definitely don’t tell everyone it rocks until you’ve actually heard it. Software engineering should work the same way. In this high-energy session, we’ll crank software development up to 11 with a set of rock-inspired commandments covering architecture, unit testing, naming, refactoring, error handling, benchmarking, simplicity, documentation, code review, security, and AI-generated code. Along the way, we’ll look at why developers still fall into the same traps despite decades of better languages, frameworks, tools, and automation—and why engineering judgment matters more than ever. And because 10 just isn’t loud enough, the final commandment tackles one of today’s biggest risks: letting AI generate production code without strict validation from an experienced software engineer. Expect practical engineering advice, real-world lessons, a little humor, and plenty of rock ’n’ roll. Code. Design. Test. Measure. Refactor. Rock.",
+      "speakers": [
+        {
+          "name": "David McCarter",
+          "title": "Microsoft MVP (Developer Technologies), Software Architect, Speaker, Trainer, Inventor, and Mentor",
+          "description": "David McCarter is an exceptionally seasoned software engineer, a celebrated author, and a captivating speaker with a remarkable track record spanning over two decades within the industry. Holding the distinguished title of Microsoft MVP (Most Valuable Professional), David also serves as a solutions architect, Code Quality Zar, consultant, proficient code reviewer, and the esteemed editor-in-chief of dotNetTips.com. Renowned for his prolific literary contributions, David has graced programming magazines with his insightful articles and penned several illuminating books, including \"Rock Your Code: Coding Standards for Microsoft .NET,\" \"Rock Your Code: Code and App Performance for Microsoft .NET,\" and \"Rock Your Career: Surviving the Technical Interview.\" David commands a powerful presence on the speaking circuit, captivating audiences with his engaging and insightful talks on programming and technical interviewing—all delivered with his signature rock-and-roll flair. He has left an indelible mark on user groups, educational institutions, and prominent conferences worldwide, such as BuildStuff, Øredev, NDC, Copenhagen Developers Festival, Code Camp, SQL Saturday, DevConnections, and VSLive, among others. His instructional legacy even includes a tenure at the University of California, San Diego. Presently, he steers his own software consulting enterprise, McCarter Consulting, further solidifying his esteemed status within the field. Notably, David is the Co-founder and Director of the San Diego .NET Developers Group—a role that earned him the prestigious INETA Community Excellence Award in recognition of his outstanding contributions to the .NET community. He also holds the distinction of being a U.S. patent holder, with his software printing system officially approved by the U.S. Patent Office in May 2008. Beyond the realm of technology, David's talents are diverse and impressive. He has cultivated an award-winning reputation as both a skilled photographer and a gifted guitarist, collaborating with renowned bands like Queensryche, Buckcherry, Geoff Tate, Eric Johnson, Lit, Gary Hoey, P.O.D and many more. David’s photography can be found using this link: https://mccarterphotography.smugmug.com/. In totality, David stands as a multifaceted professional, an abundant reservoir of wisdom and proficiency across the spheres of software engineering, literary pursuits, and public speaking. Microsoft MVP profile is located at: http://bit.ly/davidmvp GitHub repo is located at: https://github.com/RealDotNetDave NuGet packages are located at: https://www.nuget.org/profiles/davidmccarter You can also connect with David on these social media platforms: BlueSky: https://bsky.app/profile/dotnetdave.bsky.social Facebook: https://www.facebook.com/DotNetArmy LinkedIn: https://www.linkedin.com/in/davidmccarter/"
+        }
+      ]
+    }
+  ]
+}

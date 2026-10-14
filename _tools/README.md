@@ -1,6 +1,6 @@
 # Presentation tools
 
-The 29 numbered SVG sources in `_slides` introduce the workshop, cover
+The 30 numbered SVG sources in `_slides` introduce the workshop, cover
 the AI fundamentals and Part 1 exercises, and introduce the remaining workshop sections. They can be exported as a
 full-bleed image-based PowerPoint. The
 tools use PowerShell and Microsoft Edge, with no Python, Node.js, or package
@@ -21,7 +21,7 @@ To regenerate only selected slides without touching the others:
 ```
 
 Edit the content and layouts in `build-slides.ps1` and rerun it. It generates
-`slide-01.svg` through `slide-29.svg`, embedding the fonts, conference logo,
+`slide-01.svg` through `slide-30.svg`, embedding the fonts, conference logo,
 Zure icon, speaker photo, and repository QR code from `_resources`. Use
 `-OnlySlides` with slide numbers to regenerate selected slides without
 touching the others.
@@ -31,17 +31,19 @@ important content within the 100-unit horizontal margins and above the footer
 at y=985. Use Raleway 700 for headings and Open Sans for body text. XML-escape
 text when editing the generator.
 
-Slides 2 through 29 include the repository link, Zure icon, and slide number in
+Slides 2 through 30 include the repository link, Zure icon, and slide number in
 the footer; the title slide has no footer.
 
 ## Exercise slide template
 
-Slides 12 and 20-25 use `ExerciseBody` in `build-slides.ps1`: a hands-on banner, exercise
+Slides 12, 20-25, and lab slide 26 use `ExerciseBody` in `build-slides.ps1`: a hands-on banner, exercise
 number badge, three numbered action cards, a clickable project path, and a
-takeaway. Reuse this helper for future exercises, supplying the exercise
+takeaway. Reuse this helper for future exercises and labs, supplying the exercise
 number, title, subtitle, repository-relative project path, exactly three step
 titles/detail arrays, and a short takeaway. Keep card details to at most three short
 lines and the title short enough to fit beside the decorative code icon.
+For labs, pass `-badge 'LAB'` so the number badge reads LAB instead of
+EXERCISE.
 Pass the resulting body to `SaveSlide` with the new slide number.
 
 ## Export PowerPoint

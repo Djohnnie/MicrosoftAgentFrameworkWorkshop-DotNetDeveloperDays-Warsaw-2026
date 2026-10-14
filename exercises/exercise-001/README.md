@@ -60,7 +60,7 @@ exercise-001/
 
 | Package | Purpose |
 |---------|---------|
-| `OpenAI` | OpenAI SDK 2.8.0; the same direct Responses API client as exercise 101 |
+| `OpenAI` | OpenAI SDK 2.14.0; the same direct Responses API client as exercise 101 |
 | `Microsoft.ML.Tokenizers` | Local, offline o200k_base tokenisation for GPT-4o and GPT-4.1 |
 | `Spectre.Console` | Rich terminal UI: colours, tables, panels |
 
@@ -103,7 +103,7 @@ The application accepts a Foundry project endpoint (`https://<resource>.services
 
 You can also set these variables in a local `Properties\launchSettings.json` profile. Do not commit a profile containing a real API key.
 
-Like exercise 101, `Program.cs` constructs `ResponsesClient` with the deployment name, `ApiKeyCredential`, and `OpenAIClientOptions.Endpoint`. This demo uses the SDK directly: it creates `ResponseItem` messages, places them in `CreateResponseOptions.InputItems`, and reads the reply with `response.GetOutputText()`. Exercise 101 instead adapts the client to `IChatClient` and reads `response.Text`. Both exercises pin `OpenAI` to 2.8.0 to match this SDK API and suppress its experimental `OPENAI001` diagnostic.
+Like exercise 101, `Program.cs` constructs `ResponsesClient` with `ApiKeyCredential` and `ResponsesClientOptions.Endpoint`. This demo uses the SDK directly: it sets the deployment name on `CreateResponseOptions.Model` for each request, places `ResponseItem` messages in `CreateResponseOptions.InputItems`, and reads the reply with `response.GetOutputText()`. Exercise 101 instead adapts the client to `IChatClient` and reads `response.Text`. Both exercises pin `OpenAI` to 2.14.0 to match this SDK API and suppress its experimental `OPENAI001` diagnostic.
 
 Unlike exercise 101's independent requests, this demo sends the system instruction and full conversation history on each call. `CreateResponseAsync` keeps the spinner responsive, and `response.Usage` supplies the API token counts directly. The richer UI, endpoint validation, and request error handling are retained.
 

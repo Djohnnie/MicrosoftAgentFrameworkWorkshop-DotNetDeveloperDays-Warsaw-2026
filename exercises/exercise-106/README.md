@@ -50,7 +50,7 @@ The program uses the `ChatClientAgentOptions` overload to also select `InMemoryC
 
 `Microsoft.Agents.AI` supplies the agent abstraction. The underlying `IChatClient` still communicates with the same model; `AsAIAgent` does not train a new model or deploy a hosted agent. The name identifies the agent, and the instructions guide its behavior, much like the system prompt in exercise 103. Instructions do not guarantee accurate answers.
 
-This exercise pins the stable Agent Framework 1.0.0 release and uses the compatible Microsoft.Extensions.AI.OpenAI 10.4.0 adapter with OpenAI 2.9.1. Agent Framework brings in Microsoft.Extensions.AI 10.4.0 transitively. This SDK version passes the model to `AsIChatClient(model)` instead of the `ResponsesClient` constructor; the endpoint and API-key authentication stay unchanged. `OPENAI001` is still suppressed for the experimental Responses API.
+This exercise pins Agent Framework 1.24.0 and uses the compatible Microsoft.Extensions.AI.OpenAI 10.11.0 adapter with OpenAI 2.14.0, the same OpenAI packages as exercises 101-104. Agent Framework brings in Microsoft.Extensions.AI transitively. As in exercises 101-104, the model is passed to `AsIChatClient(model)` and `ResponsesClient` takes `ResponsesClientOptions`; the endpoint and API-key authentication stay unchanged. `OPENAI001` is still suppressed for the experimental Responses API.
 
 ## Let the session retain conversation context
 

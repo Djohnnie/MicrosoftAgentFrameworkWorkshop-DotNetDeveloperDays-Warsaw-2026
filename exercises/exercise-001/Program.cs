@@ -31,9 +31,8 @@ catch (ArgumentException exception)
 }
 
 ResponsesClient client = new(
-    model: model,
     credential: new ApiKeyCredential(key),
-    options: new OpenAIClientOptions { Endpoint = endpointUri });
+    options: new ResponsesClientOptions { Endpoint = endpointUri });
 
 // GPT-4.1 and GPT-4o use the o200k_base tokenizer.
 var tokenizer = TiktokenTokenizer.CreateForModel("gpt-4.1");
@@ -66,7 +65,7 @@ while (true)
     history.Add((input, ResponseItem.CreateUserMessageItem(input)));
     var localHistoryCount = CountHistoryTokens(tokenizer, history);
 
-    CreateResponseOptions options = new();
+    CreateResponseOptions options = new() { Model = model };
     foreach (var message in history)
         options.InputItems.Add(message.Item);
 

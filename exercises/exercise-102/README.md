@@ -8,7 +8,7 @@
 
 This is the same `IChatClient` chatbot as [exercise 101](../exercise-101/README.md), with one difference: it keeps the conversation history. A follow-up can now refer to earlier messages because the app sends them along with the new question. The underlying client still uses the Responses API.
 
-The client setup, `OpenAI` SDK version 2.8.0, `Microsoft.Extensions.AI` / `Microsoft.Extensions.AI.OpenAI` version 10.3.0, and `OPENAI001` warning suppression are unchanged. There is no agent yet.
+The client setup, `OpenAI` SDK version 2.14.0, `Microsoft.Extensions.AI` / `Microsoft.Extensions.AI.OpenAI` version 10.11.0, and `OPENAI001` warning suppression are unchanged. There is no agent yet.
 
 ## Run it
 

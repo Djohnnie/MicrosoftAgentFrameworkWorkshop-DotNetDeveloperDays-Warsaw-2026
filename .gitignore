@@ -425,6 +425,8 @@ FodyWeavers.xsd
 /exercises/exercise-103/Properties/launchSettings.json
 /exercises/exercise-104/Properties/launchSettings.json
 /exercises/exercise-106/Properties/launchSettings.json
+/labs/lab-100/starter/Properties/launchSettings.json
+/labs/lab-100/solution/Properties/launchSettings.json
 
 # Built Visual Studio Code Extensions
 *.vsix
