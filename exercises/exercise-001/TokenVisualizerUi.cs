@@ -1,13 +1,15 @@
-using Microsoft.Extensions.AI;
 using Microsoft.ML.Tokenizers;
+using OpenAI.Responses;
 using Spectre.Console;
+
+#pragma warning disable OPENAI001
 
 internal static class TokenVisualizerUi
 {
     public static void ShowBanner()
     {
         AnsiConsole.Write(new FigletText("Token Visualizer").Centered().Color(Color.Cyan1));
-        AnsiConsole.Write(new Rule("[bold deepskyblue1]Microsoft.Extensions.AI / Microsoft Foundry / o200k_base tokenizer[/]")
+        AnsiConsole.Write(new Rule("[bold deepskyblue1]OpenAI SDK / Microsoft Foundry / o200k_base tokenizer[/]")
             .RuleStyle("grey23").Centered());
         AnsiConsole.WriteLine();
     }
@@ -15,9 +17,9 @@ internal static class TokenVisualizerUi
     public static void ShowMissingConfiguration()
     {
         ShowError("Missing configuration. Please set the following environment variables:");
-        AnsiConsole.MarkupLine("  [yellow]OPENAI_ENDPOINT[/]  -- Foundry project, resource, or OpenAI v1 endpoint");
-        AnsiConsole.MarkupLine("  [yellow]OPENAI_KEY[/]       -- Foundry API key");
-        AnsiConsole.MarkupLine("  [yellow]OPENAI_MODEL[/]     -- Deployment name");
+        AnsiConsole.MarkupLine("  [yellow]FOUNDRY_ENDPOINT[/]          -- Foundry project, resource, or OpenAI v1 endpoint");
+        AnsiConsole.MarkupLine("  [yellow]FOUNDRY_API_KEY[/]           -- Foundry API key");
+        AnsiConsole.MarkupLine("  [yellow]FOUNDRY_MODEL_DEPLOYMENT[/]  -- Deployment name");
     }
 
     public static void ShowError(string message) =>
@@ -32,7 +34,7 @@ internal static class TokenVisualizerUi
 
     public static string ReadInput()
     {
-        var input = AnsiConsole.Ask<string>("[bold yellow]You[/] [grey]>[/]");
+        var input = AnsiConsole.Ask<string>("[bold yellow][[USER]]:[/]");
         AnsiConsole.WriteLine();
         return input;
     }
@@ -45,11 +47,11 @@ internal static class TokenVisualizerUi
 
     public static void ShowInputTokens(IReadOnlyList<EncodedToken> tokens)
     {
-        ShowRule("Your Message - Token Stream", "yellow");
+        ShowRule("[USER]: Token Stream", "yellow");
         VisualizeTokens(tokens);
     }
 
-    public static async Task<ChatResponse> WaitForResponseAsync(Func<Task<ChatResponse>> getResponse) =>
+    public static async Task<ResponseResult> WaitForResponseAsync(Func<Task<ResponseResult>> getResponse) =>
         await AnsiConsole.Status()
             .Spinner(Spinner.Known.Dots2)
             .SpinnerStyle(Style.Parse("cyan"))
@@ -57,15 +59,15 @@ internal static class TokenVisualizerUi
 
     public static void ShowResponse(string text, IReadOnlyList<EncodedToken> tokens)
     {
-        ShowRule("AI Response", "green");
+        ShowRule("[ASSISTANT]:", "green");
         AnsiConsole.Write(new Panel(new Markup(Markup.Escape(text)))
             .BorderStyle(Style.Parse("green")).Expand());
         AnsiConsole.WriteLine();
-        ShowRule("AI Response - Token Stream", "green");
+        ShowRule("[ASSISTANT]: Token Stream", "green");
         VisualizeTokens(tokens);
     }
 
-    public static void ShowComparison(int messageOnly, int localInput, int localOutput, UsageDetails? usage)
+    public static void ShowComparison(int messageOnly, int localInput, int localOutput, ResponseTokenUsage? usage)
     {
         ShowRule("Token Count Comparison", "deepskyblue1");
         var table = new Table()
@@ -92,7 +94,7 @@ internal static class TokenVisualizerUi
 
     private static void ShowRule(string title, string color)
     {
-        AnsiConsole.Write(new Rule($"[bold {color}] {title} [/]").RuleStyle(color).Centered());
+        AnsiConsole.Write(new Rule($"[bold {color}] {Markup.Escape(title)} [/]").RuleStyle(color).Centered());
         AnsiConsole.WriteLine();
     }
 

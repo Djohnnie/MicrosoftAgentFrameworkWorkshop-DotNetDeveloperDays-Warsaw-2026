@@ -1,13 +1,15 @@
 using System.ClientModel;
-using Microsoft.Extensions.AI;
 using Microsoft.ML.Tokenizers;
+using OpenAI;
 using OpenAI.Responses;
+
+#pragma warning disable OPENAI001
 
 TokenVisualizerUi.ShowBanner();
 
-var endpoint = Environment.GetEnvironmentVariable("OPENAI_ENDPOINT");
-var key = Environment.GetEnvironmentVariable("OPENAI_KEY");
-var model = Environment.GetEnvironmentVariable("OPENAI_MODEL");
+var endpoint = Environment.GetEnvironmentVariable("FOUNDRY_ENDPOINT");
+var key = Environment.GetEnvironmentVariable("FOUNDRY_API_KEY");
+var model = Environment.GetEnvironmentVariable("FOUNDRY_MODEL_DEPLOYMENT");
 
 if (string.IsNullOrWhiteSpace(endpoint) || string.IsNullOrWhiteSpace(key) || string.IsNullOrWhiteSpace(model))
 {
@@ -28,18 +30,17 @@ catch (ArgumentException exception)
     return;
 }
 
-#pragma warning disable OPENAI001
-ResponsesClient responsesClient = new(
+ResponsesClient client = new(
+    model: model,
     credential: new ApiKeyCredential(key),
-    options: new ResponsesClientOptions { Endpoint = endpointUri });
-using IChatClient chatClient = responsesClient.AsIChatClient(model);
-#pragma warning restore OPENAI001
+    options: new OpenAIClientOptions { Endpoint = endpointUri });
 
 // GPT-4.1 and GPT-4o use the o200k_base tokenizer.
 var tokenizer = TiktokenTokenizer.CreateForModel("gpt-4.1");
-var history = new List<ChatMessage>
+const string instructions = "You are a helpful assistant. Give clear, concise answers.";
+var history = new List<(string Text, ResponseItem Item)>
 {
-    new(ChatRole.System, "You are a helpful assistant. Give clear, concise answers.")
+    (instructions, ResponseItem.CreateSystemMessageItem(instructions))
 };
 
 TokenVisualizerUi.ShowChatInstructions();
@@ -52,7 +53,7 @@ while (true)
 
     if (input.Equals("clear", StringComparison.OrdinalIgnoreCase))
     {
-        history.RemoveAll(message => message.Role != ChatRole.System);
+        history.RemoveRange(1, history.Count - 1);
         TokenVisualizerUi.ShowHistoryCleared();
         continue;
     }
@@ -62,13 +63,17 @@ while (true)
 
     TokenVisualizerUi.ShowInputTokens(tokenizer.EncodeToTokens(input, out _));
     var localMessageCount = tokenizer.CountTokens(input);
-    history.Add(new ChatMessage(ChatRole.User, input));
+    history.Add((input, ResponseItem.CreateUserMessageItem(input)));
     var localHistoryCount = CountHistoryTokens(tokenizer, history);
 
-    ChatResponse response;
+    CreateResponseOptions options = new();
+    foreach (var message in history)
+        options.InputItems.Add(message.Item);
+
+    ResponseResult response;
     try
     {
-        response = await TokenVisualizerUi.WaitForResponseAsync(() => chatClient.GetResponseAsync(history));
+        response = await TokenVisualizerUi.WaitForResponseAsync(async () => await client.CreateResponseAsync(options));
     }
     catch (ClientResultException exception)
     {
@@ -77,8 +82,8 @@ while (true)
         continue;
     }
 
-    var responseText = response.Text;
-    history.Add(new ChatMessage(ChatRole.Assistant, responseText));
+    var responseText = response.GetOutputText();
+    history.Add((responseText, ResponseItem.CreateAssistantMessageItem(responseText)));
     TokenVisualizerUi.ShowResponse(responseText, tokenizer.EncodeToTokens(responseText, out _));
     TokenVisualizerUi.ShowComparison(
         localMessageCount, localHistoryCount, tokenizer.CountTokens(responseText), response.Usage);
@@ -86,11 +91,11 @@ while (true)
 
 TokenVisualizerUi.ShowGoodbye();
 
-static int CountHistoryTokens(TiktokenTokenizer tokenizer, IList<ChatMessage> history)
+static int CountHistoryTokens(TiktokenTokenizer tokenizer, IList<(string Text, ResponseItem Item)> history)
 {
     // Approximate chat framing; Responses API usage is the authoritative count.
     const int overheadPerMessage = 3;
     const int replyPrimer = 3;
-    return history.Sum(message => tokenizer.CountTokens(message.Text ?? string.Empty))
+    return history.Sum(message => tokenizer.CountTokens(message.Text))
         + history.Count * overheadPerMessage + replyPrimer;
 }

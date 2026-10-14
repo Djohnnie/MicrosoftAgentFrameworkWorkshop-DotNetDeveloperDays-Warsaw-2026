@@ -6,7 +6,7 @@ internal static class FoundryEndpoint
             uri.Scheme != Uri.UriSchemeHttps ||
             uri.UserInfo.Length > 0 || uri.Query.Length > 0 || uri.Fragment.Length > 0)
         {
-            throw new ArgumentException("OPENAI_ENDPOINT must be an HTTPS URL without credentials, query parameters, or a fragment.");
+            throw new ArgumentException("FOUNDRY_ENDPOINT must be an HTTPS URL without credentials, query parameters, or a fragment.");
         }
 
         var path = uri.AbsolutePath.TrimEnd('/');
@@ -24,6 +24,6 @@ internal static class FoundryEndpoint
             return new UriBuilder(uri) { Path = "/openai/v1" }.Uri;
 
         throw new ArgumentException(
-            "OPENAI_ENDPOINT must be a Foundry resource URL, an /openai/v1 URL, or a Foundry /api/projects/<project-name> URL.");
+            "FOUNDRY_ENDPOINT must be a Foundry resource URL, an /openai/v1 URL, or a Foundry /api/projects/<project-name> URL.");
     }
 }

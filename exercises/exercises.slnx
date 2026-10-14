@@ -4,6 +4,24 @@
     <Project Path="exercise-001\TokenVisualizer.csproj" />
   </Folder>
   <Folder Name="/1. From LLM calls to agents/" />
+  <Folder Name="/1. From LLM calls to agents/101. Stateless chat bot/">
+    <Project Path="exercise-101\SimpleChatbot.csproj" />
+  </Folder>
+  <Folder Name="/1. From LLM calls to agents/102. Chatbot with history/">
+    <Project Path="exercise-102\ChatbotWithHistory.csproj" />
+  </Folder>
+  <Folder Name="/1. From LLM calls to agents/103. Chatbot personas/">
+    <Project Path="exercise-103\ChatbotPersonas.csproj" />
+  </Folder>
+  <Folder Name="/1. From LLM calls to agents/104. Structured output/">
+    <Project Path="exercise-104\StructuredOutput.csproj" />
+  </Folder>
+  <Folder Name="/1. From LLM calls to agents/105. Local Ollama chatbot/">
+    <Project Path="exercise-105\LocalChatbot.csproj" />
+  </Folder>
+  <Folder Name="/1. From LLM calls to agents/106. Chatbot agent/">
+    <Project Path="exercise-106\ChatbotAgent.csproj" />
+  </Folder>
   <Folder Name="/2. Giving agents capabilities - tools and MCP/" />
   <Folder Name="/3. Orchestrating agents and workflows/" />
   <Folder Name="/4. Making agents reliable and production-ready/" />

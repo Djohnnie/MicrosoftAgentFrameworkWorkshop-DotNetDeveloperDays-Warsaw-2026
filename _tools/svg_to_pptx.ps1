@@ -45,7 +45,7 @@ try {
             $svg = [IO.File]::ReadAllText($files[$i].FullName) -replace '<\?xml[^>]*\?>', ''
             [IO.File]::WriteAllText($html, "<!doctype html><html><head><meta charset='utf-8'><style>html,body{margin:0;width:3840px;height:2160px;overflow:hidden}svg{display:block}</style></head><body>$svg</body></html>", [Text.UTF8Encoding]::new($false))
             $url = [Uri]::new($html).AbsoluteUri
-            $arguments = @('--headless=new', '--disable-gpu', '--no-first-run', '--hide-scrollbars',
+            $arguments = @('--headless=new', '--disable-gpu', '--no-first-run', '--disable-background-mode', '--hide-scrollbars',
                 "--user-data-dir=$(Join-Path $tmp 'edge-profile')", '--force-device-scale-factor=1',
                 '--window-size=3840,2160', '--virtual-time-budget=3000', "--screenshot=$png", $url)
             $process = Start-Process -FilePath $EdgePath -ArgumentList ($arguments | ForEach-Object { '"' + $_ + '"' }) -PassThru -RedirectStandardError (Join-Path $tmp "edge$n.log")

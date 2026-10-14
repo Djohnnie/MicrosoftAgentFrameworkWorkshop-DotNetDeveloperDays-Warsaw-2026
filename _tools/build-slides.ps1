@@ -72,13 +72,13 @@ function ExerciseBody([string]$exerciseNumber, [string]$title, [string]$subtitle
     @(
         '<rect x="100" y="185" width="1720" height="280" rx="24" fill="#202020" stroke="#383838" stroke-width="2"/>'
         '<path d="M124 185 H1796" stroke="url(#accent)" stroke-width="6"/>'
-        '<path d="M1355 220 L1310 430 M1410 275 L1455 320 L1410 365 M1270 275 L1225 320 L1270 365" fill="none" stroke="#444444" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>'
-        (Text 145 248 'HANDS-ON / YOUR TURN' 20 'label')
-        (Text 145 335 $title 64 'heading')
-        (Text 145 401 $subtitle 27)
-        '<rect x="1520" y="235" width="250" height="170" rx="18" fill="url(#accent)"/>'
-        '<text x="1645" y="282" text-anchor="middle" font-size="18" font-weight="700" style="fill:#ffffff;letter-spacing:3px">EXERCISE</text>'
-        "<text x='1645' y='365' text-anchor='middle' font-size='76' class='heading'>$([Security.SecurityElement]::Escape($exerciseNumber))</text>"
+        '<path d="M555 220 L510 430 M610 275 L655 320 L610 365 M470 275 L425 320 L470 365" fill="none" stroke="#444444" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>'
+        '<text x="1775" y="248" text-anchor="end" font-size="20" class="label">HANDS-ON / YOUR TURN</text>'
+        "<text x='1775' y='335' text-anchor='end' font-size='64' class='heading'>$([Security.SecurityElement]::Escape($title))</text>"
+        "<text x='1775' y='401' text-anchor='end' font-size='27' fill='#cccccc'>$([Security.SecurityElement]::Escape($subtitle))</text>"
+        '<rect x="130" y="235" width="250" height="170" rx="18" fill="url(#accent)"/>'
+        '<text x="255" y="282" text-anchor="middle" font-size="18" font-weight="700" style="fill:#ffffff;letter-spacing:3px">EXERCISE</text>'
+        "<text x='255' y='365' text-anchor='middle' font-size='76' class='heading'>$([Security.SecurityElement]::Escape($exerciseNumber))</text>"
         for ($i = 0; $i -lt 3; $i++) {
             $x = 100 + $i * 590
             (Card $x 510 540 230)
@@ -145,21 +145,23 @@ $body = @(
     (Text 100 245 'Johnny Hooyberghs' 72 'heading')
     "<image x='145' y='345' width='430' height='430' preserveAspectRatio='xMidYMid slice' clip-path='url(#speaker-photo-clip)' href='$speakerPhoto'/>"
     '<circle cx="360" cy="560" r="215" fill="none" stroke="#bd0926" stroke-width="3"/>'
-    '<circle cx="750" cy="380" r="7" fill="#ff6a3f"/>'
-    (Lines 780 390 @('Focus on .NET application development,', 'Azure cloud, and generative AI') 34 44)
-    '<circle cx="750" cy="500" r="7" fill="#ff6a3f"/>'
-    (Lines 780 510 @('18 years of professional experience', 'as a software enthusiast') 34 44)
-    '<circle cx="750" cy="620" r="7" fill="#ff6a3f"/>'
-    (Lines 780 630 @('Microsoft MVP in Developer Technologies', 'and Azure since 2020') 34 44)
-    '<circle cx="750" cy="780" r="7" fill="#ff6a3f"/>'
-    (Text 780 790 'Public speaker and trainer' 34)
+    '<circle cx="750" cy="340" r="7" fill="#ff6a3f"/>'
+    (Text 780 350 'Azure Architect at Zure' 34)
+    '<circle cx="750" cy="419" r="7" fill="#ff6a3f"/>'
+    (Lines 780 429 @('Focus on .NET application development,', 'Azure cloud, and generative AI') 34 44)
+    '<circle cx="750" cy="542" r="7" fill="#ff6a3f"/>'
+    (Lines 780 552 @('18 years of professional experience', 'as a software enthusiast') 34 44)
+    '<circle cx="750" cy="665" r="7" fill="#ff6a3f"/>'
+    (Lines 780 675 @('Microsoft MVP in Developer Technologies', 'and Azure since 2020') 34 44)
+    '<circle cx="750" cy="788" r="7" fill="#ff6a3f"/>'
+    (Text 780 798 'Public speaker and trainer' 34)
 ) -join "`n"
 SaveSlide 'slide-02.svg' 'Johnny Hooyberghs' 'Speaker introduction with photo, professional background, and interests.' $body '02' 'ABOUT THE SPEAKER'
 
 $body = @(
     (Text 100 245 'Explore the workshop materials.' 68 'heading')
     (Text 100 315 'Scan to open the Microsoft Agent Framework workshop repository' 30)
-    "<a href='$repoUrl'><image x='690' y='340' width='540' height='540' href='$qrCode'/></a>"
+    "<a href='$repoUrl'><image x='690' y='370' width='540' height='540' href='$qrCode'/></a>"
 ) -join "`n"
 SaveSlide 'slide-03.svg' 'Explore the workshop materials' 'QR code linking to the Microsoft Agent Framework workshop repository.' $body '03' 'FOLLOW ALONG'
 
@@ -339,12 +341,12 @@ $body = ExerciseBody -exerciseNumber '001' -title 'Tokenization demo' `
     -projectPath 'exercises\exercise-001' `
     -stepTitles @('Configure', 'Run', 'Explore') `
     -stepDetails @(
-        ,@('Set OPENAI_ENDPOINT, OPENAI_KEY,', 'and OPENAI_MODEL for Microsoft Foundry.')
-        ,@('Start the Token Visualizer console app.', 'Send a message; inspect the token stream.')
-        ,@('Try sentences, C# code, and identifiers.', 'Compare local counts with API usage.')
+        ,@('Set FOUNDRY_ENDPOINT,', 'FOUNDRY_API_KEY, and', 'FOUNDRY_MODEL_DEPLOYMENT.')
+        ,@('Start the Token Visualizer console app.', 'Send a message; inspect its tokens.')
+        ,@('Compare local counts with API usage.', 'Full history counts toward input;', 'type clear to reset; quit to exit.')
     ) `
     -takeaway 'Tokens shape context size and cost. Wording and formatting matter.'
-SaveSlide 'slide-12.svg' 'Exercise 001: Tokenization demo' 'Hands-on exercise 001: configure Microsoft Foundry, run the Token Visualizer, and explore token streams and usage. Open exercises\exercise-001.' $body '12' 'EXERCISE 001: TOKENIZATION DEMO'
+SaveSlide 'slide-12.svg' 'Exercise 001: Tokenization demo' 'Hands-on exercise 001: configure Microsoft Foundry, run the Token Visualizer, and explore token streams and usage. Open exercises\exercise-001.' $body '12' 'EXERCISE 001'
 
 $body = @(
     (Text 100 235 'Fluent output is not the same as verified truth' 48 'heading')
@@ -424,8 +426,42 @@ $body = @(
 ) -join "`n"
 SaveSlide 'slide-16.svg' 'Agent orchestration' 'Orchestration coordinates specialized agents, routes tasks, and manages handoffs toward a shared goal.' $body '16' 'AGENT ORCHESTRATION'
 
+$body = @(
+    (Text 100 225 'A framework for building production-grade agents and workflows' 43 'heading')
+    (Text 100 275 'Build individual AI agents, then connect them to tools, services, and each other.' 26)
+    (Card 100 345 400 360)
+    (Text 135 405 'AGENTS' 21 'accent')
+    (Lines 135 470 @('Use models to process', 'requests, call tools or', 'MCP servers, and respond.') 24 44)
+    (Card 535 345 400 360)
+    (Text 570 405 'HARNESS AGENT' 21 'accent')
+    (Lines 570 470 @('Support long tasks with', 'planning, memory, file', 'access, and approvals.') 24 44)
+    (Card 970 345 400 360)
+    (Text 1005 405 'WORKFLOWS' 21 'accent')
+    (Lines 1005 470 @('Connect agents and', 'functions through explicit', 'execution paths.') 24 44)
+    (Card 1405 345 415 360)
+    (Text 1440 405 'INTEGRATIONS' 21 'accent')
+    (Lines 1440 470 @('Connect model providers,', 'tools, context, middleware,', 'evaluation, and UI.') 24 44)
+    (Text 100 785 'Build in .NET and Python with provider choice, state, middleware, and observability.' 25 'heading')
+    "<a href='https://learn.microsoft.com/en-us/agent-framework/overview/?pivots=programming-language-csharp'>$(Text 100 880 'Source: Microsoft Learn overview' 20 'muted')</a>"
+    "<a href='https://github.com/microsoft/agent-framework/blob/main/README.md'>$(Text 460 880 'Microsoft Agent Framework on GitHub' 20 'muted')</a>"
+) -join "`n"
+SaveSlide 'slide-17.svg' 'What is Microsoft Agent Framework?' 'Microsoft Agent Framework brings together agents, harness agents, workflows, and integrations to build production-grade AI applications.' $body '17' 'WHAT IS MICROSOFT AGENT FRAMEWORK?'
+
+$body = @(
+    (Text 100 230 'Choose the simplest pattern that fits the task' 48 'heading')
+    (Card 100 335 790 390)
+    (Text 145 400 'USE AN AGENT WHEN' 21 'accent')
+    (Lines 145 475 @('The task is open-ended or conversational.', 'The model needs to plan and choose tools.', 'One model call, possibly with tools, is enough.') 27 74)
+    (Card 1030 335 790 390)
+    (Text 1075 400 'USE A WORKFLOW WHEN' 21 'accent')
+    (Lines 1075 475 @('The process follows well-defined steps.', 'You need explicit control over execution order.', 'Multiple agents or functions must coordinate.') 27 74)
+    (Text 100 805 'If a regular function can handle the task, use the function.' 29 'heading')
+    "<a href='https://learn.microsoft.com/en-us/agent-framework/overview/?pivots=programming-language-csharp'>$(Text 100 880 'Source: Microsoft Learn overview' 20 'muted')</a>"
+    "<a href='https://github.com/microsoft/agent-framework/blob/main/README.md'>$(Text 460 880 'Microsoft Agent Framework on GitHub' 20 'muted')</a>"
+) -join "`n"
+SaveSlide 'slide-18.svg' 'Agents or workflows?' 'Use an agent for open-ended tasks that need autonomous planning; use a workflow for defined steps that need explicit execution control.' $body '18' 'AGENTS OR WORKFLOWS?'
+
 $sections = @(
-    [pscustomobject]@{ Title = 'Introduction'; Subtitle = 'Introduction to GenAI'; Time = '09:00 - 09:30' }
     [pscustomobject]@{ Title = 'Part 1'; Subtitle = 'From LLM calls to agents'; Time = '09:30 - 11:00' }
     [pscustomobject]@{ Title = 'Part 2'; Subtitle = 'Giving agents capabilities: tools and MCP'; Time = '11:15 - 13:00' }
     [pscustomobject]@{ Title = 'Part 3'; Subtitle = 'Orchestrating agents and workflows'; Time = '13:45 - 15:15' }
@@ -433,7 +469,7 @@ $sections = @(
 )
 for ($i = 0; $i -lt $sections.Count; $i++) {
     $section = $sections[$i]
-    $slideNumber = $i + 17
+    $slideNumber = $i + 19 + 6 * [int]($i -gt 0)
     $displayTitle = $section.Title.ToUpperInvariant()
     $body = @(
         (Text 100 435 $displayTitle 76 'heading')
@@ -441,14 +477,88 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
         (Text 100 570 $section.Subtitle 50)
         (Text 100 660 $section.Time 28 'agenda-time')
     ) -join "`n"
-    SaveSlide ("slide-{0:D2}.svg" -f $slideNumber) "$($section.Title): $($section.Subtitle)" "Section divider for $($section.Title), $($section.Subtitle), scheduled $($section.Time)." $body ("{0:D2}" -f $slideNumber) 'WORKSHOP SESSION'
+    SaveSlide ("slide-{0:D2}.svg" -f $slideNumber) "$($section.Title): $($section.Subtitle)" "Section divider for $($section.Title), $($section.Subtitle), scheduled $($section.Time)." $body ("{0:D2}" -f $slideNumber) 'Hands-on building GenAI enabled .NET applications using the Microsoft Agent Framework'
+
+    if ($i -eq 0) {
+        $body = ExerciseBody -exerciseNumber '101' -title 'Simple Chatbot' `
+            -subtitle 'Talk to a language model, one message at a time.' `
+            -projectPath 'exercises\exercise-101' `
+            -stepTitles @('Configure', 'Chat', 'Observe') `
+            -stepDetails @(
+                ,@('Use the Foundry settings from', 'exercise 001.')
+                ,@('Use IChatClient.GetResponseAsync;', 'print response.Text.')
+                ,@('Try a follow-up. The model', 'does not know earlier turns.')
+            ) `
+            -takeaway 'A direct model call with only the current message; no agent or conversation history.'
+        SaveSlide 'slide-20.svg' 'Exercise 101: Simple Chatbot' 'Part 1 exercise 101: chat with a Foundry model through independent requests that do not retain conversation history. Open exercises\exercise-101.' $body '20' 'EXERCISE 101'
+
+        $body = ExerciseBody -exerciseNumber '102' -title 'Chatbot with History' `
+            -subtitle 'Give each follow-up the conversation so far.' `
+            -projectPath 'exercises\exercise-102' `
+            -stepTitles @('Keep', 'Append', 'Compare') `
+            -stepDetails @(
+                ,@('Keep a List<ChatMessage>', 'outside the conversation loop.')
+                ,@('Add the user message, call', 'GetResponseAsync(history), then', 'append response.Messages.')
+                ,@('Try a follow-up, then compare', 'with exercise 101. Restart', 'the app to discard history.')
+            ) `
+            -takeaway 'Send the full conversation on every request; more history means more input tokens.'
+        SaveSlide 'slide-21.svg' 'Exercise 102: Chatbot with History' 'Part 1 exercise 102: retain user messages and assistant replies and send the full conversation with every request. Open exercises\exercise-102.' $body '21' 'EXERCISE 102'
+
+        $body = ExerciseBody -exerciseNumber '103' -title 'Chatbot Personas' `
+            -subtitle 'Change the age persona with each question.' `
+            -projectPath 'exercises\exercise-103' `
+            -stepTitles @('Define', 'Include', 'Compare') `
+            -stepDetails @(
+                ,@('Start at age 10; put the age', 'in a system prompt template.')
+                ,@('Replace the system message;', 'keep the conversation history.')
+                ,@('Lower the age by 2 per reply:', '10, 8, 6, 4, 2, 0. Stay at 0.', 'Compare vocabulary and tone.')
+            ) `
+            -takeaway 'A system prompt guides style and behavior; it does not change the model or ensure facts.'
+        SaveSlide 'slide-22.svg' 'Exercise 103: Chatbot Personas' 'Part 1 exercise 103: update the system persona from age 10 down to 0 in steps of 2, staying at 0 and retaining conversation history. Open exercises\exercise-103.' $body '22' 'EXERCISE 103'
+
+        $body = ExerciseBody -exerciseNumber '104' -title 'Structured Output' `
+            -subtitle 'Generate a typed employee instead of free-form text.' `
+            -projectPath 'exercises\exercise-104' `
+            -stepTitles @('Define', 'Generate', 'Inspect') `
+            -stepDetails @(
+                ,@('Create an Employee record:', 'name, first name, birth date,', 'salary, and function title.')
+                ,@('Use GetResponseAsync<Employee>', 'with JSON-schema output;', 'choose a supporting deployment.')
+                ,@('Read the typed result; compare', 'employees from different prompts.')
+            ) `
+            -takeaway 'The C# type defines the output shape; application code still validates the values.'
+        SaveSlide 'slide-23.svg' 'Exercise 104: Structured Output' 'Part 1 exercise 104: use a generic structured-output call to generate an Employee with name, first name, birth date, salary, and function title. Open exercises\exercise-104.' $body '23' 'EXERCISE 104'
+
+        $body = ExerciseBody -exerciseNumber '105' -title 'Local Ollama Chatbot' `
+            -subtitle 'Keep the chat loop; run the model on your machine.' `
+            -projectPath 'exercises\exercise-105' `
+            -stepTitles @('Prepare', 'Connect', 'Compare') `
+            -stepDetails @(
+                ,@('Start Ollama and download:', 'ollama pull qwen2.5:7b')
+                ,@('Use OllamaApiClient as IChatClient', 'at http://localhost:11434.')
+                ,@('Keep the history from 102.', 'Compare local and cloud replies;', 'no Foundry credentials needed.')
+            ) `
+            -takeaway 'IChatClient lets you change providers while keeping the same conversation code.'
+        SaveSlide 'slide-24.svg' 'Exercise 105: Local Ollama Chatbot' 'Part 1 exercise 105: use a local qwen2.5:7b model through Ollama and keep the IChatClient conversation history from exercise 102. Open exercises\exercise-105.' $body '24' 'EXERCISE 105'
+
+        $body = ExerciseBody -exerciseNumber '106' -title 'Chatbot Agent' `
+            -subtitle 'Give an agent instructions and a conversation session.' `
+            -projectPath 'exercises\exercise-106' `
+            -stepTitles @('Create', 'Instruct', 'Inspect') `
+            -stepDetails @(
+                ,@('AsAIAgent with', 'ChatClientAgentOptions and', 'InMemoryChatHistoryProvider.')
+                ,@('ChatOptions: cheerful age 10;', 'RawRepresentationFactory sets', 'StoredOutputEnabled = false.')
+                ,@('Reuse one session in RunAsync.', 'DebugHistory reads local messages', 'with TryGetInMemoryChatHistory.')
+            ) `
+            -takeaway 'The agent keeps history in a local session; each model call still sends it to Foundry.'
+        SaveSlide 'slide-25.svg' 'Exercise 106: Chatbot Agent' 'Part 1 exercise 106: use ChatClientAgentOptions with InMemoryChatHistoryProvider and ChatOptions.Instructions for a fixed cheerful age-10 persona. RawRepresentationFactory sets CreateResponseOptions.StoredOutputEnabled=false. Reuse one AgentSession; DebugHistory inspects actual local messages with TryGetInMemoryChatHistory after each reply. Open exercises\exercise-106.' $body '25' 'EXERCISE 106'
+    }
 }
 
 $body = @(
     (Text 100 245 'Any questions?' 72 'heading')
     (Text 100 315 'Continue exploring the workshop materials' 30)
-    "<a href='$repoUrl'><image x='690' y='340' width='540' height='540' href='$qrCode'/></a>"
+    "<a href='$repoUrl'><image x='690' y='370' width='540' height='540' href='$qrCode'/></a>"
 ) -join "`n"
-SaveSlide 'slide-21.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '21' 'THANK YOU'
+SaveSlide 'slide-29.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '29' 'THANK YOU'
 
 Write-Host "Built selected slides in $slides"
