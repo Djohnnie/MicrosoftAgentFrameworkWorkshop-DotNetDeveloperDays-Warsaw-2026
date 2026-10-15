@@ -78,6 +78,12 @@ interactive terminal; the simpler Part 1 loops also accept piped input.
   panels, and an `agenda` table; input uses `Console.ReadLine`, so piped input
   works. The starter has the packages, the same `agenda.json`, and TODOs only.
   Keep both `agenda.json` copies identical; no tools in Part 1 labs.
+- **Lab 200:** DevDays Buddy moves the agenda into an ASP.NET Core MCP server.
+  Keep the starter and solution server `agenda.json` files identical and
+  embedded as `agenda.json`; the client must not contain or send the full
+  agenda. The server exposes six focused conference, date, speaker, and
+  session tools; the console client discovers them over Streamable HTTP and
+  passes them to a Foundry-backed `AIAgent`.
 
 Keep Part 1 code short enough for participants to type. Preserve each
 exercise's teaching boundary: do not add history to 101, agents to 101-105,
@@ -138,8 +144,9 @@ Raleway 700 headings, Open Sans body text, 100-unit horizontal margins,
 and a footer at y=985. Fonts and graphics are embedded from `_resources`.
 See `_tools\README.md` for layout and export details.
 
-Current exercise slides are 001 at 12 and 101-106 at 20-25, and lab 100 is at
-26 (`ExerciseBody -badge 'LAB'`, header `LAB 100`); section dividers
-and closing slides follow them. Adding slides requires updating generator
+Current exercise slides are 001 at 12 and 101-106 at 20-25, lab 100 is at
+26, and exercises 201-205 are at 28-32. Lab 200 uses slides 33-35
+(`ExerciseBody -badge 'LAB'`, header `LAB 200`); section dividers and the
+closing slide follow at 36-38. Adding slides requires updating generator
 numbering, the shifted SVG outputs, root README headings/image references,
 and the deck, as well as slide-count references in tool documentation.

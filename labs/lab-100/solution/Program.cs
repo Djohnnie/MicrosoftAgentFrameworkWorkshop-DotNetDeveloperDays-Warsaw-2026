@@ -63,11 +63,19 @@ while (true)
 {
     AnsiConsole.Markup("[bold yellow][[USER]]:[/] ");
     var input = Console.ReadLine();
-    if (input is null || input.Equals("quit", StringComparison.OrdinalIgnoreCase))
+    if (input is null
+        || input.Equals("quit", StringComparison.OrdinalIgnoreCase)
+        || input.Equals("/quit", StringComparison.OrdinalIgnoreCase))
         break;
 
     if (string.IsNullOrWhiteSpace(input))
         continue;
+
+    if (input.Equals("/debug", StringComparison.OrdinalIgnoreCase))
+    {
+        DebugHistory(session);
+        continue;
+    }
 
     if (input.Equals("agenda", StringComparison.OrdinalIgnoreCase))
     {
@@ -111,7 +119,7 @@ static void ShowWelcome(AgendaDocument agenda)
         .BorderColor(Color.Grey));
 
     AnsiConsole.MarkupLine("[grey]Ask anything about the agenda, for example: [italic]Which AI sessions are on Tuesday?[/][/]");
-    AnsiConsole.MarkupLine("[grey]Commands: [bold]agenda[/] to show the schedule / [bold]quit[/] to exit.[/]");
+    AnsiConsole.MarkupLine("[grey]Commands: [bold]agenda[/] to show the schedule / [bold]/debug[/] to show conversation history / [bold]/quit[/] to exit.[/]");
     AnsiConsole.WriteLine();
 }
 
@@ -142,6 +150,66 @@ static void ShowAgenda(AgendaDocument agenda)
         AnsiConsole.Write(table);
     }
 
+    AnsiConsole.WriteLine();
+}
+
+static void DebugHistory(AgentSession session)
+{
+    AnsiConsole.Write(new Rule("[bold]AgentSession local in-memory history[/]"));
+
+    if (!session.TryGetInMemoryChatHistory(out var messages) || messages.Count == 0)
+    {
+        AnsiConsole.MarkupLine("[grey]No stored messages yet.[/]");
+        AnsiConsole.WriteLine();
+        return;
+    }
+
+    AnsiConsole.MarkupLine($"[grey]Stored messages: {messages.Count}[/]");
+
+    var table = new Table()
+        .Border(TableBorder.Rounded)
+        .AddColumn("[bold]#[/]")
+        .AddColumn("[bold]Role / content[/]")
+        .AddColumn("[bold]Details[/]");
+
+    for (var i = 0; i < messages.Count; i++)
+    {
+        var message = messages[i];
+        foreach (var content in message.Contents)
+        {
+            string color;
+            string kind;
+            string details;
+
+            switch (content)
+            {
+                case FunctionCallContent call:
+                    color = "mediumpurple1";
+                    kind = "FunctionCallContent";
+                    details = $"CallId: {call.CallId}\nName: {call.Name}\nArguments: {JsonSerializer.Serialize(call.Arguments)}";
+                    break;
+                case FunctionResultContent result:
+                    color = "green";
+                    kind = "FunctionResultContent";
+                    details = $"CallId: {result.CallId}\nResult: {JsonSerializer.Serialize(result.Result)}";
+                    break;
+                default:
+                    color = message.Role == ChatRole.User ? "yellow"
+                        : message.Role == ChatRole.Assistant ? "deepskyblue1"
+                        : "grey";
+                    kind = content.GetType().Name;
+                    details = content.ToString() ?? string.Empty;
+                    break;
+            }
+
+            table.AddRow(
+                (i + 1).ToString(),
+                $"[{color}]{Markup.Escape($"{message.Role}\n{kind}")}[/]",
+                $"[{color}]{Markup.Escape(details)}[/]");
+        }
+    }
+
+    AnsiConsole.Write(table);
     AnsiConsole.WriteLine();
 }
 

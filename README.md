@@ -263,22 +263,41 @@ Connect to `https://learn.microsoft.com/api/mcp` over Streamable HTTP, call `Lis
 
 Exercise 205 splits MCP hosting and consumption into two projects. The ASP.NET server exposes the current local date and time through MCP over Streamable HTTP, with `TimeProvider` injected into the tool class by ASP.NET Core's DI container. The console client connects to `http://localhost:5285/mcp`, lists the server's tools, and provides them to a Foundry-backed `AIAgent`. Run the server first in one terminal, then the client in another.
 
-### Slide 33 - Part 3: Orchestrating agents and workflows
+### Slide 33 - Lab 200: DevDays Buddy MCP Tools
 ![Slide 33](_slides/slide-33.svg)
+
+[Lab 200 README](labs/lab-200/README.md)
+
+> **TL;DR:** Replace Lab 100's full-agenda prompt context with focused conference MCP tools.
+
+Build an ASP.NET MCP server with an embedded `agenda.json` and six tools for conference information, dates, speakers, and sessions. A separate console agent discovers and invokes those tools; the entire agenda is never added to the agent's instructions.
+
+### Slide 34 - Lab 200: Build the Agenda MCP Server
+![Slide 34](_slides/slide-34.svg)
+
+Implement tools for the conference name and description, dates, speaker list and speaker lookup, sessions by date, and session details by title or date and start time. Deterministic partial matching should return ambiguity candidates instead of silently selecting the wrong speaker or session.
+
+### Slide 35 - Lab 200: Connect the DevDays Buddy Agent
+![Slide 35](_slides/slide-35.svg)
+
+Run the MCP server and console client as separate processes. The client discovers tools over Streamable HTTP and supplies them to an `AIAgent`; only the selected tool results and conversation history are sent to the model, not the full agenda document.
+
+### Slide 36 - Part 3: Orchestrating agents and workflows
+![Slide 36](_slides/slide-36.svg)
 
 > **TL;DR:** Coordinate specialist agents and workflows to combine their work into one useful result.
 
 Part 3 splits a larger request between a Session Scout and an Itinerary Planner, then uses an orchestrator or workflow to coordinate their handoffs. The scout finds and explains relevant sessions; the planner uses those actual candidates to build a schedule within the attendee's available time and avoid overlaps. The exercise also compares when this extra coordination helps and when one specialist is enough.
 
-### Slide 34 - Part 4: Making agents reliable and production-ready
-![Slide 34](_slides/slide-34.svg)
+### Slide 37 - Part 4: Making agents reliable and production-ready
+![Slide 37](_slides/slide-37.svg)
 
 > **TL;DR:** Make agents reliable with validation, clear failure handling, logging, and tests.
 
 Part 4 improves agent reliability with input and data validation, understandable error handling, concise logging, and tests for important behavior. It also reinforces that application code—not an unsupported model claim—should verify critical rules such as whether a proposed schedule contains conflicts.
 
-### Slide 35 - Any questions?
-![Slide 35](_slides/slide-35.svg)
+### Slide 38 - Any questions?
+![Slide 38](_slides/slide-38.svg)
 
 > **TL;DR:** You are wrapping up with time for questions and a link to the workshop materials.
 

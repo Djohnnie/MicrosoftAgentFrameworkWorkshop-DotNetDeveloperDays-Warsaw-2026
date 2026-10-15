@@ -143,7 +143,7 @@ dotnet run --project .\labs\lab-100\starter\DevDaysBuddy.Starter.csproj
 dotnet run --project .\labs\lab-100\solution\DevDaysBuddy.csproj
 ```
 
-Type a question and press **Enter**. Type `agenda` to show the schedule and `quit` to exit.
+Type a question and press **Enter**. Type `agenda` to show the schedule, `/debug` to inspect the local conversation history in a colored Spectre.Console table, and `/quit` to exit. The original `quit` command still works. Commands are case-insensitive and are handled locally, without calling the model. The history view distinguishes message roles, function calls (call ID, name, and arguments), and function results (call ID and result); Lab 100 itself does not expose tools.
 
 ## Try it
 
@@ -153,6 +153,7 @@ Type a question and press **Enter**. Type `agenda` to show the schedule and `qui
 4. "I like performance and C#. Plan my Wednesday without overlaps."
 5. "When is lunch on Tuesday, and when does the party start?"
 6. "Is there a session about Blazor WebAssembly testing?" The agent should say when something is not in the agenda.
+7. Type `/debug` to inspect the messages, then `/quit` to exit.
 
 Answers can still be wrong: the model may misread a time or invent a detail. Ask for the session title and time, then compare with the `agenda` table.
 

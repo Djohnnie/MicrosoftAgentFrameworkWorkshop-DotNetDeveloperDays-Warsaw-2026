@@ -8,6 +8,15 @@
     <Project Path="lab-100\solution\DevDaysBuddy.csproj" />
   </Folder>
   <Folder Name="/2. Giving agents capabilities - tools and MCP/" />
+  <Folder Name="/2. Giving agents capabilities - tools and MCP/200. DevDays Buddy MCP tools/" />
+  <Folder Name="/2. Giving agents capabilities - tools and MCP/200. DevDays Buddy MCP tools/1. Starter/">
+    <Project Path="lab-200\starter\server\DevDaysBuddy.McpServer.Starter.csproj" />
+    <Project Path="lab-200\starter\client\DevDaysBuddy.McpClient.Starter.csproj" />
+  </Folder>
+  <Folder Name="/2. Giving agents capabilities - tools and MCP/200. DevDays Buddy MCP tools/2. Solution/">
+    <Project Path="lab-200\solution\server\DevDaysBuddy.McpServer.csproj" />
+    <Project Path="lab-200\solution\client\DevDaysBuddy.McpClient.csproj" />
+  </Folder>
   <Folder Name="/3. Orchestrating agents and workflows/" />
   <Folder Name="/4. Making agents reliable and production-ready/" />
 </Solution>

@@ -469,7 +469,7 @@ $sections = @(
 )
 for ($i = 0; $i -lt $sections.Count; $i++) {
     $section = $sections[$i]
-    $slideNumber = $i + 19 + 7 * [int]($i -gt 0) + 5 * [int]($i -gt 1)
+    $slideNumber = $i + 19 + 7 * [int]($i -gt 0) + 8 * [int]($i -gt 1)
     $displayTitle = $section.Title.ToUpperInvariant()
     $body = @(
         (Text 100 435 $displayTitle 76 'heading')
@@ -625,6 +625,42 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
             ) `
             -takeaway 'MCP lets a console agent call DI-backed tools hosted by a separate ASP.NET process.'
         SaveSlide 'slide-32.svg' 'Exercise 205: Host Date and Time MCP Tools' 'Part 2 exercise 205: host the current date and time MCP tools in a standalone ASP.NET Core server, inject TimeProvider into the tool class, and discover and call them from a separate console AIAgent client over Streamable HTTP. Open exercises\exercise-205.' $body '32' 'EXERCISE 205'
+
+        $body = ExerciseBody -exerciseNumber '200' -badge 'LAB' -title 'DevDays Buddy MCP Tools' `
+            -subtitle 'Replace one large prompt context with focused agenda lookups.' `
+            -projectPath 'labs\lab-200' `
+            -stepTitles @('Keep', 'Expose', 'Ask') `
+            -stepDetails @(
+                ,@('Embed agenda.json in the MCP', 'server; do not send the full', 'file to the model.')
+                ,@('Build tools for conference,', 'speaker, and session lookups.')
+                ,@('Connect a console AIAgent;', 'let it call tools for answers.')
+            ) `
+            -takeaway 'The server keeps the full agenda; the agent receives only requested tool results.'
+        SaveSlide 'slide-33.svg' 'Lab 200: DevDays Buddy MCP Tools' 'Part 2 lab 200: embed the conference agenda in an ASP.NET MCP server, expose focused conference, speaker, and session lookup tools, and use them from a separate console AIAgent without putting the full agenda in its context.' $body '33' 'LAB 200'
+
+        $body = ExerciseBody -exerciseNumber '200' -badge 'LAB' -title 'Build the Agenda MCP Server' `
+            -subtitle 'Expose six focused conference, speaker, and session tools.' `
+            -projectPath 'labs\lab-200' `
+            -stepTitles @('Conference', 'Speakers', 'Sessions') `
+            -stepDetails @(
+                ,@('Return conference info and dates.')
+                ,@('List speakers; look up a', 'profile by first, last, or full name.')
+                ,@('List sessions by date; find', 'details by title or date and time.')
+            ) `
+            -takeaway 'Clear tool contracts and ambiguity messages help the model ask better follow-ups.'
+        SaveSlide 'slide-34.svg' 'Lab 200: Build the Agenda MCP Server' 'Lab 200 MCP server tools: conference information and dates; the speaker list and speaker details by name; sessions for a date and session details by title or by date and starting time. Deterministic matching reports ambiguous results for clarification.' $body '34' 'LAB 200'
+
+        $body = ExerciseBody -exerciseNumber '200' -badge 'LAB' -title 'Connect the DevDays Buddy Agent' `
+            -subtitle 'Discover MCP tools and fetch only the agenda data the question needs.' `
+            -projectPath 'labs\lab-200' `
+            -stepTitles @('Connect', 'Discover', 'Ground') `
+            -stepDetails @(
+                ,@('Run the MCP server separately', 'from the console client.')
+                ,@('List tools over Streamable HTTP;', 'add them to the agent.')
+                ,@('Answer from selected tool results;', 'never embed the full agenda.')
+            ) `
+            -takeaway 'MCP separates agenda data and lookup logic from the conversational client.'
+        SaveSlide 'slide-35.svg' 'Lab 200: Connect the DevDays Buddy Agent' 'Lab 200 console client: discover and invoke the separate ASP.NET MCP server tools over Streamable HTTP, while the Foundry-backed AIAgent retains conversation history without receiving the entire embedded agenda.' $body '35' 'LAB 200'
     }
 }
 
@@ -633,6 +669,6 @@ $body = @(
     (Text 100 315 'Continue exploring the workshop materials' 30)
     "<a href='$repoUrl'><image x='690' y='370' width='540' height='540' href='$qrCode'/></a>"
 ) -join "`n"
-SaveSlide 'slide-35.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '35' 'THANK YOU'
+SaveSlide 'slide-38.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '38' 'THANK YOU'
 
 Write-Host "Built selected slides in $slides"

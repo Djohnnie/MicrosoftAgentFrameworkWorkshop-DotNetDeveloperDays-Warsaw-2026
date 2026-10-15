@@ -7,7 +7,9 @@
 // TODO 2: Read the embedded agenda.json resource as a string.
 // TODO 3: Create an AIAgent with InMemoryChatHistoryProvider and instructions
 //         that contain the complete agenda JSON as context.
-// TODO 4: Create one AgentSession and answer questions in a loop until 'quit'.
+// TODO 4: Create one AgentSession and answer questions in a loop until '/quit'.
+//         Handle '/debug' locally: print the session history with colored
+//         Spectre.Console rows for messages, function calls, and results.
 // TODO 5: Spice it up with Spectre.Console: a FigletText banner, a status spinner,
 //         and a Panel for each answer.
 
