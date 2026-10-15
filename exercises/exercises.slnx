@@ -23,6 +23,22 @@
     <Project Path="exercise-106\ChatbotAgent.csproj" />
   </Folder>
   <Folder Name="/2. Giving agents capabilities - tools and MCP/" />
+  <Folder Name="/2. Giving agents capabilities - tools and MCP/201. Chatbot agent with tools/">
+    <Project Path="exercise-201\ChatbotAgentWithTools.csproj" />
+  </Folder>
+  <Folder Name="/2. Giving agents capabilities - tools and MCP/202. Local chatbot agent with tools/">
+    <Project Path="exercise-202\LocalChatbotAgentWithTools.csproj" />
+  </Folder>
+  <Folder Name="/2. Giving agents capabilities - tools and MCP/203. Dependency injection for agent tools/">
+    <Project Path="exercise-203\ChatbotAgentWithDependencyInjection.csproj" />
+  </Folder>
+  <Folder Name="/2. Giving agents capabilities - tools and MCP/204. Microsoft Learn MCP agent/">
+    <Project Path="exercise-204\ChatbotAgentWithLearnMcp.csproj" />
+  </Folder>
+  <Folder Name="/2. Giving agents capabilities - tools and MCP/205. Date and time MCP server/">
+    <Project Path="exercise-205\server\DateTimeMcpServer.csproj" />
+    <Project Path="exercise-205\client\ChatbotAgentWithMcpServer.csproj" />
+  </Folder>
   <Folder Name="/3. Orchestrating agents and workflows/" />
   <Folder Name="/4. Making agents reliable and production-ready/" />
 </Solution>

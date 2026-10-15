@@ -216,24 +216,69 @@ Combine everything from Part 1 in a lab with an empty `starter` and a possible `
 
 > **TL;DR:** Give agents tools and MCP capabilities so they can look up information instead of guessing.
 
-Part 2 grounds an agent's responses by connecting it to tools that search a session catalog or check schedule availability and conflicts. The model decides when to call a focused capability, while application code performs the actual lookup and validation. MCP can expose a capability through a server or connect the agent to one.
+Part 2 starts with a familiar history-based chatbot and gives it separate tools for the current date and time. The model chooses when to call a focused capability, while application code performs the actual lookup. The exercises then introduce dependency injection and MCP discovery and hosting. In the broader DevDays Buddy conference-assistant scenario, future tools could ground responses by searching a session catalog or checking schedule availability and conflicts.
 
-### Slide 28 - Part 3: Orchestrating agents and workflows
+### Slide 28 - Exercise 201: Chatbot Agent with Tools
 ![Slide 28](_slides/slide-28.svg)
+
+[Exercise 201 README](exercises/exercise-201/README.md)
+
+> **TL;DR:** Use an AIAgent with separate tools that return the current local time and date.
+
+Wrap the Foundry `IChatClient` in an `AIAgent`, create independent `get_current_time` and `get_current_date` functions with `AIFunctionFactory`, and make them available through the agent's `ChatClientAgentOptions`. An in-memory history provider retains context in an `AgentSession`; `StoredOutputEnabled = false` prevents a server-side conversation ID from conflicting with that local history, and `UseFunctionInvocation()` executes functions selected by the model. The tools return values from the computer running the app.
+
+### Slide 29 - Exercise 202: Local Chatbot with Tools
+![Slide 29](_slides/slide-29.svg)
+
+[Exercise 202 README](exercises/exercise-202/README.md)
+
+> **TL;DR:** Run exercise 201's date and time tools with a local Ollama model instead of Foundry.
+
+Keep the same agent, tool functions, and in-memory session history, but use `OllamaApiClient` with `qwen2.5:7b` on `http://localhost:11434`. No Foundry credentials are needed; Ollama and the model must be running locally.
+
+### Slide 30 - Exercise 203: Dependency Injection for Agent Tools
+![Slide 30](_slides/slide-30.svg)
+
+[Exercise 203 README](exercises/exercise-203/README.md)
+
+> **TL;DR:** Pass an `IServiceProvider` to `AsAIAgent` so tool methods can resolve dependencies.
+
+Register `TimeProvider` in a `ServiceCollection` and add `IServiceProvider` to the date/time tool method signatures. `AIFunctionFactory` keeps that parameter out of the model-facing schema; during invocation, the agent supplies its configured service provider. Do not put `UseFunctionInvocation()` in the chat-client pipeline here, because the agent needs to create the function-invocation layer that uses the provider passed to `AsAIAgent`. Disable Responses storage so server-side conversation IDs do not conflict with the local session history.
+
+### Slide 31 - Exercise 204: Microsoft Learn MCP Agent
+![Slide 31](_slides/slide-31.svg)
+
+[Exercise 204 README](exercises/exercise-204/README.md)
+
+> **TL;DR:** Discover Microsoft Learn's remote MCP tools and use them in an agent conversation.
+
+Connect to `https://learn.microsoft.com/api/mcp` over Streamable HTTP, call `ListToolsAsync`, and print each tool's name and description so the user can see what they can ask. Pass those MCP tools to an `AIAgent`; the agent can invoke them during the conversation. `DebugHistory` makes tool calls and results visible. The public endpoint requires no authentication or API key.
+
+### Slide 32 - Exercise 205: Host Date and Time MCP Tools
+![Slide 32](_slides/slide-32.svg)
+
+[Exercise 205 README](exercises/exercise-205/README.md)
+
+> **TL;DR:** Host exercise 201's date and time tools in ASP.NET Core and call them from a separate agent client.
+
+Exercise 205 splits MCP hosting and consumption into two projects. The ASP.NET server exposes the current local date and time through MCP over Streamable HTTP, with `TimeProvider` injected into the tool class by ASP.NET Core's DI container. The console client connects to `http://localhost:5285/mcp`, lists the server's tools, and provides them to a Foundry-backed `AIAgent`. Run the server first in one terminal, then the client in another.
+
+### Slide 33 - Part 3: Orchestrating agents and workflows
+![Slide 33](_slides/slide-33.svg)
 
 > **TL;DR:** Coordinate specialist agents and workflows to combine their work into one useful result.
 
 Part 3 splits a larger request between a Session Scout and an Itinerary Planner, then uses an orchestrator or workflow to coordinate their handoffs. The scout finds and explains relevant sessions; the planner uses those actual candidates to build a schedule within the attendee's available time and avoid overlaps. The exercise also compares when this extra coordination helps and when one specialist is enough.
 
-### Slide 29 - Part 4: Making agents reliable and production-ready
-![Slide 29](_slides/slide-29.svg)
+### Slide 34 - Part 4: Making agents reliable and production-ready
+![Slide 34](_slides/slide-34.svg)
 
 > **TL;DR:** Make agents reliable with validation, clear failure handling, logging, and tests.
 
 Part 4 improves agent reliability with input and data validation, understandable error handling, concise logging, and tests for important behavior. It also reinforces that application code—not an unsupported model claim—should verify critical rules such as whether a proposed schedule contains conflicts.
 
-### Slide 30 - Any questions?
-![Slide 30](_slides/slide-30.svg)
+### Slide 35 - Any questions?
+![Slide 35](_slides/slide-35.svg)
 
 > **TL;DR:** You are wrapping up with time for questions and a link to the workshop materials.
 

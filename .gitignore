@@ -419,14 +419,7 @@ FodyWeavers.xsd
 .history/
 
 # Local exercise configuration can contain Foundry API keys.
-/exercises/exercise-001/Properties/launchSettings.json
-/exercises/exercise-101/Properties/launchSettings.json
-/exercises/exercise-102/Properties/launchSettings.json
-/exercises/exercise-103/Properties/launchSettings.json
-/exercises/exercise-104/Properties/launchSettings.json
-/exercises/exercise-106/Properties/launchSettings.json
-/labs/lab-100/starter/Properties/launchSettings.json
-/labs/lab-100/solution/Properties/launchSettings.json
+**/Properties/launchSettings.json
 
 # Built Visual Studio Code Extensions
 *.vsix

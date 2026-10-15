@@ -1,7 +1,6 @@
-using System.ClientModel;
 using Microsoft.ML.Tokenizers;
-using OpenAI;
 using OpenAI.Responses;
+using System.ClientModel;
 
 #pragma warning disable OPENAI001
 

@@ -469,7 +469,7 @@ $sections = @(
 )
 for ($i = 0; $i -lt $sections.Count; $i++) {
     $section = $sections[$i]
-    $slideNumber = $i + 19 + 7 * [int]($i -gt 0)
+    $slideNumber = $i + 19 + 7 * [int]($i -gt 0) + 5 * [int]($i -gt 1)
     $displayTitle = $section.Title.ToUpperInvariant()
     $body = @(
         (Text 100 435 $displayTitle 76 'heading')
@@ -564,6 +564,68 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
             -takeaway 'Context in the instructions grounds answers, but the whole agenda is sent every time.'
         SaveSlide 'slide-26.svg' 'Lab 100: DevDays Buddy' 'Part 1 lab 100: embed the .NET DeveloperDays Warsaw 2026 agenda as agenda.json, add it to the agent instructions as context, answer attendee questions with one AgentSession, and use Spectre.Console for the UI. Starter and solution in labs\lab-100.' $body '26' 'LAB 100'
     }
+
+    if ($i -eq 1) {
+        $body = ExerciseBody -exerciseNumber '201' -title 'Chatbot Agent with Tools' `
+            -subtitle 'Use an agent that can call C# functions for current date and time.' `
+            -projectPath 'exercises\exercise-201' `
+            -stepTitles @('Define', 'Enable', 'Ask') `
+            -stepDetails @(
+                ,@('Create separate functions for', 'the current local time and date.')
+                ,@('Add both to agent ChatOptions;', 'UseFunctionInvocation runs', 'the selected function.')
+                ,@('Reuse one AgentSession for', 'conversation history and ask for', 'the current date or time.')
+            ) `
+            -takeaway 'AIAgent manages conversation state; the model chooses a tool and application code executes it.'
+        SaveSlide 'slide-28.svg' 'Exercise 201: Chatbot Agent with Tools' 'Part 2 exercise 201: create an AIAgent around the Foundry chat client, use an AgentSession for history, disable server-side Responses storage, and expose current-time and current-date functions as tools executed by UseFunctionInvocation. Open exercises\exercise-201.' $body '28' 'EXERCISE 201'
+
+        $body = ExerciseBody -exerciseNumber '202' -title 'Local Chatbot with Tools' `
+            -subtitle 'Use the local Ollama model to ask C# functions for current date and time.' `
+            -projectPath 'exercises\exercise-202' `
+            -stepTitles @('Prepare', 'Create agent', 'Ask') `
+            -stepDetails @(
+                ,@('Start Ollama and download:', 'ollama pull qwen2.5:7b')
+                ,@('Add the date and time tools;', 'reuse one AgentSession for', 'conversation history.')
+                ,@('Ask for current values.', 'The local model can select a tool;', 'no Foundry credentials needed.')
+            ) `
+            -takeaway 'AIAgent manages local conversation history while function invocation executes the selected tool.'
+        SaveSlide 'slide-29.svg' 'Exercise 202: Local Chatbot with Tools' 'Part 2 exercise 202: use AIAgent with an OllamaSharp client and AgentSession, exposing functions for current local time and date. No Foundry credentials or cloud inference are needed. Open exercises\exercise-202.' $body '29' 'EXERCISE 202'
+
+        $body = ExerciseBody -exerciseNumber '203' -title 'Dependency Injection for Tools' `
+            -subtitle 'Resolve a tool dependency through the agent service provider.' `
+            -projectPath 'exercises\exercise-203' `
+            -stepTitles @('Register', 'Connect', 'Invoke') `
+            -stepDetails @(
+                ,@('Register TimeProvider in a', 'ServiceCollection container.')
+                ,@('Pass the ServiceProvider to', 'AsAIAgent; omit middleware.')
+                ,@('Resolve the clock inside the', 'tool method and query the', 'current date or time.')
+            ) `
+            -takeaway 'AsAIAgent passes services to tool invocation when the agent creates that pipeline.'
+        SaveSlide 'slide-30.svg' 'Exercise 203: Dependency Injection for Tools' 'Part 2 exercise 203: register TimeProvider in a dependency injection container, receive IServiceProvider in tool methods, pass the provider to AsAIAgent for function invocation, and disable server-side Responses storage to keep history in the local session. Open exercises\exercise-203.' $body '30' 'EXERCISE 203'
+
+        $body = ExerciseBody -exerciseNumber '204' -title 'Microsoft Learn MCP Agent' `
+            -subtitle 'Discover remote documentation tools and use them in a conversation.' `
+            -projectPath 'exercises\exercise-204' `
+            -stepTitles @('Connect', 'Discover', 'Ask') `
+            -stepDetails @(
+                ,@('Connect to the public Learn MCP', 'server over Streamable HTTP.')
+                ,@('List tools; print their names', 'and descriptions for the user.')
+                ,@('Ask a documentation question.', 'The agent can invoke MCP tools', 'and show calls in history.')
+            ) `
+            -takeaway 'MCP exposes remote capabilities through a standard client and callable agent tools.'
+        SaveSlide 'slide-31.svg' 'Exercise 204: Microsoft Learn MCP Agent' 'Part 2 exercise 204: connect to https://learn.microsoft.com/api/mcp with the MCP C# SDK, list and describe available tools, then provide them to an AIAgent for a documentation conversation. DebugHistory displays tool calls and results. Open exercises\exercise-204.' $body '31' 'EXERCISE 204'
+
+        $body = ExerciseBody -exerciseNumber '205' -title 'Host Date and Time MCP Tools' `
+            -subtitle 'Publish local functions from ASP.NET and call them remotely.' `
+            -projectPath 'exercises\exercise-205' `
+            -stepTitles @('Host', 'Discover', 'Invoke') `
+            -stepDetails @(
+                ,@('Inject TimeProvider into the', 'ASP.NET MCP server tool class.')
+                ,@('Connect the console MCP client;', 'list the server-provided tools.')
+                ,@('Ask the Foundry agent for', 'the date or time; inspect calls', 'and results in session history.')
+            ) `
+            -takeaway 'MCP lets a console agent call DI-backed tools hosted by a separate ASP.NET process.'
+        SaveSlide 'slide-32.svg' 'Exercise 205: Host Date and Time MCP Tools' 'Part 2 exercise 205: host the current date and time MCP tools in a standalone ASP.NET Core server, inject TimeProvider into the tool class, and discover and call them from a separate console AIAgent client over Streamable HTTP. Open exercises\exercise-205.' $body '32' 'EXERCISE 205'
+    }
 }
 
 $body = @(
@@ -571,6 +633,6 @@ $body = @(
     (Text 100 315 'Continue exploring the workshop materials' 30)
     "<a href='$repoUrl'><image x='690' y='370' width='540' height='540' href='$qrCode'/></a>"
 ) -join "`n"
-SaveSlide 'slide-30.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '30' 'THANK YOU'
+SaveSlide 'slide-35.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '35' 'THANK YOU'
 
 Write-Host "Built selected slides in $slides"
