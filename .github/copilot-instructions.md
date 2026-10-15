@@ -144,9 +144,10 @@ Raleway 700 headings, Open Sans body text, 100-unit horizontal margins,
 and a footer at y=985. Fonts and graphics are embedded from `_resources`.
 See `_tools\README.md` for layout and export details.
 
-Current exercise slides are 001 at 12 and 101-106 at 20-25, lab 100 is at
-26, and exercises 201-205 are at 28-32. Lab 200 uses slides 33-35
+Current exercise slides are 001 at 12 and 101-106 at 23, 25, 26, 29, 30, 33;
+lab 100 is at 35, and exercises 201-205 are at 38, 39, 42, 44, 46.
+Lab 200 uses slides 48-50
 (`ExerciseBody -badge 'LAB'`, header `LAB 200`); section dividers and the
-closing slide follow at 36-38. Adding slides requires updating generator
+closing slide follow at 51-53 (53 slides total). Adding slides requires updating generator
 numbering, the shifted SVG outputs, root README headings/image references,
 and the deck, as well as slide-count references in tool documentation.
