@@ -426,17 +426,44 @@ Run the MCP server and console client as separate processes. The client discover
 
 > **TL;DR:** Coordinate specialist agents and workflows to combine their work into one useful result.
 
-Part 3 splits a larger request between a Session Scout and an Itinerary Planner, then uses an orchestrator or workflow to coordinate their handoffs. The scout finds and explains relevant sessions; the planner uses those actual candidates to build a schedule within the attendee's available time and avoid overlaps. The exercise also compares when this extra coordination helps and when one specialist is enough.
+Part 3 starts with the Terrible Startup Pitch: exercise 301 manually forwards a Founder's pitch to an Investor, and 302 uses the same agents with workflow executors and an edge. Lab 300 then splits a conference-day planning request between a Session Picker, Schedule Builder, and Plan Reviewer, adding structured state, C# constraints, and conditional revision edges. Compare when workflow structure helps and when simple sequential calls are enough.
 
-### Slide 52 - Part 4: Making agents reliable and production-ready
+### Slide 52 - Exercise 301: Terrible Startup Pitch - Manual Orchestration
 ![Slide 52](_slides/slide-52.svg)
+
+[Exercise 301 README](exercises/exercise-301/README.md)
+
+> **TL;DR:** Orchestration can start with two awaited calls and an explicit text handoff.
+
+Create an enthusiastic Founder agent and a skeptical Investor agent using the same Foundry-backed `IChatClient`, but different instructions and fresh sessions. The Founder turns a theme into a ridiculous startup pitch; ordinary C# passes its exact `AgentResponse.Text` to the Investor, which returns a strength, objections, and a fictional FUND/PASS verdict. There are no workflows, tools, or revision loops.
+
+### Slide 53 - Exercise 302: Terrible Startup Pitch - Workflow
+![Slide 53](_slides/slide-53.svg)
+
+[Exercise 302 README](exercises/exercise-302/README.md)
+
+> **TL;DR:** Keep the two agents unchanged; replace the manual handoff with a directed workflow edge.
+
+Wrap each agent in an `Executor<string, string>`, connect Founder to Investor with `WorkflowBuilder.AddEdge`, and register the Investor with `WithOutputFrom`. `InProcessExecution.RunStreamingAsync` runs the graph locally; executor completion shows the Founder's pitch and workflow output supplies the Investor's review. Both exercises use identical prompts, isolated sessions, and two agent invocations per completed round. The workflow makes the sequence observable rather than adding another model or a retry loop.
+
+### Slide 54 - Lab 300: Plan My Conference Day
+![Slide 54](_slides/slide-54.svg)
+
+[Lab 300 README](labs/lab-300/README.md)
+
+> **TL;DR:** Let three agents judge relevance while C# validates the schedule and workflow edges control revisions.
+
+Build on Lab 200's MCP agenda server with a Session Picker, Schedule Builder, and Plan Reviewer. The console collects a conference date, availability, and interests; the workflow fetches one day's structured sessions through MCP and passes canonical IDs and recommendation reasons between agents. C# checks dates, time windows, duplicate IDs, candidate membership, and overlaps. Conditional edges send rejected plans back to the builder for at most two revisions, then return either an approved itinerary or an explicit no-approved-plan result. Stage panels expose handoffs and feedback. Starter and solution projects, plus deterministic graph checks without Foundry, are included.
+
+### Slide 55 - Part 4: Making agents reliable and production-ready
+![Slide 55](_slides/slide-55.svg)
 
 > **TL;DR:** Make agents reliable with validation, clear failure handling, logging, and tests.
 
 Part 4 improves agent reliability with input and data validation, understandable error handling, concise logging, and tests for important behavior. Exercises 401-404 use a tiny Secret Snack Stash to separate claimed identity, console authentication, trusted in-process user context, and authenticated MCP requests. Application code—not an unsupported model claim—must enforce who can access protected data.
 
-### Slide 53 - Exercise 401: A Name Is Not Authentication
-![Slide 53](_slides/slide-53.svg)
+### Slide 56 - Exercise 401: A Name Is Not Authentication
+![Slide 56](_slides/slide-56.svg)
 
 [Exercise 401 README](exercises/exercise-401/README.md)
 
@@ -444,8 +471,8 @@ Part 4 improves agent reliability with input and data validation, understandable
 
 Alice keeps stroopwafels in her keyboard drawer; Bob keeps gummy bears behind his rubber duck. The intentionally vulnerable `get_secret_snack(string userName)` tool takes its owner name from the agent without verifying credentials. Claim to be either person and inspect the tool output. Knowing a name is not permission to open that person's private stash.
 
-### Slide 54 - Exercise 402: Authenticated but Model-Controlled Identity
-![Slide 54](_slides/slide-54.svg)
+### Slide 57 - Exercise 402: Authenticated but Model-Controlled Identity
+![Slide 57](_slides/slide-57.svg)
 
 [Exercise 402 README](exercises/exercise-402/README.md)
 
@@ -453,8 +480,8 @@ Alice keeps stroopwafels in her keyboard drawer; Bob keeps gummy bears behind hi
 
 The console's `/auth` command checks public demo credentials without sending the password to the model. After successful authentication, it creates an agent with the signed-in `userId` in its system instructions; questions are sent unchanged, and the agent supplies the ID to `get_secret_snack(string userId)`. This is still intentionally unsafe: the tool does not compare the supplied ID with trusted authentication state. System instructions and a model's refusal to substitute another ID are not an authorization boundary.
 
-### Slide 55 - Exercise 403: Trusted User Context Through DI
-![Slide 55](_slides/slide-55.svg)
+### Slide 58 - Exercise 403: Trusted User Context Through DI
+![Slide 58](_slides/slide-58.svg)
 
 [Exercise 403 README](exercises/exercise-403/README.md)
 
@@ -462,8 +489,8 @@ The console's `/auth` command checks public demo credentials without sending the
 
 Console `/auth` now populates a scoped `UserContext`. The scope's service provider is passed to `AsAIAgent`, which injects `IServiceProvider` into the static `SnackTools.GetSecretSnack` method, as in exercise 203. The tool resolves the context without exposing any model-facing parameters and denies signed-out or unknown users. A console scope belongs to one user at a time; sign-in attempts and sign-out clear conversation history to prevent cross-user leakage.
 
-### Slide 56 - Exercise 404: Authenticated MCP Tools
-![Slide 56](_slides/slide-56.svg)
+### Slide 59 - Exercise 404: Authenticated MCP Tools
+![Slide 59](_slides/slide-59.svg)
 
 [Exercise 404 README](exercises/exercise-404/README.md)
 
@@ -473,8 +500,8 @@ Run a separate ASP.NET Core server and console client. `/auth` posts demo creden
 
 The [authentication boundary checks](tests/AuthenticationExercises/README.md) demonstrate the intentional flaws and enforce the corrected boundaries without Foundry or model calls.
 
-### Slide 57 - Any questions?
-![Slide 57](_slides/slide-57.svg)
+### Slide 60 - Any questions?
+![Slide 60](_slides/slide-60.svg)
 
 > **TL;DR:** You are wrapping up with time for questions and a link to the workshop materials.
 

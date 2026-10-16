@@ -531,7 +531,7 @@ $sections = @(
 )
 for ($i = 0; $i -lt $sections.Count; $i++) {
     $section = $sections[$i]
-    $slideNumber = @(21, 36, 51, 52)[$i]
+    $slideNumber = @(21, 36, 51, 55)[$i]
     $displayTitle = $section.Title.ToUpperInvariant()
     $body = @(
         (Text 100 435 $displayTitle 76 'heading')
@@ -869,6 +869,42 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
     }
 }
 
+$body = ExerciseBody -exerciseNumber '301' -title 'Terrible Startup Pitch' `
+    -subtitle 'Manually pass one agent''s pitch to another agent for review.' `
+    -projectPath 'exercises\exercise-301' `
+    -stepTitles @('Create', 'Pitch', 'Review') `
+    -stepDetails @(
+        ,@('Create a wildly optimistic Founder', 'and a skeptical Investor agent.')
+        ,@('Give the Founder a silly theme;', 'await its complete pitch.')
+        ,@('Pass the exact pitch text', 'to the Investor in a fresh session;', 'print its FUND or PASS verdict.')
+    ) `
+    -takeaway 'Two awaited agent calls are enough for a simple handoff; no workflow is required.'
+SaveSlide 'slide-52.svg' 'Exercise 301: Terrible Startup Pitch - Manual Orchestration' 'Part 3 exercise 301: create Founder and Investor agents with separate fresh sessions. Ordinary C# calls the Founder with a theme and forwards its exact response text to the Investor. No workflows, tools or revision loop.' $body '52' 'EXERCISE 301'
+
+$body = ExerciseBody -exerciseNumber '302' -title 'Pitch with a Workflow' `
+    -subtitle 'Keep the agents; let workflow edges deliver the pitch.' `
+    -projectPath 'exercises\exercise-302' `
+    -stepTitles @('Wrap', 'Connect', 'Observe') `
+    -stepDetails @(
+        ,@('Wrap each agent in a typed', 'string-to-string executor.')
+        ,@('Add a Founder-to-Investor edge;', 'register the Investor as output.')
+        ,@('Run the graph; print the pitch', 'from completion events and', 'the review from workflow output.')
+    ) `
+    -takeaway 'Same prompts and two model calls; the graph now owns the handoff and exposes events.'
+SaveSlide 'slide-53.svg' 'Exercise 302: Terrible Startup Pitch - Workflow' 'Part 3 exercise 302: keep exercise 301 agents and prompts, wrap each in an Executor<string, string>, connect them with WorkflowBuilder.AddEdge, and observe completion and final output events using InProcessExecution.RunStreamingAsync.' $body '53' 'EXERCISE 302'
+
+$body = ExerciseBody -exerciseNumber '300' -badge 'LAB' -title 'Plan My Conference Day' `
+    -subtitle 'Coordinate three specialist agents with typed workflow handoffs.' `
+    -projectPath 'labs\lab-300' `
+    -stepTitles @('Pick', 'Schedule', 'Review') `
+    -stepDetails @(
+        ,@('Fetch one day through MCP;', 'pick relevant session IDs', 'and explain the matches.')
+        ,@('Build an itinerary from candidates;', 'check dates, times and overlaps', 'with ordinary C# rules.')
+        ,@('Approve or route feedback back;', 'allow at most two revisions;', 'print each workflow handoff.')
+    ) `
+    -takeaway 'Agents judge relevance; C# validates constraints; workflow edges control the bounded loop.'
+SaveSlide 'slide-54.svg' 'Lab 300: Plan My Conference Day' 'Part 3 lab 300: build on Lab 200 with a Session Picker, Schedule Builder and Plan Reviewer in Microsoft Agent Framework Workflows. Pass structured session IDs, validate canonical agenda times in C#, and route rejected plans through at most two revisions.' $body '54' 'LAB 300'
+
 $body = ExerciseBody -exerciseNumber '401' -title 'A Name Is Not Authentication' `
     -subtitle 'Whose secret snack stash can a chatbot open?' `
     -projectPath 'exercises\exercise-401' `
@@ -879,7 +915,7 @@ $body = ExerciseBody -exerciseNumber '401' -title 'A Name Is Not Authentication'
         ,@('The tool trusts userName.', 'No credentials are checked;', 'a chat claim is not identity.')
     ) `
     -takeaway 'Intentionally unsafe: the model can choose a name, but cannot authenticate that person.'
-SaveSlide 'slide-53.svg' 'Exercise 401: A Name Is Not Authentication' 'Part 4 exercise 401: the Secret Snack Stash tool accepts a model-supplied userName without authentication. Claim Alice or Bob to open their fictional stash. Intentionally vulnerable.' $body '53' 'EXERCISE 401'
+SaveSlide 'slide-56.svg' 'Exercise 401: A Name Is Not Authentication' 'Part 4 exercise 401: the Secret Snack Stash tool accepts a model-supplied userName without authentication. Claim Alice or Bob to open their fictional stash. Intentionally vulnerable.' $body '56' 'EXERCISE 401'
 
 $body = ExerciseBody -exerciseNumber '402' -title 'Sign In, Then Trust an ID?' `
     -subtitle 'Console authentication is only half of the boundary.' `
@@ -891,7 +927,7 @@ $body = ExerciseBody -exerciseNumber '402' -title 'Sign In, Then Trust an ID?' `
         ,@('Try another userId.', 'The tool checks no ownership;', 'a prompt rule is not security.')
     ) `
     -takeaway 'Still intentionally unsafe: a model-controlled userId is not proof of the authenticated owner.'
-SaveSlide 'slide-54.svg' 'Exercise 402: Authenticated but Model-Controlled Identity' 'Part 4 exercise 402: successful console /auth creates an agent with the signed-in userId in its system instructions. Questions are sent unchanged. The snack tool still accepts a model-controlled identity argument and cannot enforce ownership.' $body '54' 'EXERCISE 402'
+SaveSlide 'slide-57.svg' 'Exercise 402: Authenticated but Model-Controlled Identity' 'Part 4 exercise 402: successful console /auth creates an agent with the signed-in userId in its system instructions. Questions are sent unchanged. The snack tool still accepts a model-controlled identity argument and cannot enforce ownership.' $body '57' 'EXERCISE 402'
 
 $body = ExerciseBody -exerciseNumber '403' -title 'Trusted Identity Through DI' `
     -subtitle 'Keep the authenticated owner in application code, not tool arguments.' `
@@ -903,7 +939,7 @@ $body = ExerciseBody -exerciseNumber '403' -title 'Trusted Identity Through DI' 
         ,@('Claim to be another person.', 'The tool still reads the owner', 'from trusted DI context.')
     ) `
     -takeaway 'The model requests the operation; a user-scoped tool enforces identity and ownership.'
-SaveSlide 'slide-55.svg' 'Exercise 403: Trusted User Context Through DI' 'Part 4 exercise 403: console demo authentication sets a scoped UserContext. AsAIAgent supplies the scoped service provider to the static snack tool, which resolves that context. No identity parameter is exposed to the model. Signed-out and unknown owners are denied.' $body '55' 'EXERCISE 403'
+SaveSlide 'slide-58.svg' 'Exercise 403: Trusted User Context Through DI' 'Part 4 exercise 403: console demo authentication sets a scoped UserContext. AsAIAgent supplies the scoped service provider to the static snack tool, which resolves that context. No identity parameter is exposed to the model. Signed-out and unknown owners are denied.' $body '58' 'EXERCISE 403'
 
 $body = ExerciseBody -exerciseNumber '404' -title 'Authenticate Across MCP' `
     -subtitle 'Carry a protected bearer token, not a user name, over the process boundary.' `
@@ -915,13 +951,13 @@ $body = ExerciseBody -exerciseNumber '404' -title 'Authenticate Across MCP' `
         ,@('Inject context into the tool.', 'Stateless MCP isolates requests;', 'each user opens only their stash.')
     ) `
     -takeaway 'Demo login, real token validation: production needs HTTPS, an identity provider, and MCP OAuth.'
-SaveSlide 'slide-56.svg' 'Exercise 404: Authenticated MCP Tools' 'Part 4 exercise 404: an ASP.NET Core MCP server issues protected opaque bearer tokens after demo sign-in. Stateless authenticated MCP requests use a DI user context derived from validated claims, not model arguments. Loopback workshop login, not production OAuth.' $body '56' 'EXERCISE 404'
+SaveSlide 'slide-59.svg' 'Exercise 404: Authenticated MCP Tools' 'Part 4 exercise 404: an ASP.NET Core MCP server issues protected opaque bearer tokens after demo sign-in. Stateless authenticated MCP requests use a DI user context derived from validated claims, not model arguments. Loopback workshop login, not production OAuth.' $body '59' 'EXERCISE 404'
 
 $body = @(
     (Text 100 245 'Any questions?' 72 'heading')
     (Text 100 315 'Continue exploring the workshop materials' 30)
     "<a href='$repoUrl'><image x='690' y='370' width='540' height='540' href='$qrCode'/></a>"
 ) -join "`n"
-SaveSlide 'slide-57.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '57' 'THANK YOU'
+SaveSlide 'slide-60.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '60' 'THANK YOU'
 
 Write-Host "Built selected slides in $slides"

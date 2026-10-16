@@ -18,5 +18,17 @@
     <Project Path="lab-200\solution\client\DevDaysBuddy.McpClient.csproj" />
   </Folder>
   <Folder Name="/3. Orchestrating agents and workflows/" />
+  <Folder Name="/3. Orchestrating agents and workflows/300. DevDays Buddy day planner/" />
+  <Folder Name="/3. Orchestrating agents and workflows/300. DevDays Buddy day planner/1. Starter/">
+    <Project Path="lab-300\starter\server\DevDaysBuddy.PlanningServer.Starter.csproj" />
+    <Project Path="lab-300\starter\client\DevDaysBuddy.Workflows.Starter.csproj" />
+  </Folder>
+  <Folder Name="/3. Orchestrating agents and workflows/300. DevDays Buddy day planner/2. Solution/">
+    <Project Path="lab-300\solution\server\DevDaysBuddy.PlanningServer.csproj" />
+    <Project Path="lab-300\solution\client\DevDaysBuddy.Workflows.csproj" />
+  </Folder>
+  <Folder Name="/3. Orchestrating agents and workflows/300. DevDays Buddy day planner/3. Checks/">
+    <Project Path="lab-300\checks\WorkflowChecks.csproj" />
+  </Folder>
   <Folder Name="/4. Making agents reliable and production-ready/" />
 </Solution>

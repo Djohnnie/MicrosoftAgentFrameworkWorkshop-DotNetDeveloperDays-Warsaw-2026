@@ -84,6 +84,24 @@ interactive terminal; the simpler Part 1 loops also accept piped input.
   agenda. The server exposes six focused conference, date, speaker, and
   session tools; the console client discovers them over Streamable HTTP and
   passes them to a Foundry-backed `AIAgent`.
+- **Lab 300:** Builds on Lab 200 with three independent `AIAgent` instances inside
+  typed Agent Framework workflow executors: Session Picker, Schedule Builder,
+  and Plan Reviewer. Its completed MCP server runs on port 5287; the same six
+  tools remain, but `get_sessions_for_date` returns structured JSON with stable
+  IDs and canonical dates/times. Keep starter and solution server agendas
+  identical to Lab 200. The workflow fetches one day through MCP in application
+  code; agents receive data, not tools or the full agenda. C# validates the
+  schedule; conditional edges allow at most two revisions. No shared chat
+  history: each invocation creates a fresh session. Deterministic checks live in
+  `labs\lab-300\checks`; `--mcp` additionally checks a running Lab 300 server.
+- **301-302:** Independent Terrible Startup Pitch examples share identical
+  Founder/Investor prompts and isolated fresh sessions. 301 manually calls the
+  Founder and forwards its exact response text to the Investor; it has no
+  workflow dependency. 302 wraps each agent in `Executor<string, string>`,
+  connects them with `AddEdge`, and exposes only the Investor as workflow output.
+  FUND/PASS is plain text, not a branch or revision trigger. No tools or third
+  agent. Both use Agent Framework 1.24.0/OpenAI adapter 10.11.0/OpenAI 2.14.0;
+  302 also uses Microsoft.Agents.AI.Workflows 1.24.0.
 
 Keep Part 1 code short enough for participants to type. Preserve each
 exercise's teaching boundary: do not add history to 101, agents to 101-105,
@@ -147,8 +165,9 @@ See `_tools\README.md` for layout and export details.
 Current exercise slides are 001 at 12 and 101-106 at 23, 25, 26, 29, 30, 33;
 lab 100 is at 35, and exercises 201-205 are at 38, 39, 42, 44, 46.
 Lab 200 uses slides 48-50
-(`ExerciseBody -badge 'LAB'`, header `LAB 200`); section dividers are 51-52,
-exercises 401-404 use slides 53-56, and the closing slide is 57 (57 slides total).
+(`ExerciseBody -badge 'LAB'`, header `LAB 200`); exercises 301-302 use slides
+52-53, and lab 300 is at 54 with header `LAB 300`. Section dividers are 51 and 55,
+exercises 401-404 use slides 56-59, and the closing slide is 60 (60 slides total).
 Adding slides requires updating generator
 numbering, the shifted SVG outputs, root README headings/image references,
 and the deck, as well as slide-count references in tool documentation.
