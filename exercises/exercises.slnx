@@ -41,4 +41,17 @@
   </Folder>
   <Folder Name="/3. Orchestrating agents and workflows/" />
   <Folder Name="/4. Making agents reliable and production-ready/" />
+  <Folder Name="/4. Making agents reliable and production-ready/401. A name is not authentication/">
+    <Project Path="exercise-401\SnackAgentByName.csproj" />
+  </Folder>
+  <Folder Name="/4. Making agents reliable and production-ready/402. Authenticated but model-controlled identity/">
+    <Project Path="exercise-402\SnackAgentWithUserId.csproj" />
+  </Folder>
+  <Folder Name="/4. Making agents reliable and production-ready/403. Trusted user context through DI/">
+    <Project Path="exercise-403\SnackAgentWithUserContext.csproj" />
+  </Folder>
+  <Folder Name="/4. Making agents reliable and production-ready/404. Authenticated MCP tools/">
+    <Project Path="exercise-404\server\SnackMcpServer.csproj" />
+    <Project Path="exercise-404\client\SnackAgentWithAuthenticatedMcp.csproj" />
+  </Folder>
 </Solution>

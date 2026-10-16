@@ -869,11 +869,59 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
     }
 }
 
+$body = ExerciseBody -exerciseNumber '401' -title 'A Name Is Not Authentication' `
+    -subtitle 'Whose secret snack stash can a chatbot open?' `
+    -projectPath 'exercises\exercise-401' `
+    -stepTitles @('Claim', 'Impersonate', 'Inspect') `
+    -stepDetails @(
+        ,@('Ask as Alice for the snack', 'hidden in her keyboard drawer.')
+        ,@('Now claim to be Bob and ask', 'for his secret snack stash.')
+        ,@('The tool trusts userName.', 'No credentials are checked;', 'a chat claim is not identity.')
+    ) `
+    -takeaway 'Intentionally unsafe: the model can choose a name, but cannot authenticate that person.'
+SaveSlide 'slide-53.svg' 'Exercise 401: A Name Is Not Authentication' 'Part 4 exercise 401: the Secret Snack Stash tool accepts a model-supplied userName without authentication. Claim Alice or Bob to open their fictional stash. Intentionally vulnerable.' $body '53' 'EXERCISE 401'
+
+$body = ExerciseBody -exerciseNumber '402' -title 'Sign In, Then Trust an ID?' `
+    -subtitle 'Console authentication is only half of the boundary.' `
+    -projectPath 'exercises\exercise-402' `
+    -stepTitles @('Authenticate', 'Pass the ID', 'Challenge') `
+    -stepDetails @(
+        ,@('Use /auth in the console.', 'Check public demo credentials;', 'keep passwords out of chat.')
+        ,@('Set userId in the system prompt', 'after sign-in. The model puts', 'that ID in the tool argument.')
+        ,@('Try another userId.', 'The tool checks no ownership;', 'a prompt rule is not security.')
+    ) `
+    -takeaway 'Still intentionally unsafe: a model-controlled userId is not proof of the authenticated owner.'
+SaveSlide 'slide-54.svg' 'Exercise 402: Authenticated but Model-Controlled Identity' 'Part 4 exercise 402: successful console /auth creates an agent with the signed-in userId in its system instructions. Questions are sent unchanged. The snack tool still accepts a model-controlled identity argument and cannot enforce ownership.' $body '54' 'EXERCISE 402'
+
+$body = ExerciseBody -exerciseNumber '403' -title 'Trusted Identity Through DI' `
+    -subtitle 'Keep the authenticated owner in application code, not tool arguments.' `
+    -projectPath 'exercises\exercise-403' `
+    -stepTitles @('Keep context', 'Inject', 'Verify') `
+    -stepDetails @(
+        ,@('Console /auth populates a', 'scoped UserContext. Reset', 'conversation on auth changes.')
+        ,@('Pass services to AsAIAgent.', 'Static tool resolves UserContext;', 'no model-facing arguments.')
+        ,@('Claim to be another person.', 'The tool still reads the owner', 'from trusted DI context.')
+    ) `
+    -takeaway 'The model requests the operation; a user-scoped tool enforces identity and ownership.'
+SaveSlide 'slide-55.svg' 'Exercise 403: Trusted User Context Through DI' 'Part 4 exercise 403: console demo authentication sets a scoped UserContext. AsAIAgent supplies the scoped service provider to the static snack tool, which resolves that context. No identity parameter is exposed to the model. Signed-out and unknown owners are denied.' $body '55' 'EXERCISE 403'
+
+$body = ExerciseBody -exerciseNumber '404' -title 'Authenticate Across MCP' `
+    -subtitle 'Carry a protected bearer token, not a user name, over the process boundary.' `
+    -projectPath 'exercises\exercise-404' `
+    -stepTitles @('Sign in', 'Validate', 'Isolate') `
+    -stepDetails @(
+        ,@('Console /auth calls the server.', 'Keep its five-minute bearer token', 'in MCP HTTP headers, not prompts.')
+        ,@('Protect /mcp with authorization.', 'Build the request user context', 'from validated identity claims.')
+        ,@('Inject context into the tool.', 'Stateless MCP isolates requests;', 'each user opens only their stash.')
+    ) `
+    -takeaway 'Demo login, real token validation: production needs HTTPS, an identity provider, and MCP OAuth.'
+SaveSlide 'slide-56.svg' 'Exercise 404: Authenticated MCP Tools' 'Part 4 exercise 404: an ASP.NET Core MCP server issues protected opaque bearer tokens after demo sign-in. Stateless authenticated MCP requests use a DI user context derived from validated claims, not model arguments. Loopback workshop login, not production OAuth.' $body '56' 'EXERCISE 404'
+
 $body = @(
     (Text 100 245 'Any questions?' 72 'heading')
     (Text 100 315 'Continue exploring the workshop materials' 30)
     "<a href='$repoUrl'><image x='690' y='370' width='540' height='540' href='$qrCode'/></a>"
 ) -join "`n"
-SaveSlide 'slide-53.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '53' 'THANK YOU'
+SaveSlide 'slide-57.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '57' 'THANK YOU'
 
 Write-Host "Built selected slides in $slides"

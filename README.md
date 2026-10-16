@@ -433,10 +433,48 @@ Part 3 splits a larger request between a Session Scout and an Itinerary Planner,
 
 > **TL;DR:** Make agents reliable with validation, clear failure handling, logging, and tests.
 
-Part 4 improves agent reliability with input and data validation, understandable error handling, concise logging, and tests for important behavior. It also reinforces that application code—not an unsupported model claim—should verify critical rules such as whether a proposed schedule contains conflicts.
+Part 4 improves agent reliability with input and data validation, understandable error handling, concise logging, and tests for important behavior. Exercises 401-404 use a tiny Secret Snack Stash to separate claimed identity, console authentication, trusted in-process user context, and authenticated MCP requests. Application code—not an unsupported model claim—must enforce who can access protected data.
 
-### Slide 53 - Any questions?
+### Slide 53 - Exercise 401: A Name Is Not Authentication
 ![Slide 53](_slides/slide-53.svg)
+
+[Exercise 401 README](exercises/exercise-401/README.md)
+
+> **TL;DR:** A name claimed in chat is not an authenticated identity.
+
+Alice keeps stroopwafels in her keyboard drawer; Bob keeps gummy bears behind his rubber duck. The intentionally vulnerable `get_secret_snack(string userName)` tool takes its owner name from the agent without verifying credentials. Claim to be either person and inspect the tool output. Knowing a name is not permission to open that person's private stash.
+
+### Slide 54 - Exercise 402: Authenticated but Model-Controlled Identity
+![Slide 54](_slides/slide-54.svg)
+
+[Exercise 402 README](exercises/exercise-402/README.md)
+
+> **TL;DR:** Authenticate outside chat, but do not trust a model-controlled user ID for authorization.
+
+The console's `/auth` command checks public demo credentials without sending the password to the model. After successful authentication, it creates an agent with the signed-in `userId` in its system instructions; questions are sent unchanged, and the agent supplies the ID to `get_secret_snack(string userId)`. This is still intentionally unsafe: the tool does not compare the supplied ID with trusted authentication state. System instructions and a model's refusal to substitute another ID are not an authorization boundary.
+
+### Slide 55 - Exercise 403: Trusted User Context Through DI
+![Slide 55](_slides/slide-55.svg)
+
+[Exercise 403 README](exercises/exercise-403/README.md)
+
+> **TL;DR:** Remove identity from tool arguments and inject a trusted user context.
+
+Console `/auth` now populates a scoped `UserContext`. The scope's service provider is passed to `AsAIAgent`, which injects `IServiceProvider` into the static `SnackTools.GetSecretSnack` method, as in exercise 203. The tool resolves the context without exposing any model-facing parameters and denies signed-out or unknown users. A console scope belongs to one user at a time; sign-in attempts and sign-out clear conversation history to prevent cross-user leakage.
+
+### Slide 56 - Exercise 404: Authenticated MCP Tools
+![Slide 56](_slides/slide-56.svg)
+
+[Exercise 404 README](exercises/exercise-404/README.md)
+
+> **TL;DR:** Authenticate each MCP request with a protected bearer token and enforce ownership on the server.
+
+Run a separate ASP.NET Core server and console client. `/auth` posts demo credentials to the server, which issues a five-minute opaque bearer token using ASP.NET Core authentication. The client keeps it in MCP HTTP headers, not model input. `/mcp` requires authorization, and a request-scoped user context reads identity from validated claims. The zero-argument tool returns only that owner's stash. Stateless Streamable HTTP keeps request identities separate. This is a loopback teaching login, not a production OAuth server; real deployments need HTTPS, an identity provider, and MCP-compatible OAuth authorization.
+
+The [authentication boundary checks](tests/AuthenticationExercises/README.md) demonstrate the intentional flaws and enforce the corrected boundaries without Foundry or model calls.
+
+### Slide 57 - Any questions?
+![Slide 57](_slides/slide-57.svg)
 
 > **TL;DR:** You are wrapping up with time for questions and a link to the workshop materials.
 

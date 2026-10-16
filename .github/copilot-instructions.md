@@ -147,7 +147,25 @@ See `_tools\README.md` for layout and export details.
 Current exercise slides are 001 at 12 and 101-106 at 23, 25, 26, 29, 30, 33;
 lab 100 is at 35, and exercises 201-205 are at 38, 39, 42, 44, 46.
 Lab 200 uses slides 48-50
-(`ExerciseBody -badge 'LAB'`, header `LAB 200`); section dividers and the
-closing slide follow at 51-53 (53 slides total). Adding slides requires updating generator
+(`ExerciseBody -badge 'LAB'`, header `LAB 200`); section dividers are 51-52,
+exercises 401-404 use slides 53-56, and the closing slide is 57 (57 slides total).
+Adding slides requires updating generator
 numbering, the shifted SVG outputs, root README headings/image references,
 and the deck, as well as slide-count references in tool documentation.
+
+## Part 4 authentication exercises
+
+Exercises 401-404 use the same fictional Secret Snack Stash and tool name
+`get_secret_snack`. Keep the programs independent and the use case small.
+401 deliberately trusts a model-supplied name; 402 checks public demo credentials
+with console `/auth`, creates a fresh agent with userId in its system instructions,
+and sends questions unchanged, but still deliberately trusts a model-supplied userId.
+403 injects a scoped UserContext into a zero-argument tool. 404 hosts that tool
+in a stateless ASP.NET Core MCP server, validates five-minute protected opaque
+bearer tokens, and injects request-scoped context derived from validated claims.
+Keep credentials and tokens out of agent messages and tool arguments.
+Auth attempts and logout reset history; failed reauthentication signs out.
+Public demo passwords and loopback HTTP are not production authentication.
+404 is not a complete OAuth/OIDC authorization server; do not describe it as one.
+Run deterministic checks from the root with
+`dotnet run --project .\tests\AuthenticationExercises\AuthenticationChecks.csproj`.
