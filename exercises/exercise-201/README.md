@@ -6,11 +6,11 @@
 
 ## What you'll build
 
-This builds on [exercise 106](../exercise-106/README.md): it uses the same Foundry Responses client and wraps its `IChatClient` in an `AIAgent`, then adds two tools. `get_current_time` returns the computer's local time and UTC offset; `get_current_date` returns its local date with the weekday, formatted as `ddd yyyy-MM-dd` (for example, `Thu 2026-10-15`).
+This builds on [exercise 107](../exercise-107/README.md): it uses the same Foundry Responses client and wraps its `IChatClient` in an `AIAgent`, then adds two tools. `get_current_time` returns the computer's local time and UTC offset; `get_current_date` returns its local date with the weekday, formatted as `ddd yyyy-MM-dd` (for example, `Thu 2026-10-15`).
 
 The model decides whether to call either tool. `UseFunctionInvocation()` executes the selected C# function and returns its result to the model, which can then answer the user. An `InMemoryChatHistoryProvider` stores the conversation in a single `AgentSession` reused for each `RunAsync` call. The tools read the machine running this app, not a timezone or date supplied by the user.
 
-It uses Microsoft.Agents.AI 1.24.0, OpenAI 2.14.0, and Microsoft.Extensions.AI / Microsoft.Extensions.AI.OpenAI 10.11.0, matching the SDK versions used in exercise 106.
+It uses Microsoft.Agents.AI 1.24.0, OpenAI 2.14.0, and Microsoft.Extensions.AI / Microsoft.Extensions.AI.OpenAI 10.11.0, matching the SDK versions used in exercise 107.
 
 ## Run it
 
@@ -24,7 +24,7 @@ Use the **.NET 10 SDK** and the [Foundry environment-variable setup from exercis
 
 Ask for the current date or time, then type `quit` to exit.
 
-## What changed from exercise 106?
+## What changed from exercise 107?
 
 Keep the tool implementations and their metadata in a separate `DateTimeTools` class. Add `[AIFunctionName]` for the name exposed to the model and `[Description]` from `System.ComponentModel` for the description. The date tool formats its value with the weekday followed by the ISO date:
 

@@ -2,7 +2,7 @@
 
 > **Part:** Part 1, From LLM calls to agents  
 > **Focus:** Ground an agent with hard-coded context from an embedded JSON document  
-> **Builds on:** [Exercise 106 - Chatbot Agent](../../exercises/exercise-106/README.md)
+> **Builds on:** [Exercise 107 - Chatbot Agent](../../exercises/exercise-107/README.md)
 
 ## What you'll build
 
@@ -10,8 +10,8 @@
 
 You combine everything from Part 1:
 
-- the Foundry-backed `IChatClient` from exercises 101-104;
-- the `AIAgent`, instructions, `InMemoryChatHistoryProvider`, and reusable `AgentSession` from exercise 106;
+- the Foundry-backed `IChatClient` from exercises 101-105;
+- the `AIAgent`, instructions, `InMemoryChatHistoryProvider`, and reusable `AgentSession` from exercise 107;
 - the complete conference agenda from an `agenda.json` file that is compiled into the app as an **embedded resource** and pasted into the agent instructions as context;
 - a richer terminal UI built with [Spectre.Console](https://spectreconsole.net/).
 
@@ -26,7 +26,7 @@ There are no tools yet. The model receives the whole agenda with every request; 
 
 Both projects are in [`labs\labs.slnx`](../labs.slnx), separate from the exercises solution.
 
-Both projects target **.NET 10** and add `Spectre.Console` 0.57.2. The starter keeps exercise 106's package versions; the solution uses newer Agent Framework and OpenAI packages:
+Both projects target **.NET 10** and add `Spectre.Console` 0.57.2. The starter keeps exercise 107's package versions; the solution uses newer Agent Framework and OpenAI packages:
 
 ```xml
 <PackageReference Include="Microsoft.Agents.AI" Version="1.24.0" />
@@ -71,7 +71,7 @@ The project file embeds it with a fixed resource name:
 
 ## Your task
 
-Open [`starter\Program.cs`](starter/Program.cs) and follow the TODOs. Copy code from your exercise 106 solution where it helps.
+Open [`starter\Program.cs`](starter/Program.cs) and follow the TODOs. Copy code from your exercise 107 solution where it helps.
 
 ### 1. Read the embedded agenda
 
@@ -120,7 +120,7 @@ This is the simplest form of grounding: the relevant knowledge is placed directl
 
 ### 3. Chat with one session
 
-Create one `AgentSession` before the loop and pass it to `RunAsync` on every question, exactly like exercise 106, so follow-up questions such as "And what is the speaker's background?" work.
+Create one `AgentSession` before the loop and pass it to `RunAsync` on every question, exactly like exercise 107, so follow-up questions such as "And what is the speaker's background?" work.
 
 ### 4. Spice it up with Spectre.Console
 
@@ -159,5 +159,5 @@ Answers can still be wrong: the model may misread a time or invent a detail. Ask
 
 ## Going further
 
-- Count the input tokens of a request with the token visualizer from exercise 001 and compare with exercise 106.
+- Count the input tokens of a request with the token visualizer from exercise 001 and compare with exercise 107.
 - Think about what would break with an agenda ten times larger. Part 2 answers this with tools.

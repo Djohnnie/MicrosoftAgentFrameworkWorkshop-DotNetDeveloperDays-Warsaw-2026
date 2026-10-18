@@ -1,7 +1,7 @@
 // Lab 100 - DevDays Buddy (starter)
 //
 // Build an agent that answers questions about the .NET DeveloperDays 2026 Warsaw agenda.
-// Start from your exercise 106 code and follow the steps in ..\README.md.
+// Start from your exercise 107 code and follow the steps in ..\README.md.
 //
 // TODO 1: Read FOUNDRY_ENDPOINT, FOUNDRY_API_KEY, and FOUNDRY_MODEL_DEPLOYMENT.
 // TODO 2: Read the embedded agenda.json resource as a string.

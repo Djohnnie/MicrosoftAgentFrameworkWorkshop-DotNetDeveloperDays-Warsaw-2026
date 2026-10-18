@@ -1,98 +1,103 @@
-# Exercise 107 - Multimodal Images
+# Exercise 107 - Chatbot Agent
 
-> **Part:** Part 1, From LLM calls to agents  
-> **Focus:** Send text and an image together to an image-capable agent  
-> **History:** A fresh session for each image request, so the comparison is independent
+> **Part:** Part 1, From LLM calls to agents\
+> **Focus:** Create an agent with instructions and a conversation session\
+> **History:** Retained by reusing the same session while the application is running
 
 ## What you'll build
 
-An `AIAgent` translates the text in a sample image into Dutch twice: first using
-an image URL, then using the bytes of the included `quote.jpg`. This extends
-exercise 106's agent setup with multimodal messages, not tools or workflows.
-It understands an input image and returns text; it does not generate images.
+This exercise moves from direct `IChatClient` calls to a Microsoft Agent Framework `AIAgent`. It uses the same Foundry endpoint, API key, and model as exercises 101-105, gives the agent a cheerful 10-year-old persona, and keeps conversation context across questions. Exercise 108 then adds image input to an agent.
+
+Unlike exercise 104, the age stays at 10. The focus here is the agent concept, not changing the instructions on every turn. There are no tools or workflows yet.
 
 ## Run it
 
-From the repository root:
+From this directory:
 
 ```powershell
-dotnet run --project .\exercises\exercise-107\MultimodalImages.csproj
+dotnet run
 ```
 
-Use the **.NET 10 SDK** and the
-[Foundry environment-variable setup from exercise 001](../exercise-001/README.md#1-set-your-microsoft-foundry-credentials):
-`FOUNDRY_ENDPOINT`, `FOUNDRY_API_KEY`, and `FOUNDRY_MODEL_DEPLOYMENT`.
-Select a deployment that supports **image input through the Responses API**,
-such as a supporting GPT-4o or GPT-4.1 deployment. The setting is your deployment
-name, not necessarily the model catalog name. Text-only chat success does not
-prove image support.
+Use the **.NET 10 SDK** and the [Foundry environment-variable setup from exercise 001](../exercise-001/README.md#1-set-your-microsoft-foundry-credentials). An optional, Git-ignored local `Properties\launchSettings.json` profile can supply these values; it is not included in a fresh clone. Otherwise, set the variables in the same PowerShell session before running. Never commit your API key.
 
-An optional `Properties\launchSettings.json` profile is Git-ignored and may
-supply these settings locally. Never commit credentials.
+Type a message and press **Enter**. Type `quit` to exit.
 
-The program prints two translations and exits; there is no interactive loop.
-The public URL must remain reachable by the model provider. The local image is
-copied to the build output and resolved relative to `AppContext.BaseDirectory`,
-so running from the repository root also works.
+## Create an agent
 
-## Put text and an image in one message
+Keep the existing `ResponsesClient` and its `IChatClient` adapter, then wrap it in an agent:
 
 ```csharp
-var prompt = new TextContent("Translate the text in the image to Dutch.");
-var imageUrl = new UriContent(
-    "https://djohnnie.blob.core.windows.net/temp/quote.jpg", "image/jpeg");
-
-AgentSession urlSession = await agent.CreateSessionAsync();
-var urlResponse = await agent.RunAsync(
-    new ChatMessage(ChatRole.User, [prompt, imageUrl]), urlSession);
+AIAgent agent = chatClient.AsAIAgent(new ChatClientAgentOptions
+{
+    Name = "ChildAgent",
+    ChatHistoryProvider = new InMemoryChatHistoryProvider(),
+    ChatOptions = new ChatOptions
+    {
+        Instructions = """
+            Play the role of a curious, cheerful 10-year-old.
+            Use simple words, short answers, and playful examples.
+            If you do not know something, say so instead of making it up.
+            """,
+        RawRepresentationFactory = _ => new CreateResponseOptions
+        {
+            StoredOutputEnabled = false
+        }
+    }
+});
 ```
 
-`ChatMessage.Contents` can contain more than plain text. `TextContent` supplies
-the question; `UriContent` supplies an actual image input. Merely writing a URL
-or file path inside the prompt is not the same as attaching image content.
-The adapter maps these content objects to Responses API image input.
+The program uses the `ChatClientAgentOptions` overload to also select `InMemoryChatHistoryProvider` and set `ChatOptions.Instructions`. `RawRepresentationFactory` creates Responses API options with `StoredOutputEnabled = false`, disabling stored responses and server-side response chaining for this demo.
 
-## Send inline image bytes
+`Microsoft.Agents.AI` supplies the agent abstraction. The underlying `IChatClient` still communicates with the same model; `AsAIAgent` does not train a new model or deploy a hosted agent. The name identifies the agent, and the instructions guide its behavior, much like the system prompt in exercise 104. Instructions do not guarantee accurate answers.
+
+This exercise pins Agent Framework 1.24.0 and uses the compatible Microsoft.Extensions.AI.OpenAI 10.11.0 adapter with OpenAI 2.14.0, the same OpenAI packages as exercises 101-105. Agent Framework brings in Microsoft.Extensions.AI transitively. As in exercises 101-105, the model is passed to `AsIChatClient(model)` and `ResponsesClient` takes `ResponsesClientOptions`; the endpoint and API-key authentication stay unchanged. `OPENAI001` is still suppressed for the experimental Responses API.
+
+## Let the session retain conversation context
+
+Create one session **before** the loop:
 
 ```csharp
-var bytes = await File.ReadAllBytesAsync(Path.Combine(AppContext.BaseDirectory, "quote.jpg"));
-var inlineImage = new DataContent(bytes, "image/jpeg");
-
-AgentSession inlineSession = await agent.CreateSessionAsync();
-var inlineResponse = await agent.RunAsync(
-    new ChatMessage(ChatRole.User, [prompt, inlineImage]), inlineSession);
+AgentSession session = await agent.CreateSessionAsync();
 ```
 
-`DataContent` carries the bytes and their media type; the adapter encodes them
-for the request. Reading a local file does **not** make inference local: its
-image content is uploaded to Foundry. Never attach private images without
-permission. If replacing the file with a PNG, also change the file name,
-project copy entry, and media type to `image/png`.
+Reuse it for each question:
 
-Unlike the reference's shared session, this exercise uses a separate session
-for each request. The inline request therefore cannot rely on the earlier URL
-image or translation. Both use `InMemoryChatHistoryProvider` and
-`StoredOutputEnabled = false`, as in 106; neither session is persisted.
+```csharp
+var response = await agent.RunAsync(input, session);
+Console.WriteLine($"[ASSISTANT]: {response.Text}");
+DebugHistory(session);
+```
 
-The packages match exercise 106: Microsoft.Agents.AI 1.24.0,
-Microsoft.Extensions.AI.OpenAI 10.11.0, and OpenAI 2.14.0. Endpoint resolution,
-API-key authentication, and deployment selection stay unchanged.
+Unlike exercise 102, application code no longer appends messages to a `List<ChatMessage>`. The agent manages conversation state through the session, including earlier user messages and assistant replies. Creating a new session for every question would lose that context.
+
+The session is not permanent model memory. This exercise explicitly uses `InMemoryChatHistoryProvider`, which stores messages inside `AgentSession.StateBag` in the application's memory. Stored Responses API output is disabled, so the conversation is sent again with each request rather than continued through a server-side response ID. This does not make inference local: messages are still sent to Foundry for each model call. This exercise does not save or restore the session, so restarting the app starts a new conversation. Longer conversations still consume context and tokens.
+
+## Inspect the history in memory
+
+After every reply, `DebugHistory(session)` reads the actual session state using `session.TryGetInMemoryChatHistory(out var messages)`. It prints the message count, roles, and full text in order, without making another model call or maintaining a separate debug copy.
+
+After the first question you can see the user message and assistant reply. After the second question you can see both turns still present. The persona instructions are configured separately in `ChatOptions.Instructions`, not as a user/assistant turn in the history.
+
+```text
+--- DEBUG: AgentSession local in-memory history ---
+Stored messages: 4
+  1. [user]: My name is Alex.
+  2. [assistant]: Hi Alex!
+  3. [user]: What is my name?
+  4. [assistant]: Your name is Alex!
+--- END HISTORY ---
+```
+
+Replies and message counts can vary with the model's output. Set a breakpoint inside `DebugHistory` to inspect `session.StateBag` and `messages` in the debugger. The method only reads the history; the agent still stores it automatically. This teaching-only output exposes the entire conversation, so avoid entering sensitive information and remove it before using the app in production.
+
+The program stays intentionally simple: no persistence, history trimming, tools, or request error recovery. Missing configuration and request failures propagate as exceptions.
 
 ## Try it
 
-1. Open `quote.jpg`, run the program, and compare both translations with the image.
-2. Change the prompt to translate into Polish or to transcribe the original text.
-3. Replace the local image with another non-sensitive JPEG. Notice that the URL
-   request still uses the original image unless you also change its URL.
+1. Say: "My name is Alex, and I am learning C#."
+2. Ask: "What is my name, and what am I learning?"
+3. Ask: "Explain how a computer remembers things." Notice the simple language and playful examples.
+4. Compare the manual history in exercise 102 and system prompt in exercise 104 with the agent's session and instructions.
+5. Restart the app and ask about your name again.
 
-Image reading and translation can be wrong, especially with small or blurred
-text. Treat image text as untrusted data, not application instructions, and
-check important results yourself. The example intentionally has no OCR service,
-image-generation model, tools, workflows, or error-recovery framework. Missing
-configuration, file errors, unavailable URLs, and unsupported model requests
-surface as exceptions rather than fabricated answers.
-
-Adapted from the
-[Ilionx DevDays multimodal image example](https://github.com/Djohnnie/EnableGenAIUsingTheMicrosoftAgentFramework-IlionxDevDays-2026/blob/main/AgentFramework.MultiModal.Images/Program.cs).
-The bundled `quote.jpg` is a snapshot of that example's
-[public sample image](https://djohnnie.blob.core.windows.net/temp/quote.jpg).
+See Microsoft Learn's [Your First Agent](https://learn.microsoft.com/en-us/agent-framework/get-started/your-first-agent?pivots=programming-language-csharp) and [Conversations & Memory](https://learn.microsoft.com/en-us/agent-framework/concepts/agents/conversations/?pivots=programming-language-csharp). We keep API-key authentication through the existing `IChatClient` instead of switching to the guide's `AIProjectClient` and Microsoft Entra authentication.

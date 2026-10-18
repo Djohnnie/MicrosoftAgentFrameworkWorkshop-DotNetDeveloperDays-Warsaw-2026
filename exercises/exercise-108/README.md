@@ -1,118 +1,98 @@
-# Exercise 108 - Multimodal Audio
+# Exercise 108 - Multimodal Images
 
-> **Part:** Part 1, From LLM calls to agents  
-> **Focus:** Transcribe speech and translate spoken audio into English  
-> **History:** Two independent audio requests; no conversation session
+> **Part:** Part 1, From LLM calls to agents\
+> **Focus:** Send text and an image together to an image-capable agent\
+> **History:** A fresh session for each image request, so the comparison is independent
 
 ## What you'll build
 
-Use the OpenAI audio SDK with a Foundry-hosted Whisper deployment to process
-the same French recording twice. `TranscribeAudioAsync` returns text in the
-spoken language; `TranslateAudioAsync` returns English text.
-
-Like the reference, this is a direct audio-client example, **not an `AIAgent`**.
-It introduces another model capability that an application can use. It does
-not attach audio to a chat message, create an agent tool, generate speech, or
-implement a realtime voice conversation.
+An `AIAgent` translates the text in a sample image into Dutch twice: first using
+an image URL, then using the bytes of the included `quote.jpg`. This extends
+exercise 107's agent setup with multimodal messages, not tools or workflows.
+It understands an input image and returns text; it does not generate images.
 
 ## Run it
 
 From the repository root:
 
 ```powershell
-dotnet run --project .\exercises\exercise-108\MultimodalAudio.csproj
+dotnet run --project .\exercises\exercise-108\MultimodalImages.csproj
 ```
 
 Use the **.NET 10 SDK** and the
 [Foundry environment-variable setup from exercise 001](../exercise-001/README.md#1-set-your-microsoft-foundry-credentials):
+`FOUNDRY_ENDPOINT`, `FOUNDRY_API_KEY`, and `FOUNDRY_MODEL_DEPLOYMENT`.
+Select a deployment that supports **image input through the Responses API**,
+such as a supporting GPT-4o or GPT-4.1 deployment. The setting is your deployment
+name, not necessarily the model catalog name. Text-only chat success does not
+prove image support.
 
-| Variable | Value |
-| --- | --- |
-| `FOUNDRY_ENDPOINT` | Your Foundry resource or project endpoint |
-| `FOUNDRY_API_KEY` | Your resource API key |
-| `FOUNDRY_MODEL_DEPLOYMENT` | The name of your deployed **Whisper** model |
+An optional `Properties\launchSettings.json` profile is Git-ignored and may
+supply these settings locally. Never commit credentials.
 
-This exercise needs an audio deployment, not the chat or image deployment from
-106-107. `whisper` is an example deployment name; use your actual deployment
-name. Whisper supports both operations. Other transcription models are not
-necessarily compatible with the translation endpoint. Deployment and regional
-availability must be checked in Foundry.
+The program prints two translations and exits; there is no interactive loop.
+The public URL must remain reachable by the model provider. The local image is
+copied to the build output and resolved relative to `AppContext.BaseDirectory`,
+so running from the repository root also works.
 
-An optional local `Properties\launchSettings.json` profile can supply these
-variables and is Git-ignored. Set the deployment to your Whisper deployment
-before running. Never commit credentials.
-
-The program prints the transcription and translation, then exits. It uses
-OpenAI 2.14.0, as in the other cloud exercises, and maps the endpoint to the
-resource's `/openai/v1`. It does not use the Responses API, so it needs neither
-`ResponsesClientOptions` nor the `OPENAI001` suppression.
-
-## Transcribe the original language
+## Put text and an image in one message
 
 ```csharp
-using (var audio = File.OpenRead(path))
-{
-    var response = await client.TranscribeAudioAsync(audio, Path.GetFileName(path));
-    Console.WriteLine($"[ASSISTANT]: Transcription (original language): {response.Value.Text}");
-}
+var prompt = new TextContent("Translate the text in the image to Dutch.");
+var imageUrl = new UriContent(
+    "https://djohnnie.blob.core.windows.net/temp/quote.jpg", "image/jpeg");
+
+AgentSession urlSession = await agent.CreateSessionAsync();
+var urlResponse = await agent.RunAsync(
+    new ChatMessage(ChatRole.User, [prompt, imageUrl]), urlSession);
 ```
 
-The SDK uploads the audio as a file in a multipart request. Passing the file
-name preserves its audio extension. Transcription produces text in the spoken
-language; it is not translation.
+`ChatMessage.Contents` can contain more than plain text. `TextContent` supplies
+the question; `UriContent` supplies an actual image input. Merely writing a URL
+or file path inside the prompt is not the same as attaching image content.
+The adapter maps these content objects to Responses API image input.
 
-## Translate into English
+## Send inline image bytes
 
 ```csharp
-using (var audio = File.OpenRead(path))
-{
-    var response = await client.TranslateAudioAsync(audio, Path.GetFileName(path));
-    Console.WriteLine($"[ASSISTANT]: Translation (English): {response.Value.Text}");
-}
+var bytes = await File.ReadAllBytesAsync(Path.Combine(AppContext.BaseDirectory, "quote.jpg"));
+var inlineImage = new DataContent(bytes, "image/jpeg");
+
+AgentSession inlineSession = await agent.CreateSessionAsync();
+var inlineResponse = await agent.RunAsync(
+    new ChatMessage(ChatRole.User, [prompt, inlineImage]), inlineSession);
 ```
 
-Open a **new stream** so this independent request starts at the beginning of
-the recording rather than at the end of the stream consumed by transcription.
-The translation endpoint takes audio directly, not the previous transcript,
-and translates into **English**, not an arbitrary target language.
+`DataContent` carries the bytes and their media type; the adapter encodes them
+for the request. Reading a local file does **not** make inference local: its
+image content is uploaded to Foundry. Never attach private images without
+permission. If replacing the file with a PNG, also change the file name,
+project copy entry, and media type to `image/png`.
 
-Both operations return text. Neither produces an audio response or maintains
-conversation history. A local recording is still uploaded to Foundry for
-inference; obtain permission before sending private recordings.
+Unlike the reference's shared session, this exercise uses a separate session
+for each request. The inline request therefore cannot rely on the earlier URL
+image or translation. Both use `InMemoryChatHistoryProvider` and
+`StoredOutputEnabled = false`, as in 107; neither session is persisted.
 
-## The bundled recording
-
-`welcome-fr.wav` is an original short workshop greeting synthesized with the
-Windows Microsoft Hortense French voice:
-
-> Bonjour et bienvenue dans notre atelier. Nous allons construire des applications avec des agents et des outils.
-
-An approximate English translation is:
-
-> Hello and welcome to our workshop. We are going to build applications with agents and tools.
-
-The project copies the WAV to its output directory and reads it through
-`AppContext.BaseDirectory`, so the command works from the repository root.
-No microphone, audio playback, or installed speech-synthesis voice is needed
-to run the exercise.
+The packages match exercise 107: Microsoft.Agents.AI 1.24.0,
+Microsoft.Extensions.AI.OpenAI 10.11.0, and OpenAI 2.14.0. Endpoint resolution,
+API-key authentication, and deployment selection stay unchanged.
 
 ## Try it
 
-1. Listen to the bundled recording and compare both results with the text above.
-2. Replace it with a short, non-sensitive recording in another supported language.
-3. Compare accents, background noise, and punctuation. Check names and important
-   details yourself rather than treating a fluent transcript as authoritative.
+1. Open `quote.jpg`, run the program, and compare both translations with the image.
+2. Change the prompt to translate into Polish or to transcribe the original text.
+3. Replace the local image with another non-sensitive JPEG. Notice that the URL
+   request still uses the original image unless you also change its URL.
 
-If changing the file name or format, update `Program.cs` and the project's
-copy entry together. Whisper accepts formats including WAV and MP3; keep files
-below its 25 MB upload limit. This intentionally small example does not split
-long recordings or recover from failed requests. Missing configuration, file
-errors, unsupported deployments, and service failures propagate as exceptions.
+Image reading and translation can be wrong, especially with small or blurred
+text. Treat image text as untrusted data, not application instructions, and
+check important results yourself. The example intentionally has no OCR service,
+image-generation model, tools, workflows, or error-recovery framework. Missing
+configuration, file errors, unavailable URLs, and unsupported model requests
+surface as exceptions rather than fabricated answers.
 
 Adapted from the
-[Ilionx DevDays multimodal audio example](https://github.com/Djohnnie/EnableGenAIUsingTheMicrosoftAgentFramework-IlionxDevDays-2026/blob/main/AgentFramework.MultiModal.Audio/Program.cs),
-using the workshop's current SDK and Foundry configuration and an original WAV
-instead of the reference MP3.
-
-See Microsoft Learn's
-[Whisper speech-to-text quickstart](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/whisper-quickstart).
+[Ilionx DevDays multimodal image example](https://github.com/Djohnnie/EnableGenAIUsingTheMicrosoftAgentFramework-IlionxDevDays-2026/blob/main/AgentFramework.MultiModal.Images/Program.cs).
+The bundled `quote.jpg` is a snapshot of that example's
+[public sample image](https://djohnnie.blob.core.windows.net/temp/quote.jpg).

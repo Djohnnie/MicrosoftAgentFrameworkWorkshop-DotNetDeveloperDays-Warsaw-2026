@@ -54,8 +54,6 @@ read-only, but leaking private data is already an authorization failure.
 Next: [402](../exercise-402/README.md) adds console sign-in but leaves the
 identity argument under model control.
 
-For deterministic checks of the whole progression, without Foundry:
-
-```powershell
-dotnet run --project .\tests\AuthenticationExercises\AuthenticationChecks.csproj
-```
+To inspect this boundary independently of the model, put a breakpoint in
+`SnackTools.GetSecretSnack` and inspect the supplied name and returned value.
+The repository does not currently include an automated authentication-check project.

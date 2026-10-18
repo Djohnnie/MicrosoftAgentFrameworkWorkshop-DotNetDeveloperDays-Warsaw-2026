@@ -10,23 +10,26 @@
   <Folder Name="/1. From LLM calls to agents/102. Chatbot with history/">
     <Project Path="exercise-102\ChatbotWithHistory.csproj" />
   </Folder>
-  <Folder Name="/1. From LLM calls to agents/103. Chatbot personas/">
-    <Project Path="exercise-103\ChatbotPersonas.csproj" />
+  <Folder Name="/1. From LLM calls to agents/103. Chatbot with token usage/">
+    <Project Path="exercise-103\ChatbotWithTokenUsage.csproj" />
   </Folder>
-  <Folder Name="/1. From LLM calls to agents/104. Structured output/">
-    <Project Path="exercise-104\StructuredOutput.csproj" />
+  <Folder Name="/1. From LLM calls to agents/104. Chatbot personas/">
+    <Project Path="exercise-104\ChatbotPersonas.csproj" />
   </Folder>
-  <Folder Name="/1. From LLM calls to agents/105. Local Ollama chatbot/">
-    <Project Path="exercise-105\LocalChatbot.csproj" />
+  <Folder Name="/1. From LLM calls to agents/105. Structured output/">
+    <Project Path="exercise-105\StructuredOutput.csproj" />
   </Folder>
-  <Folder Name="/1. From LLM calls to agents/106. Chatbot agent/">
-    <Project Path="exercise-106\ChatbotAgent.csproj" />
+  <Folder Name="/1. From LLM calls to agents/106. Local Ollama chatbot/">
+    <Project Path="exercise-106\LocalChatbot.csproj" />
   </Folder>
-  <Folder Name="/1. From LLM calls to agents/107. Multimodal images/">
-    <Project Path="exercise-107\MultimodalImages.csproj" />
+  <Folder Name="/1. From LLM calls to agents/107. Chatbot agent/">
+    <Project Path="exercise-107\ChatbotAgent.csproj" />
   </Folder>
-  <Folder Name="/1. From LLM calls to agents/108. Multimodal audio/">
-    <Project Path="exercise-108\MultimodalAudio.csproj" />
+  <Folder Name="/1. From LLM calls to agents/108. Multimodal images/">
+    <Project Path="exercise-108\MultimodalImages.csproj" />
+  </Folder>
+  <Folder Name="/1. From LLM calls to agents/109. Multimodal audio/">
+    <Project Path="exercise-109\MultimodalAudio.csproj" />
   </Folder>
   <Folder Name="/2. Giving agents capabilities - tools and MCP/" />
   <Folder Name="/2. Giving agents capabilities - tools and MCP/201. Chatbot agent with tools/">

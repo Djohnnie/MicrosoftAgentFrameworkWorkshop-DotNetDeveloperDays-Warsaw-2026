@@ -1,5 +1,18 @@
 # Lab: Build DevDays Buddy
 
+This is the original four-part scenario outline, not the instructions for the
+implemented numbered labs. Use these READMEs for the current workshop:
+
+| Part | Implemented material |
+| --- | --- |
+| 1 | [Lab 100](labs/lab-100/README.md): an agent grounded in the conference agenda |
+| 2 | [Lab 200](labs/lab-200/README.md): agenda tools hosted in an MCP server |
+| 3 | [Lab 300](labs/lab-300/README.md): a three-agent workflow with C# schedule validation |
+| 4 | [Authentication exercises](exercises/exercise-401/README.md) and a [Foundry agent invocation](exercises/exercise-405/README.md); no Lab 400 is implemented |
+
+The implemented labs use the bundled DeveloperDays agenda, not the fictional
+catalog proposed below. Their READMEs take precedence over this original outline.
+
 Build a friendly conference assistant that helps attendees discover sessions and
 put together a schedule. The same small application grows throughout the
 workshop: first it can chat, then it can use tools, then it can coordinate
@@ -26,7 +39,7 @@ can have an ID, title, description, topics, level, start time, end time, and
 room. This avoids external APIs and setup while still giving the assistant
 useful information to reason over.
 
-## The four exercises
+## The four proposed parts
 
 ### Part 1 — From an LLM call to an agent
 

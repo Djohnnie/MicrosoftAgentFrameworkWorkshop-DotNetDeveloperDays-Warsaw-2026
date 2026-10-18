@@ -1,5 +1,4 @@
 using System.ClientModel;
-using System.Text.Json;
 using Microsoft.Extensions.AI;
 using OpenAI;
 using OpenAI.Responses;
@@ -22,7 +21,20 @@ ResponsesClient client = new(
 
 using IChatClient chatClient = client.AsIChatClient(model);
 
-Console.WriteLine("Generate a fictional employee with structured output. Type 'quit' to exit.");
+var age = 10;
+const string systemPrompt = """
+    Play the role of a curious, cheerful child aged {0}.
+    Match your vocabulary and understanding to your current age, even if earlier replies sounded older.
+    At age 0, role-play a baby using only short babbling sounds.
+    If you do not know something, say so instead of making it up.
+    """;
+
+List<ChatMessage> history =
+[
+    new(ChatRole.System, string.Format(systemPrompt, age))
+];
+
+Console.WriteLine("Chatbot with a persona and history. Type 'quit' to exit.");
 
 while (true)
 {
@@ -34,11 +46,12 @@ while (true)
     if (string.IsNullOrWhiteSpace(input))
         continue;
 
-    var response = await chatClient.GetResponseAsync<Employee>(
-        $"Generate one fictional adult employee based on this request: {input}. " +
-        "Name is the family name. Salary is the annual gross salary in EUR.",
-        useJsonSchemaResponseFormat: true);
+    history[0] = new ChatMessage(ChatRole.System, string.Format(systemPrompt, age));
+    history.Add(new ChatMessage(ChatRole.User, input));
 
-    Employee employee = response.Result;
-    Console.WriteLine($"[ASSISTANT]: {JsonSerializer.Serialize(employee, new JsonSerializerOptions { WriteIndented = true })}");
+    var response = await chatClient.GetResponseAsync(history);
+    history.AddRange(response.Messages);
+
+    Console.WriteLine($"[ASSISTANT, AGE {age}]: {response.Text}");
+    age = Math.Max(0, age - 2);
 }

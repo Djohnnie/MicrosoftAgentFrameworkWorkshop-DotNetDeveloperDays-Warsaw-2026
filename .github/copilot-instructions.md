@@ -1,7 +1,7 @@
 # Repository context
 
 This is a .NET DeveloperDays Warsaw 2026 workshop, not a production application.
-The implemented exercises are independent .NET 10 console applications in
+The implemented exercises are independent .NET 10 examples in
 `exercises\exercises.slnx`. Labs live in `labs\labs.slnx` (separate solution,
 same numbered part folders) under `labs\lab-NNN` with `starter` and `solution`
 subfolders. Part 1 deliberately progresses through small,
@@ -24,8 +24,8 @@ dotnet build .\exercises\exercises.slnx
 dotnet build .\labs\labs.slnx
 
 # Build or run only the exercise being changed.
-dotnet build .\exercises\exercise-106\ChatbotAgent.csproj
-dotnet run --project .\exercises\exercise-106\ChatbotAgent.csproj
+dotnet build .\exercises\exercise-107\ChatbotAgent.csproj
+dotnet run --project .\exercises\exercise-107\ChatbotAgent.csproj
 
 # Check patch whitespace.
 git diff --check
@@ -41,7 +41,7 @@ git diff --check
 ```
 
 Runtime checks require a configured Foundry deployment, or a running Ollama
-server for exercise 105. Exercise 001's Spectre.Console input requires an
+server for exercise 106. Exercise 001's Spectre.Console input requires an
 interactive terminal; the simpler Part 1 loops also accept piped input.
 
 ## Exercise architecture and teaching boundaries
@@ -51,35 +51,38 @@ interactive terminal; the simpler Part 1 loops also accept piped input.
   endpoint validation/resolution; `TokenVisualizerUi` handles the richer
   Spectre.Console interface. Local full-history token counts are estimates;
   API usage is authoritative.
-- **101-103:** Responses clients are adapted to `IChatClient`. Exercise 101
+- **101-104:** Responses clients are adapted to `IChatClient`. Exercise 101
   sends only the current input. Exercise 102 keeps `List<ChatMessage>` outside
-  the loop and retains `response.Messages`. Exercise 103 replaces the first
-  system message each turn, lowering the persona age from 10 by 2 after each
-  successful reply and clamping it at zero.
-- **104:** Independent structured-output requests use
+  the loop and retains `response.Messages`. Exercise 103 copies 102 and prints
+  `response.Usage.InputTokenCount` and `OutputTokenCount` after each reply,
+  displaying `not reported` when a count is absent. Counts are per request,
+  not cumulative or local estimates. Exercise 104 replaces the first system
+  message each turn, lowering the persona age from 10 by 2 after each successful
+  reply and clamping it at zero.
+- **105:** Independent structured-output requests use
   `GetResponseAsync<Employee>(..., useJsonSchemaResponseFormat: true)` and
   `response.Result`. The record defines family name, first name, `DateOnly`
   birth date, `decimal` annual gross salary in EUR, and function title.
-- **105:** `OllamaApiClient` implements `IChatClient` for `qwen2.5:7b` at
+- **106:** `OllamaApiClient` implements `IChatClient` for `qwen2.5:7b` at
   `http://localhost:11434`, retaining exercise 102's history loop. It needs
   no Foundry configuration.
-- **106:** An `AIAgent` wraps `IChatClient` with fixed 10-year-old persona
+- **107:** An `AIAgent` wraps `IChatClient` with fixed 10-year-old persona
   instructions. One `AgentSession` is reused for every `RunAsync`.
   `InMemoryChatHistoryProvider` stores messages in the session state bag;
   `StoredOutputEnabled = false` disables server-side Responses storage.
   `DebugHistory` reads the actual session with `TryGetInMemoryChatHistory`.
   History is local, but inference still sends it to Foundry.
-- **107:** An image-capable Foundry-backed `AIAgent` translates a JPEG using
+- **108:** An image-capable Foundry-backed `AIAgent` translates a JPEG using
   `TextContent` plus `UriContent`, then `TextContent` plus `DataContent` loaded
   from the bundled `quote.jpg`. The file is copied to the output directory.
   Each request uses a fresh session for an independent comparison; local
-  history and disabled Responses storage match 106. No tools or workflows.
-- **108:** Direct OpenAI `AudioClient` calls, not an `AIAgent`, transcribe the
+  history and disabled Responses storage match 107. No tools or workflows.
+- **109:** Direct OpenAI `AudioClient` calls, not an `AIAgent`, transcribe the
   bundled original French `welcome-fr.wav` and translate it into English.
   Reopen the file for each request. OpenAI 2.14.0 uses `/openai/v1` with
   `OpenAIClientOptions`; `FOUNDRY_MODEL_DEPLOYMENT` must name a Whisper
   deployment supporting both audio operations. No chat history or tools.
-- **Lab 100:** DevDays Buddy builds on 106. `agenda.json` (conference info plus
+- **Lab 100:** DevDays Buddy builds on 107. `agenda.json` (conference info plus
   every Tuesday/Wednesday slot with day, date, times, room, type, level,
   description, and speakers with name/title/description, scraped from the
   Sessionize agenda on developerdays.eu) is an `EmbeddedResource` with
@@ -114,8 +117,8 @@ interactive terminal; the simpler Part 1 loops also accept piped input.
   302 also uses Microsoft.Agents.AI.Workflows 1.24.0.
 
 Keep Part 1 code short enough for participants to type. Preserve each
-exercise's teaching boundary: do not add history to 101, agents to 101-105,
-or tools/workflows to 106. The richer validation and error handling in 001
+exercise's teaching boundary: do not add history to 101, agents to 101-106,
+or tools/workflows to 107. The richer validation and error handling in 001
 are intentional, not a template to copy into every introductory exercise.
 
 ## Configuration and SDK conventions
@@ -133,24 +136,24 @@ Microsoft Entra ID via `DefaultAzureCredential` (Azure.Identity 1.21.0), not
 `FOUNDRY_API_KEY`; no model deployment setting is needed. Reuse the agent-scoped
 pipeline and endpoint for server-side conversations, not local chat history.
 
-Local `Properties\launchSettings.json` profiles are optional and explicitly
-ignored per exercise in `.gitignore`. They may contain real API keys: do not
+Local `Properties\launchSettings.json` profiles are optional and ignored by
+`**/Properties/launchSettings.json` in `.gitignore`. They may contain real API keys: do not
 print their contents, embed their values in documentation, or commit them.
-When adding a cloud exercise or lab, add its profile path to `.gitignore` before
+When adding a cloud exercise or lab, verify its profile is ignored before
 copying local configuration.
 
-Exercises 001, 101-104, 106-108, and the lab 100 solution use OpenAI 2.14.0;
-101-104 use Microsoft.Extensions.AI/OpenAI 10.11.0; 106-107 and the lab 100
+Exercises 001, 101-105, 107-109, and the lab 100 solution use OpenAI 2.14.0;
+101-105 use Microsoft.Extensions.AI/OpenAI 10.11.0; 107-108 and the lab 100
 solution use Microsoft.Agents.AI 1.24.0 with the OpenAI adapter 10.11.0 (the
-lab 100 starter still references 106's older 1.0.0/10.4.0/2.9.1 versions).
+lab 100 starter still references 107's older 1.0.0/10.4.0/2.9.1 versions).
 In 2.14.0, `ResponsesClient` takes `ResponsesClientOptions` (not
 `OpenAIClientOptions`) and no model: pass the deployment to
 `AsIChatClient(model)`, or set `CreateResponseOptions.Model` when using the
-SDK directly (001). Exercise 105 uses OllamaSharp 5.5.0 and its transitive
+SDK directly (001). Exercise 106 uses OllamaSharp 5.5.0 and its transitive
 AI dependencies. Do not change these versions without checking SDK
 signatures and runtime compatibility. Responses exercises suppress `OPENAI001`.
 
-Console labels are `[USER]:` and `[ASSISTANT]:`; exercise 103 includes the
+Console labels are `[USER]:` and `[ASSISTANT]:`; exercise 104 includes the
 current age in its assistant label. Part 1 skips blank input and exits on
 EOF or case-insensitive `quit`. Only 001 implements `clear`.
 
@@ -179,12 +182,12 @@ Raleway 700 headings, Open Sans body text, 100-unit horizontal margins,
 and a footer at y=985. Fonts and graphics are embedded from `_resources`.
 See `_tools\README.md` for layout and export details.
 
-Current exercise slides are 001 at 12 and 101-108 at 23, 25, 26, 29, 30, 33, 34, 35;
-lab 100 is at 37, and exercises 201-205 are at 40, 41, 44, 46, 48.
-Lab 200 uses slides 50-52
+Current exercise slides are 001 at 14 and 101-109 at 26, 28, 30, 32, 35, 37, 40, 42, 43;
+lab 100 is at 45, and exercises 201-205 are at 48, 51, 54, 56, 59.
+Lab 200 uses slides 61-63
 (`ExerciseBody -badge 'LAB'`, header `LAB 200`); exercises 301-302 use slides
-54-55, and lab 300 is at 56 with header `LAB 300`. Section dividers are 53 and 57,
-exercises 401-405 use slides 58-62, and the closing slide is 63 (63 slides total).
+65-66, and lab 300 is at 67 with header `LAB 300`. Section dividers are 64 and 68,
+exercises 401-405 use slides 69-73, and the closing slide is 74 (74 slides total).
 Adding slides requires updating generator
 numbering, the shifted SVG outputs, root README headings/image references,
 and the deck, as well as slide-count references in tool documentation.
@@ -203,5 +206,7 @@ Keep credentials and tokens out of agent messages and tool arguments.
 Auth attempts and logout reset history; failed reauthentication signs out.
 Public demo passwords and loopback HTTP are not production authentication.
 404 is not a complete OAuth/OIDC authorization server; do not describe it as one.
-Run deterministic checks from the root with
-`dotnet run --project .\tests\AuthenticationExercises\AuthenticationChecks.csproj`.
+No automated authentication-check project is currently included. Follow each
+exercise README's manual checks; exercise 404 includes an unauthenticated HTTP
+request that needs no Foundry deployment. Build the progression from the root
+with `dotnet build .\exercises\exercises.slnx`.

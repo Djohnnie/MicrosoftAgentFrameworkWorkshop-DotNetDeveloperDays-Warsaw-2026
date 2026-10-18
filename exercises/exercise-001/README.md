@@ -4,7 +4,7 @@
 > **Skill focus:** Understanding how LLMs tokenise text; exploring Microsoft Foundry's Responses API  
 > **Difficulty:** ⭐⭐
 
-[🏠 Workshop Home](../../README.md) | [📊 Exercise Slide](../../README.md#slide-12---exercise-001-tokenization-demo)
+[🏠 Workshop Home](../../README.md) | [📊 Exercise Slide](../../README.md#slide-14---exercise-001-tokenization-demo)
 
 ---
 

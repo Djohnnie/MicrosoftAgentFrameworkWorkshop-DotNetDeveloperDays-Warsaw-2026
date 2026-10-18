@@ -1,12 +1,28 @@
+using System.ClientModel;
+using System.Text.Json;
 using Microsoft.Extensions.AI;
-using OllamaSharp;
+using OpenAI;
+using OpenAI.Responses;
 
-using IChatClient chatClient = new OllamaApiClient(
-    new Uri("http://localhost:11434"), "qwen2.5:7b");
+#pragma warning disable OPENAI001
 
-List<ChatMessage> history = [];
+var endpoint = Environment.GetEnvironmentVariable("FOUNDRY_ENDPOINT")
+    ?? throw new InvalidOperationException("Set FOUNDRY_ENDPOINT");
+var key = Environment.GetEnvironmentVariable("FOUNDRY_API_KEY")
+    ?? throw new InvalidOperationException("Set FOUNDRY_API_KEY");
+var model = Environment.GetEnvironmentVariable("FOUNDRY_MODEL_DEPLOYMENT")
+    ?? throw new InvalidOperationException("Set FOUNDRY_MODEL_DEPLOYMENT");
 
-Console.WriteLine("Local Ollama chatbot with history. Type 'quit' to exit.");
+ResponsesClient client = new(
+    credential: new ApiKeyCredential(key),
+    options: new ResponsesClientOptions
+    {
+        Endpoint = new UriBuilder(endpoint) { Path = "/openai/v1" }.Uri
+    });
+
+using IChatClient chatClient = client.AsIChatClient(model);
+
+Console.WriteLine("Generate a fictional employee with structured output. Type 'quit' to exit.");
 
 while (true)
 {
@@ -18,10 +34,11 @@ while (true)
     if (string.IsNullOrWhiteSpace(input))
         continue;
 
-    history.Add(new ChatMessage(ChatRole.User, input));
+    var response = await chatClient.GetResponseAsync<Employee>(
+        $"Generate one fictional adult employee based on this request: {input}. " +
+        "Name is the family name. Salary is the annual gross salary in EUR.",
+        useJsonSchemaResponseFormat: true);
 
-    var response = await chatClient.GetResponseAsync(history);
-    history.AddRange(response.Messages);
-
-    Console.WriteLine($"[ASSISTANT]: {response.Text}");
+    Employee employee = response.Result;
+    Console.WriteLine($"[ASSISTANT]: {JsonSerializer.Serialize(employee, new JsonSerializerOptions { WriteIndented = true })}");
 }

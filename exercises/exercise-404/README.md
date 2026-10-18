@@ -77,9 +77,9 @@ dotnet run --project .\exercises\exercise-404\client\SnackAgentWithAuthenticated
 4. Wait more than five minutes and ask for a new lookup. The server rejects
    the expired token; use `/auth` again. Tokens are not refreshed automatically.
 
-The [automated boundary checks](../../tests/AuthenticationExercises/README.md)
-exercise real MCP discovery/calls, invalid tokens, concurrent Alice/Bob clients,
-forged identity arguments, and the console sign-in lifecycle without Foundry.
+These are manual boundary checks. The unauthenticated HTTP request needs no
+Foundry deployment; the agent questions require the configured client.
+The repository does not currently include an automated authentication-check project.
 
 ## What this is, and is not
 

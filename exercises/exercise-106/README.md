@@ -1,16 +1,36 @@
-# Exercise 106 - Chatbot Agent
+# Exercise 106 - Local Ollama Chatbot
 
-> **Part:** Part 1, From LLM calls to agents  
-> **Focus:** Create an agent with instructions and a conversation session  
-> **History:** Retained by reusing the same session while the application is running
+> **Part:** Part 1, From LLM calls to agents\
+> **Focus:** Swap the model provider without changing the chat loop\
+> **History:** Kept in memory while the application is running
 
 ## What you'll build
 
-This exercise moves from direct `IChatClient` calls to a Microsoft Agent Framework `AIAgent`. It uses the same Foundry endpoint, API key, and model as exercises 101-104, gives the agent a cheerful 10-year-old persona, and keeps conversation context across questions. Exercise 107 then adds image input to an agent.
+This is [exercise 102](../exercise-102/README.md)'s chatbot with history, using a local **Ollama** model instead of Microsoft Foundry. The model is **`qwen2.5:7b`**, and Ollama runs at **`http://localhost:11434`**.
 
-Unlike exercise 103, the age stays at 10. The focus here is the agent concept, not changing the instructions on every turn. There are no tools or workflows yet.
+`OllamaApiClient` implements `IChatClient`, so the `ChatMessage` history, `GetResponseAsync`, and `response.Messages` work exactly as before. No Agent Framework agent is involved.
+
+## Set up Ollama
+
+1. Install [Ollama](https://ollama.com/download) on your machine.
+2. Ensure Ollama is running. The desktop application normally starts the server; if it is not running, run `ollama serve` in a separate terminal. Do not start a second server if one is already listening on port 11434.
+3. Download the model:
+
+```powershell
+ollama pull qwen2.5:7b
+```
+
+The download requires internet access and several gigabytes of disk space. Running a 7B model also requires sufficient memory; response speed depends on your hardware.
+
+You can check the server and installed models with:
+
+```powershell
+Invoke-RestMethod http://localhost:11434/api/tags
+```
 
 ## Run it
+
+Use the **.NET 10 SDK**, as in the earlier exercises.
 
 From this directory:
 
@@ -18,86 +38,39 @@ From this directory:
 dotnet run
 ```
 
-Use the **.NET 10 SDK** and the [Foundry environment-variable setup from exercise 001](../exercise-001/README.md#1-set-your-microsoft-foundry-credentials). An optional, Git-ignored local `Properties\launchSettings.json` profile can supply these values; it is not included in a fresh clone. Otherwise, set the variables in the same PowerShell session before running. Never commit your API key.
-
 Type a message and press **Enter**. Type `quit` to exit.
 
-## Create an agent
+No Foundry credentials, environment variables, or `launchSettings.json` are needed. The local URL and model name are hard-coded to keep the exercise simple. Once the model is downloaded, inference takes place on your machine.
 
-Keep the existing `ResponsesClient` and its `IChatClient` adapter, then wrap it in an agent:
+## What changed from exercise 102?
+
+Replace the Foundry configuration and Responses client adapter with:
 
 ```csharp
-AIAgent agent = chatClient.AsAIAgent(new ChatClientAgentOptions
-{
-    Name = "ChildAgent",
-    ChatHistoryProvider = new InMemoryChatHistoryProvider(),
-    ChatOptions = new ChatOptions
-    {
-        Instructions = """
-            Play the role of a curious, cheerful 10-year-old.
-            Use simple words, short answers, and playful examples.
-            If you do not know something, say so instead of making it up.
-            """,
-        RawRepresentationFactory = _ => new CreateResponseOptions
-        {
-            StoredOutputEnabled = false
-        }
-    }
-});
+using IChatClient chatClient = new OllamaApiClient(
+    new Uri("http://localhost:11434"), "qwen2.5:7b");
 ```
 
-The program uses the `ChatClientAgentOptions` overload to also select `InMemoryChatHistoryProvider` and set `ChatOptions.Instructions`. `RawRepresentationFactory` creates Responses API options with `StoredOutputEnabled = false`, disabling stored responses and server-side response chaining for this demo.
+`OllamaSharp` 5.5.0 is the only package reference; it includes the Microsoft.Extensions.AI dependencies. There is no OpenAI SDK dependency or `OPENAI001` warning to suppress.
 
-`Microsoft.Agents.AI` supplies the agent abstraction. The underlying `IChatClient` still communicates with the same model; `AsAIAgent` does not train a new model or deploy a hosted agent. The name identifies the agent, and the instructions guide its behavior, much like the system prompt in exercise 103. Instructions do not guarantee accurate answers.
-
-This exercise pins Agent Framework 1.24.0 and uses the compatible Microsoft.Extensions.AI.OpenAI 10.11.0 adapter with OpenAI 2.14.0, the same OpenAI packages as exercises 101-104. Agent Framework brings in Microsoft.Extensions.AI transitively. As in exercises 101-104, the model is passed to `AsIChatClient(model)` and `ResponsesClient` takes `ResponsesClientOptions`; the endpoint and API-key authentication stay unchanged. `OPENAI001` is still suppressed for the experimental Responses API.
-
-## Let the session retain conversation context
-
-Create one session **before** the loop:
+The conversation code stays the same:
 
 ```csharp
-AgentSession session = await agent.CreateSessionAsync();
-```
+history.Add(new ChatMessage(ChatRole.User, input));
 
-Reuse it for each question:
+var response = await chatClient.GetResponseAsync(history);
+history.AddRange(response.Messages);
 
-```csharp
-var response = await agent.RunAsync(input, session);
 Console.WriteLine($"[ASSISTANT]: {response.Text}");
-DebugHistory(session);
 ```
 
-Unlike exercise 102, application code no longer appends messages to a `List<ChatMessage>`. The agent manages conversation state through the session, including earlier user messages and assistant replies. Creating a new session for every question would lose that context.
-
-The session is not permanent model memory. This exercise explicitly uses `InMemoryChatHistoryProvider`, which stores messages inside `AgentSession.StateBag` in the application's memory. Stored Responses API output is disabled, so the conversation is sent again with each request rather than continued through a server-side response ID. This does not make inference local: messages are still sent to Foundry for each model call. This exercise does not save or restore the session, so restarting the app starts a new conversation. Longer conversations still consume context and tokens.
-
-## Inspect the history in memory
-
-After every reply, `DebugHistory(session)` reads the actual session state using `session.TryGetInMemoryChatHistory(out var messages)`. It prints the message count, roles, and full text in order, without making another model call or maintaining a separate debug copy.
-
-After the first question you can see the user message and assistant reply. After the second question you can see both turns still present. The persona instructions are configured separately in `ChatOptions.Instructions`, not as a user/assistant turn in the history.
-
-```text
---- DEBUG: AgentSession local in-memory history ---
-Stored messages: 4
-  1. [user]: My name is Alex.
-  2. [assistant]: Hi Alex!
-  3. [user]: What is my name?
-  4. [assistant]: Your name is Alex!
---- END HISTORY ---
-```
-
-Replies and message counts can vary with the model's output. Set a breakpoint inside `DebugHistory` to inspect `session.StateBag` and `messages` in the debugger. The method only reads the history; the agent still stores it automatically. This teaching-only output exposes the entire conversation, so avoid entering sensitive information and remove it before using the app in production.
-
-The program stays intentionally simple: no persistence, history trimming, tools, or request error recovery. Missing configuration and request failures propagate as exceptions.
+History is application-managed and sent on every request. Restarting the app discards it. The local model has a finite context window too; this exercise does not trim or persist history. Connection errors, a missing model, and inference failures propagate as exceptions rather than falling back to a cloud model.
 
 ## Try it
 
-1. Say: "My name is Alex, and I am learning C#."
-2. Ask: "What is my name, and what am I learning?"
-3. Ask: "Explain how a computer remembers things." Notice the simple language and playful examples.
-4. Compare the manual history in exercise 102 and system prompt in exercise 103 with the agent's session and instructions.
-5. Restart the app and ask about your name again.
+1. Say "My name is Alex, and I am learning C#."
+2. Ask "What is my name, and what am I learning?"
+3. Compare the answers and response speed with exercise 102.
+4. Notice that changing the provider did not require changing the conversation loop.
 
-See Microsoft Learn's [Your First Agent](https://learn.microsoft.com/en-us/agent-framework/get-started/your-first-agent?pivots=programming-language-csharp) and [Conversations & Memory](https://learn.microsoft.com/en-us/agent-framework/concepts/agents/conversations/?pivots=programming-language-csharp). We keep API-key authentication through the existing `IChatClient` instead of switching to the guide's `AIProjectClient` and Microsoft Entra authentication.
+Read [Microsoft Learn: Chat with a local AI model](https://learn.microsoft.com/en-us/dotnet/ai/quickstarts/chat-local-model).

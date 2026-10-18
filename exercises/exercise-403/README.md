@@ -77,9 +77,8 @@ tool while the trusted context belongs to Alice.
 This application is one console with one user at a time, so one DI scope spans
 that console's lifetime. Do not share a mutable `UserContext`, an agent session,
 or an agent's scoped service provider across concurrent users. The static tool
-holds no per-user state. The
-[deterministic checks](../../tests/AuthenticationExercises/README.md) cover
-separate scopes, forged arguments, failed authentication, and signed-out calls.
+holds no per-user state. Use the sign-in, impersonation, and sign-out steps above
+and inspect the tool's context and result in the debugger.
 
 The context itself is not added to the prompt or schema. Selected snack results
 and conversation history still go to Foundry; disabling Responses storage does

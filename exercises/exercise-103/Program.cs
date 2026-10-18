@@ -21,20 +21,9 @@ ResponsesClient client = new(
 
 using IChatClient chatClient = client.AsIChatClient(model);
 
-var age = 10;
-const string systemPrompt = """
-    Play the role of a curious, cheerful child aged {0}.
-    Match your vocabulary and understanding to your current age, even if earlier replies sounded older.
-    At age 0, role-play a baby using only short babbling sounds.
-    If you do not know something, say so instead of making it up.
-    """;
+List<ChatMessage> history = [];
 
-List<ChatMessage> history =
-[
-    new(ChatRole.System, string.Format(systemPrompt, age))
-];
-
-Console.WriteLine("Chatbot with a persona and history. Type 'quit' to exit.");
+Console.WriteLine("Chatbot with history and API token usage. Type 'quit' to exit.");
 
 while (true)
 {
@@ -46,12 +35,12 @@ while (true)
     if (string.IsNullOrWhiteSpace(input))
         continue;
 
-    history[0] = new ChatMessage(ChatRole.System, string.Format(systemPrompt, age));
     history.Add(new ChatMessage(ChatRole.User, input));
 
     var response = await chatClient.GetResponseAsync(history);
     history.AddRange(response.Messages);
 
-    Console.WriteLine($"[ASSISTANT, AGE {age}]: {response.Text}");
-    age = Math.Max(0, age - 2);
+    Console.WriteLine($"[ASSISTANT]: {response.Text}");
+    Console.WriteLine($"[USAGE]: Input tokens: {response.Usage?.InputTokenCount?.ToString() ?? "not reported"}");
+    Console.WriteLine($"[USAGE]: Output tokens: {response.Usage?.OutputTokenCount?.ToString() ?? "not reported"}");
 }

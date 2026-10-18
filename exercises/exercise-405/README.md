@@ -82,7 +82,7 @@ scope. The response client binds subsequent requests to the conversation ID.
 To experiment with follow-ups, call `CreateResponseAsync` again on that same
 `responseClient`.
 
-This is **server-side state**, not exercise 106's local in-memory history.
+This is **server-side state**, not exercise 107's local in-memory history.
 Each program run creates a separate conversation; exiting does not delete it.
 Use non-sensitive workshop prompts and manage retained conversations according
 to your Foundry project's policies.

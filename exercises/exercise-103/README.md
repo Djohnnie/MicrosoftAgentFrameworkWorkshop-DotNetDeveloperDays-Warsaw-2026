@@ -1,14 +1,14 @@
-# Exercise 103 - Chatbot Personas
+# Exercise 103 - Chatbot with Token Usage
 
-> **Part:** Part 1, From LLM calls to agents  
-> **Focus:** Change the chatbot's age persona with a system prompt on each turn  
-> **History:** Kept in memory, including the system message
+> **Part:** Part 1, From LLM calls to agents\
+> **Focus:** Display API-reported input and output tokens after each request\
+> **History:** Kept in memory while the application is running
 
 ## What you'll build
 
-Start with [exercise 102](../exercise-102/README.md)'s chatbot with history and give it a changing persona. The first reply is from a curious, cheerful 10-year-old; subsequent replies use ages **8, 6, 4, 2, 0**, then stay at **0**. A **system message** guides the model's behavior for the current age.
+This is [exercise 102](../exercise-102/README.md)'s chatbot with history, with two extra console lines after each reply. They display the input and output token counts returned by the API through `response.Usage`, not estimates from a local tokenizer.
 
-The `IChatClient` setup, `OpenAI` SDK version 2.14.0, `Microsoft.Extensions.AI` / `Microsoft.Extensions.AI.OpenAI` version 10.11.0, `OPENAI001` warning suppression, and conversation loop stay the same. The adapter still calls the Responses API. There is no Agent Framework agent yet.
+The `ResponsesClient` setup, `IChatClient` adapter, `List<ChatMessage>` history, and conversation loop are unchanged. The packages remain OpenAI 2.14.0 and Microsoft.Extensions.AI / Microsoft.Extensions.AI.OpenAI 10.11.0, with `OPENAI001` suppressed. There is no Agent Framework agent yet.
 
 ## Run it
 
@@ -18,50 +18,40 @@ From this directory:
 dotnet run
 ```
 
-Use the **.NET 10 SDK** and the [Foundry environment-variable setup from exercise 001](../exercise-001/README.md#1-set-your-microsoft-foundry-credentials). An optional, Git-ignored local `Properties\launchSettings.json` profile can supply the same values as exercise 102; it is not included in a fresh clone. Otherwise, set the variables in the same PowerShell session before running.
+Or, from the repository root:
 
-Type a message and press **Enter**. Type `quit` to exit.
+```powershell
+dotnet run --project .\exercises\exercise-103\ChatbotWithTokenUsage.csproj
+```
+
+Use the **.NET 10 SDK** and the [Foundry environment-variable setup from exercise 001](../exercise-001/README.md#1-set-your-microsoft-foundry-credentials): `FOUNDRY_ENDPOINT`, `FOUNDRY_API_KEY`, and `FOUNDRY_MODEL_DEPLOYMENT`. An optional, Git-ignored `Properties\launchSettings.json` profile can supply the same values as exercise 102; it is not included in a fresh clone. Otherwise, set the variables in the same PowerShell session before running.
+
+Type a message and press **Enter**. Blank input is skipped. Type `quit` (case-insensitive) or send EOF to exit.
 
 ## What changed from exercise 102?
 
-Define the persona in a hard-coded template and add it as the first `ChatMessage` in the history, before the conversation loop. `{0}` is replaced with the current age:
+Keep the request and history handling, then print the API usage after the answer:
 
 ```csharp
-var age = 10;
-const string systemPrompt = """
-    Play the role of a curious, cheerful child aged {0}.
-    Match your vocabulary and understanding to your current age, even if earlier replies sounded older.
-    At age 0, role-play a baby using only short babbling sounds.
-    If you do not know something, say so instead of making it up.
-    """;
+var response = await chatClient.GetResponseAsync(history);
+history.AddRange(response.Messages);
 
-List<ChatMessage> history =
-[
-    new(ChatRole.System, string.Format(systemPrompt, age))
-];
+Console.WriteLine($"[ASSISTANT]: {response.Text}");
+Console.WriteLine($"[USAGE]: Input tokens: {response.Usage?.InputTokenCount?.ToString() ?? "not reported"}");
+Console.WriteLine($"[USAGE]: Output tokens: {response.Usage?.OutputTokenCount?.ToString() ?? "not reported"}");
 ```
 
-Before adding each user message, replace the first item with the current persona:
+These counts belong to **the request that just completed**, not a cumulative session total. Input tokens include the conversation history sent with that request, not just the latest prompt. Output tokens can include hidden reasoning tokens on reasoning-capable models; the API-reported total is more authoritative than counting the visible reply. Cached input is still part of the reported input count.
 
-```csharp
-history[0] = new ChatMessage(ChatRole.System, string.Format(systemPrompt, age));
-```
+If the API does not report a count, the console explicitly displays `not reported` rather than inventing a zero or a local estimate. Token counts are not monetary cost; input, cached input, and output may have different prices.
 
-After printing the reply, decrease the age without going below zero:
-
-```csharp
-age = Math.Max(0, age - 2);
-```
-
-A **system message** sets instructions for the conversation. A **user message** supplies the current question, and an **assistant message** records the model's reply. `GetResponseAsync(history)` sends these messages, and `history.AddRange(response.Messages)` retains the returned messages. Replacing the system message avoids accumulating conflicting age instructions. The user and assistant history remains intact. Blank input and `quit` do not advance the age; each successful reply does. At zero, the persona babbles rather than answering normally.
-
-The persona changes the intended tone and style, not the model itself. The chatbot is role-playing, not actually a child. Instructions guide the model but do not guarantee that every answer follows them or is factually correct.
-
-As in exercise 102, history exists only while the app runs. Restarting clears the conversation and resets the age to 10. Full history is sent on every request, so input token usage grows with the conversation. Configuration and request failures propagate as exceptions to keep the code simple.
+As in exercise 102, restarting discards history. There is no history trimming, persistence, reset command, or request error recovery. Missing configuration and request failures propagate as exceptions.
 
 ## Try it
 
-1. Ask "What is a black hole?" and compare the response with exercise 102.
-2. Repeat the question and observe the age labels: 10, 8, 6, 4, 2, 0, 0.
-3. Try follow-ups to observe the changing persona and retained history together.
-4. Restart the app to return to age 10. Compare vocabulary, tone, and detail without changing the model deployment.
+1. Say: "My name is Alex, and I am learning C#." Read the two usage lines after the reply.
+2. Ask: "What is my name, and what am I learning?" Notice that the request includes the earlier conversation.
+3. Ask for a short answer, then a longer explanation. Compare output token counts; reasoning can affect them too.
+4. Restart the app and compare the first request with a longer conversation. Counts depend on the deployment and actual API response.
+
+Next: [Exercise 104 - Chatbot Personas](../exercise-104/README.md) adds a changing system instruction to exercise 102's history loop.

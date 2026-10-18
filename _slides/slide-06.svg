@@ -36,21 +36,21 @@
 <text x="130" y="495" font-size="35" class="heading">Rules-based</text>
 <text x="130" y="555" font-size="25" class="">People define the logic.</text>
 <text x="130" y="595" font-size="25" class="">Predictable, but brittle.</text>
-<path d="M490 535 H525" class="diagram-arrow"/>
+<path d="M498 535 H522 M514 527 L522 535 L514 543" fill="none" stroke="#ff6a3f" stroke-width="3"/>
 <rect x='535' y='365' width='390' height='340' rx='18' fill='#202020' stroke='#383838' stroke-width='2'/>
 <path d='M553 365 H907' stroke='url(#accent)' stroke-width='5'/>
 <text x="565" y="425" font-size="20" class="accent">02 / DATA</text>
 <text x="565" y="495" font-size="33" class="heading">Machine learning</text>
 <text x="565" y="555" font-size="25" class="">Models learn patterns</text>
 <text x="565" y="595" font-size="25" class="">from examples.</text>
-<path d="M925 535 H960" class="diagram-arrow"/>
+<path d="M933 535 H957 M949 527 L957 535 L949 543" fill="none" stroke="#ff6a3f" stroke-width="3"/>
 <rect x='970' y='365' width='390' height='340' rx='18' fill='#202020' stroke='#383838' stroke-width='2'/>
 <path d='M988 365 H1342' stroke='url(#accent)' stroke-width='5'/>
 <text x="1000" y="425" font-size="20" class="accent">03 / SCALE</text>
 <text x="1000" y="495" font-size="35" class="heading">Deep learning</text>
 <text x="1000" y="555" font-size="25" class="">Neural networks learn</text>
 <text x="1000" y="595" font-size="25" class="">richer representations.</text>
-<path d="M1360 535 H1395" class="diagram-arrow"/>
+<path d="M1368 535 H1392 M1384 527 L1392 535 L1384 543" fill="none" stroke="#ff6a3f" stroke-width="3"/>
 <rect x='1405' y='365' width='390' height='340' rx='18' fill='#202020' stroke='#383838' stroke-width='2'/>
 <path d='M1423 365 H1777' stroke='url(#accent)' stroke-width='5'/>
 <text x="1435" y="425" font-size="20" class="accent">04 / GENERATION</text>
@@ -60,6 +60,6 @@
 <text x="100" y="795" font-size="25" class="muted">A progression of techniques—not a replacement of every earlier kind of AI.</text>
 <path d="M100 985H1820" stroke="#444444"/>
 <a href='https://github.com/Djohnnie/MicrosoftAgentFrameworkWorkshop-DotNetDeveloperDays-Warsaw-2026'><text x="100" y="1030" font-size="24" class="">github.com/Djohnnie/MicrosoftAgentFrameworkWorkshop-DotNetDeveloperDays-Warsaw-2026</text></a>
-<text x='1820' y='1032' text-anchor='end' font-size='24' fill='#ffffff'>06</text>
+<text x='1820' y='1032' text-anchor='end' font-size='24' fill='#ffffff'>6</text>
 <image x='1526' y='880' width='294' height='75' href='data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iOTgiIGhlaWdodD0iMjUiIHZpZXdCb3g9IjAgMCA5OCAyNSIgZmlsbD0ibm9uZSI+DQogICAgPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzY4NjVfMTQwMjYpIj4NCiAgICAgICAgPG1hc2sgaWQ9Im1hc2swXzY4NjVfMTQwMjYiIHN0eWxlPSJtYXNrLXR5cGU6bHVtaW5hbmNlIiBtYXNrVW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4PSIwIiB5PSIwIiB3aWR0aD0iOTgiIGhlaWdodD0iMjUiPg0KICAgICAgICA8cGF0aCBkPSJNOTcuNzE5NSAwLjVIMC4yNzkyOTdWMjQuNUg5Ny43MTk1VjAuNVoiIGZpbGw9IndoaXRlIj48L3BhdGg+DQogICAgICAgIDwvbWFzaz4NCiAgICAgICAgPGcgbWFzaz0idXJsKCNtYXNrMF82ODY1XzE0MDI2KSI+DQogICAgICAgIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNy44ODc1OSAwLjVINDAuNDYxMUwzNi4zMjA0IDE1Ljk1MzRDMzYuMDkzMyAxNi44MDAyIDM2Ljg3NTcgMTcuNDg3NiAzNy45NDQgMTcuNDg3NkMzOS4wMTIzIDE3LjQ4NzYgMzkuOTY0MyAxNi44MDAyIDQwLjE5MTQgMTUuOTUzNEw0NC4zMzI2IDAuNUg1My4xODA1TDQ5LjAzOTcgMTUuOTUzNEM0Ny43NzU4IDIwLjY3MDIgNDQuMDE4MiAyNC41IDM3LjI0MTQgMjQuNUMzMC40NjQ3IDI0LjUgMjYuMjA5MiAyMC42NzA3IDI3LjQ3MzEgMTUuOTUzNEwzMS42MTM4IDAuNUwxMy43ODk1IDE1LjQ1NjFIMjYuMjgyM0wyMy45OTIyIDI0LjAwMjdIMC4yODAyNzNMMTguMTA0NSA5LjA0NjYxSDUuNTk4MDNMNy44ODc1OSAwLjVaTTkxLjQyMjggMjQuMDAyN0g3Mi42MjEyTDc4LjkxODMgMC41SDk3LjcyTDk2LjAwMjQgNi45MDk5Nkg4Ni4wNDg2TDg1LjQ3NjEgOS4wNDY2MUg5NC4zMjRMOTIuNjA2NCAxNS40NTY2SDgzLjc1ODZMODMuMTg2MSAxNy41OTMySDkzLjEzOThMOTEuNDIyMyAyNC4wMDMyTDkxLjQyMjggMjQuMDAyN1pNNjcuOTQ3NSAwLjVDNzIuODMxIDAuNSA3NS40ODMyIDUuMzk3NjQgNzQuMjE5MyAxMC4xMTQ5QzczLjUwOTYgMTIuNzYzMSA3MS43MTU5IDE0Ljc5NDYgNjkuNDE1MiAxNi4wNjcyTDcyLjYyMTIgMjQuMDAyN0g2Mi45NzI3TDYxLjI1NTEgMTcuNTkyN0g1OS40OTY5TDU3Ljc3OTQgMjQuMDAyN0g0OC45MzE1TDU1LjIyODcgMC41SDY3Ljk0NzVaTTY0LjAxODIgNi45MDk5NkM2NS4yMzg5IDYuOTA5OTYgNjUuOTczNCA3Ljg2NzU0IDY1LjY1NzUgOS4wNDY2MUM2NS4zNDE1IDEwLjIyNTcgNjQuMDkzOCAxMS4xODMzIDYyLjg3MzEgMTEuMTgzM0g2MS4yMTRMNjIuMzU5IDYuOTA5OTZINjQuMDE4MloiIGZpbGw9IiNmZmZmZmYiPjwvcGF0aD4NCiAgICAgICAgPC9nPg0KICAgIDwvZz4NCiAgICA8ZGVmcz4NCiAgICAgICAgPGNsaXBQYXRoIGlkPSJjbGlwMF82ODY1XzE0MDI2Ij4NCiAgICAgICAgPHJlY3Qgd2lkdGg9Ijk3LjQ0MDciIGhlaWdodD0iMjQiIGZpbGw9IndoaXRlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjI3OTI5NyAwLjUpIj48L3JlY3Q+DQogICAgICAgIDwvY2xpcFBhdGg+DQogICAgPC9kZWZzPg0KPC9zdmc+'/>
 </svg>

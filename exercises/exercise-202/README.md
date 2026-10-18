@@ -6,7 +6,7 @@
 
 ## What you'll build
 
-This is [exercise 201](../exercise-201/README.md)'s tool-enabled chatbot using a local **Ollama** model instead of Microsoft Foundry. It uses the same `qwen2.5:7b` model and Ollama server as [exercise 105](../exercise-105/README.md), at `http://localhost:11434`.
+This is [exercise 201](../exercise-201/README.md)'s tool-enabled chatbot using a local **Ollama** model instead of Microsoft Foundry. It uses the same `qwen2.5:7b` model and Ollama server as [exercise 106](../exercise-106/README.md), at `http://localhost:11434`.
 
 The model can call `get_current_time` and `get_current_date`. `UseFunctionInvocation()` executes the selected C# function, and its result is returned to the model so it can answer the user. The tools read the computer running this app, not a timezone or date supplied by the user.
 
@@ -36,7 +36,7 @@ Ask for the current date or time, then type `quit` to exit. The model chooses wh
 
 ## What changed from exercise 201?
 
-Replace the Foundry client and its configuration with the local client from exercise 105:
+Replace the Foundry client and its configuration with the local client from exercise 106:
 
 ```csharp
 IChatClient ollamaClient = new OllamaApiClient(

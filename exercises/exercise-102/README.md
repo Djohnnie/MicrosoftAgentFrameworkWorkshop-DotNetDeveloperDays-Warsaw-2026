@@ -54,4 +54,4 @@ The code stays intentionally simple: no history trimming, persistence, reset com
 3. Ask for an explanation, then follow up with "Can you explain that more simply?"
 4. Compare with exercise 101, then restart this app and notice that the earlier conversation is gone.
 
-Next: [Exercise 103 - Chatbot Personas](../exercise-103/README.md) adds a system prompt to guide the chatbot's tone and style.
+Next: [Exercise 103 - Chatbot with Token Usage](../exercise-103/README.md) displays API-reported input and output tokens after each request.

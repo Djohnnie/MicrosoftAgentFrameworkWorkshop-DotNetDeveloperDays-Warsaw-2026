@@ -54,9 +54,8 @@ Optional local launch profiles are Git-ignored.
 The model may refuse the second request because its instructions tell it to use
 Alice's ID. That refusal is **not** an authorization check. A direct call to
 `SnackTools.GetSecretSnack("bob-002")` returns Bob's gummy bears regardless of
-who signed in. The deterministic
-[boundary checks](../../tests/AuthenticationExercises/README.md) demonstrate
-this independently of model behavior.
+who signed in. Put a breakpoint in the tool method and inspect its argument
+and return value to observe this independently of the final model response.
 
 ## The important difference
 

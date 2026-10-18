@@ -38,7 +38,7 @@ var response = await chatClient.GetResponseAsync(input);
 Console.WriteLine($"[ASSISTANT]: {response.Text}");
 ```
 
-The project uses `OpenAI` **2.14.0** and `Microsoft.Extensions.AI` / `Microsoft.Extensions.AI.OpenAI` **10.11.0**, matching exercise 104. In these versions `ResponsesClient` takes `ResponsesClientOptions` and no model; the deployment name is passed to `AsIChatClient(model)`. Agent Framework will build on this model call later; see [Microsoft Learn: Your First Agent](https://learn.microsoft.com/en-us/agent-framework/get-started/your-first-agent?pivots=programming-language-csharp).
+The project uses `OpenAI` **2.14.0** and `Microsoft.Extensions.AI` / `Microsoft.Extensions.AI.OpenAI` **10.11.0**, matching exercise 105. In these versions `ResponsesClient` takes `ResponsesClientOptions` and no model; the deployment name is passed to `AsIChatClient(model)`. Agent Framework will build on this model call later; see [Microsoft Learn: Your First Agent](https://learn.microsoft.com/en-us/agent-framework/get-started/your-first-agent?pivots=programming-language-csharp).
 
 The code is intentionally short enough to type along. Missing environment variables throw a clear exception, and request errors propagate rather than being caught. The `OPENAI001` pragma suppresses the underlying SDK's experimental Responses API diagnostic.
 
