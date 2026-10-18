@@ -155,7 +155,7 @@ $body = @(
     (Text 100 805 'Johnny Hooyberghs' 34 'heading')
     (Text 100 860 '.NET DeveloperDays / Warsaw / 2026' 26)
 ) -join "`n"
-SaveSlide 'slide-01.svg' 'Hands-on building GenAI enabled .NET applications using the Microsoft Agent Framework' 'Workshop opening slide for hands-on building GenAI-enabled .NET applications using the Microsoft Agent Framework at .NET DeveloperDays Warsaw 2026.' $body '01' 'MICROSOFT AGENT FRAMEWORK'
+SaveSlide 'slide-01.svg' 'Hands-on building GenAI enabled .NET applications using the Microsoft Agent Framework' 'Workshop opening slide for hands-on building GenAI-enabled .NET applications using the Microsoft Agent Framework at .NET DeveloperDays Warsaw 2026.' $body '1' 'MICROSOFT AGENT FRAMEWORK'
 
 $body = @(
     (Text 100 245 'Johnny Hooyberghs' 72 'heading')
@@ -172,14 +172,14 @@ $body = @(
     '<circle cx="750" cy="788" r="7" fill="#ff6a3f"/>'
     (Text 780 798 'Public speaker and trainer' 34)
 ) -join "`n"
-SaveSlide 'slide-02.svg' 'Johnny Hooyberghs' 'Speaker introduction with photo, professional background, and interests.' $body '02' 'ABOUT THE SPEAKER'
+SaveSlide 'slide-02.svg' 'Johnny Hooyberghs' 'Speaker introduction with photo, professional background, and interests.' $body '2' 'ABOUT THE SPEAKER'
 
 $body = @(
     (Text 100 245 'Explore the workshop materials.' 68 'heading')
     (Text 100 315 'Scan to open the Microsoft Agent Framework workshop repository' 30)
     "<a href='$repoUrl'><image x='690' y='370' width='540' height='540' href='$qrCode'/></a>"
 ) -join "`n"
-SaveSlide 'slide-03.svg' 'Explore the workshop materials' 'QR code linking to the Microsoft Agent Framework workshop repository.' $body '03' 'FOLLOW ALONG'
+SaveSlide 'slide-03.svg' 'Explore the workshop materials' 'QR code linking to the Microsoft Agent Framework workshop repository.' $body '3' 'FOLLOW ALONG'
 
 $agenda = @(
     [pscustomobject]@{ Time = '09:00 - 09:30'; Topic = 'Introduction to GenAI' }
@@ -205,7 +205,7 @@ for ($i = 0; $i -lt $agenda.Count; $i++) {
     }
 }
 $body = $bodyParts -join "`n"
-SaveSlide 'slide-04.svg' 'Full-day workshop agenda' 'Agenda and timings for the full-day Microsoft Agent Framework workshop.' $body '04' 'WORKSHOP AGENDA'
+SaveSlide 'slide-04.svg' 'Full-day workshop agenda' 'Agenda and timings for the full-day Microsoft Agent Framework workshop.' $body '4' 'WORKSHOP AGENDA'
 
 $body = @(
     (Text 100 235 'From hand-written rules to systems that create' 48 'heading')
@@ -231,7 +231,7 @@ $body = @(
     (Lines 1435 555 @('Models create new text,', 'images, audio, and code.') 25 40)
     (Text 100 795 'A progression of techniques—not a replacement of every earlier kind of AI.' 25 'muted')
 ) -join "`n"
-SaveSlide 'slide-06.svg' 'The evolution of AI' 'A concise progression from rules-based systems through machine learning and deep learning to generative AI.' $body '06' 'THE EVOLUTION OF AI'
+SaveSlide 'slide-06.svg' 'The evolution of AI' 'A concise progression from rules-based systems through machine learning and deep learning to generative AI.' $body '6' 'THE EVOLUTION OF AI'
 
 $body = @(
     (Text 100 235 'Different learning signals lead to different capabilities' 46 'heading')
@@ -252,7 +252,7 @@ $body = @(
     (Text 1319 690 'FEEDBACK: rewards / penalties' 19 'muted')
     (Text 100 820 'Same broad field, different objectives and feedback loops.' 25 'muted')
 ) -join "`n"
-SaveSlide 'slide-07.svg' 'Types of machine learning' 'Supervised, unsupervised, and reinforcement learning compared by objective and feedback.' $body '07' 'TYPES OF MACHINE LEARNING'
+SaveSlide 'slide-07.svg' 'Types of machine learning' 'Supervised, unsupervised, and reinforcement learning compared by objective and feedback.' $body '7' 'TYPES OF MACHINE LEARNING'
 
 $body = @(
     (Text 100 235 'An agent improves through repeated interaction' 48 'heading')
@@ -274,7 +274,7 @@ $body = @(
     '<path d="M430 480 Q520 375 700 380" class="diagram-arrow"/>'
     (Text 100 860 'The reward signal updates the policy, shaping what the agent tries next.' 24 'muted')
 ) -join "`n"
-SaveSlide 'slide-08.svg' 'The reinforcement loop' 'An agent acts in an environment, receives feedback, and uses rewards to improve future choices.' $body '08' 'THE REINFORCEMENT LOOP'
+SaveSlide 'slide-08.svg' 'The reinforcement loop' 'An agent acts in an environment, receives feedback, and uses rewards to improve future choices.' $body '8' 'THE REINFORCEMENT LOOP'
 
 $body = @(
     (Text 100 235 'AI is a broad family of techniques—not one product' 46 'heading')
@@ -297,7 +297,7 @@ $body = @(
     (Card 685 785 550 90)
     (Text 725 842 'LLMs are one kind of generative AI model.' 26 'heading')
 ) -join "`n"
-SaveSlide 'slide-09.svg' 'AI is not one thing' 'AI includes many distinct capabilities; large language models are one type of generative AI model.' $body '09' 'AI IS NOT ONE THING'
+SaveSlide 'slide-09.svg' 'AI is not one thing' 'AI includes many distinct capabilities; large language models are one type of generative AI model.' $body '9' 'AI IS NOT ONE THING'
 
 $body = @(
     (Text 100 235 'A model is a learned mapping from input to output' 47 'heading')
@@ -531,7 +531,7 @@ $sections = @(
 )
 for ($i = 0; $i -lt $sections.Count; $i++) {
     $section = $sections[$i]
-    $slideNumber = @(21, 36, 51, 55)[$i]
+    $slideNumber = @(21, 38, 53, 57)[$i]
     $displayTitle = $section.Title.ToUpperInvariant()
     $body = @(
         (Text 100 435 $displayTitle 76 'heading')
@@ -680,7 +680,31 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
             -takeaway 'The agent keeps history in a local session; each model call still sends it to Foundry.'
         SaveSlide 'slide-33.svg' 'Exercise 106: Chatbot Agent' 'Part 1 exercise 106: use ChatClientAgentOptions with InMemoryChatHistoryProvider and ChatOptions.Instructions for a fixed cheerful age-10 persona. RawRepresentationFactory sets CreateResponseOptions.StoredOutputEnabled=false. Reuse one AgentSession; DebugHistory inspects actual local messages with TryGetInMemoryChatHistory after each reply. Open exercises\exercise-106.' $body '33' 'EXERCISE 106'
 
-        ConceptSlide 34 'Lab 100: ground answers with an agenda snapshot' `
+        $body = ExerciseBody -exerciseNumber '107' -title 'Multimodal Images' `
+            -subtitle 'Ask an image-capable agent to read and translate a picture.' `
+            -projectPath 'exercises\exercise-107' `
+            -stepTitles @('Configure', 'Attach', 'Compare') `
+            -stepDetails @(
+                ,@('Use a Foundry deployment', 'that supports image input', 'through the Responses API.')
+                ,@('Combine TextContent with', 'UriContent or DataContent', 'in one user ChatMessage.')
+                ,@('Translate the URL and local JPEG', 'in separate fresh sessions;', 'check both against the image.')
+            ) `
+            -takeaway 'Image bytes are model input, not a tool; local files still go to Foundry for inference.'
+        SaveSlide 'slide-34.svg' 'Exercise 107: Multimodal Images' 'Part 1 exercise 107: translate text in an image using a Foundry-backed AIAgent. Combine TextContent with UriContent for a public image URL or DataContent for local JPEG bytes. Use independent sessions, local history, and disabled Responses storage. Open exercises\exercise-107.' $body '34' 'EXERCISE 107'
+
+        $body = ExerciseBody -exerciseNumber '108' -title 'Multimodal Audio' `
+            -subtitle 'Turn spoken audio into a transcript and an English translation.' `
+            -projectPath 'exercises\exercise-108' `
+            -stepTitles @('Configure', 'Transcribe', 'Translate') `
+            -stepDetails @(
+                ,@('Use a Whisper deployment;', 'the chat deployment from 107', 'does not provide this capability.')
+                ,@('Open the bundled French WAV;', 'TranscribeAudioAsync returns', 'text in the original language.')
+                ,@('Reopen the same recording;', 'TranslateAudioAsync returns', 'English text, not speech.')
+            ) `
+            -takeaway 'Direct audio SDK calls, not an agent session; the local recording is uploaded to Foundry.'
+        SaveSlide 'slide-35.svg' 'Exercise 108: Multimodal Audio' 'Part 1 exercise 108: use the OpenAI AudioClient with a Foundry Whisper deployment to transcribe the bundled original French WAV and translate the same audio into English. Reopen the stream for each independent request. No AIAgent, tools, Responses API, or speech generation. Open exercises\exercise-108.' $body '35' 'EXERCISE 108'
+
+        ConceptSlide 36 'Lab 100: ground answers with an agenda snapshot' `
             'Start with the simplest design: known conference data inside the instructions.' `
             @('PROVIDE THE EVIDENCE', 'SET THE ANSWER CONTRACT', 'UNDERSTAND THE TRADEOFF') `
             @(
@@ -701,11 +725,11 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
                 ,@('Use Spectre.Console: banner,', 'spinner, answer panels, and', 'an agenda table.')
             ) `
             -takeaway 'Context in the instructions grounds answers, but the whole agenda is sent every time.'
-        SaveSlide 'slide-35.svg' 'Lab 100: DevDays Buddy' 'Part 1 lab 100: embed the .NET DeveloperDays Warsaw 2026 agenda as agenda.json, add it to the agent instructions as context, answer attendee questions with one AgentSession, and use Spectre.Console for the UI. Starter and solution in labs\lab-100.' $body '35' 'LAB 100'
+        SaveSlide 'slide-37.svg' 'Lab 100: DevDays Buddy' 'Part 1 lab 100: embed the .NET DeveloperDays Warsaw 2026 agenda as agenda.json, add it to the agent instructions as context, answer attendee questions with one AgentSession, and use Spectre.Console for the UI. Starter and solution in labs\lab-100.' $body '37' 'LAB 100'
     }
 
     if ($i -eq 1) {
-        ConceptSlide 37 'The tool-call loop: the model proposes, code executes' `
+        ConceptSlide 39 'The tool-call loop: the model proposes, code executes' `
             'One RunAsync can contain several model calls and tool invocations.' `
             @('1 / SELECT A TOOL', '2 / EXECUTE THE FUNCTION', '3 / ANSWER FROM THE RESULT') `
             @(
@@ -726,7 +750,7 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
                 ,@('Reuse one AgentSession for', 'conversation history and ask for', 'the current date or time.')
             ) `
             -takeaway 'AIAgent manages conversation state; the model chooses a tool and application code executes it.'
-        SaveSlide 'slide-38.svg' 'Exercise 201: Chatbot Agent with Tools' 'Part 2 exercise 201: create an AIAgent around the Foundry chat client, use an AgentSession for history, disable server-side Responses storage, and expose current-time and current-date functions as tools executed by UseFunctionInvocation. Open exercises\exercise-201.' $body '38' 'EXERCISE 201'
+        SaveSlide 'slide-40.svg' 'Exercise 201: Chatbot Agent with Tools' 'Part 2 exercise 201: create an AIAgent around the Foundry chat client, use an AgentSession for history, disable server-side Responses storage, and expose current-time and current-date functions as tools executed by UseFunctionInvocation. Open exercises\exercise-201.' $body '40' 'EXERCISE 201'
 
         $body = ExerciseBody -exerciseNumber '202' -title 'Local Chatbot with Tools' `
             -subtitle 'Use the local Ollama model to ask C# functions for current date and time.' `
@@ -738,9 +762,9 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
                 ,@('Ask for current values.', 'The local model can select a tool;', 'no Foundry credentials needed.')
             ) `
             -takeaway 'AIAgent manages local conversation history while function invocation executes the selected tool.'
-        SaveSlide 'slide-39.svg' 'Exercise 202: Local Chatbot with Tools' 'Part 2 exercise 202: use AIAgent with an OllamaSharp client and AgentSession, exposing functions for current local time and date. No Foundry credentials or cloud inference are needed. Open exercises\exercise-202.' $body '39' 'EXERCISE 202'
+        SaveSlide 'slide-41.svg' 'Exercise 202: Local Chatbot with Tools' 'Part 2 exercise 202: use AIAgent with an OllamaSharp client and AgentSession, exposing functions for current local time and date. No Foundry credentials or cloud inference are needed. Open exercises\exercise-202.' $body '41' 'EXERCISE 202'
 
-        ConceptSlide 40 'Tool contracts are part of the prompt' `
+        ConceptSlide 42 'Tool contracts are part of the prompt' `
             'Good names, descriptions, parameters, and results help the model choose correctly.' `
             @('FOCUSED CAPABILITY', 'CLEAR INPUT CONTRACT', 'USEFUL RESULT CONTRACT') `
             @(
@@ -751,7 +775,7 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
             'Lab 200 needs six focused tools, not a single "return the entire agenda" tool.' `
             'https://learn.microsoft.com/en-us/agent-framework/agents/tools/function-tools' 'Source: Microsoft Learn / function tools; Lab 200 tool contract'
 
-        ConceptSlide 41 'Dependency injection belongs to the invocation layer' `
+        ConceptSlide 43 'Dependency injection belongs to the invocation layer' `
             'Exercise 203 separates model-supplied arguments from application-supplied services.' `
             @('REGISTER THE DEPENDENCY', 'SUPPLY INVOCATION CONTEXT', 'KEEP IT TESTABLE') `
             @(
@@ -772,9 +796,9 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
                 ,@('Resolve the clock inside the', 'tool method and query the', 'current date or time.')
             ) `
             -takeaway 'AsAIAgent passes services to tool invocation when the agent creates that pipeline.'
-        SaveSlide 'slide-42.svg' 'Exercise 203: Dependency Injection for Tools' 'Part 2 exercise 203: register TimeProvider in a dependency injection container, receive IServiceProvider in tool methods, pass the provider to AsAIAgent for function invocation, and disable server-side Responses storage to keep history in the local session. Open exercises\exercise-203.' $body '42' 'EXERCISE 203'
+        SaveSlide 'slide-44.svg' 'Exercise 203: Dependency Injection for Tools' 'Part 2 exercise 203: register TimeProvider in a dependency injection container, receive IServiceProvider in tool methods, pass the provider to AsAIAgent for function invocation, and disable server-side Responses storage to keep history in the local session. Open exercises\exercise-203.' $body '44' 'EXERCISE 203'
 
-        ConceptSlide 43 'MCP connects capabilities across a process boundary' `
+        ConceptSlide 45 'MCP connects capabilities across a process boundary' `
             'Model Context Protocol standardizes discovery and invocation, not model intelligence.' `
             @('AGENT APPLICATION / HOST', 'MCP CLIENT / CONNECTION', 'MCP SERVER / CAPABILITIES') `
             @(
@@ -795,9 +819,9 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
                 ,@('Ask a documentation question.', 'The agent can invoke MCP tools', 'and show calls in history.')
             ) `
             -takeaway 'MCP exposes remote capabilities through a standard client and callable agent tools.'
-        SaveSlide 'slide-44.svg' 'Exercise 204: Microsoft Learn MCP Agent' 'Part 2 exercise 204: connect to https://learn.microsoft.com/api/mcp with the MCP C# SDK, list and describe available tools, then provide them to an AIAgent for a documentation conversation. DebugHistory displays tool calls and results. Open exercises\exercise-204.' $body '44' 'EXERCISE 204'
+        SaveSlide 'slide-46.svg' 'Exercise 204: Microsoft Learn MCP Agent' 'Part 2 exercise 204: connect to https://learn.microsoft.com/api/mcp with the MCP C# SDK, list and describe available tools, then provide them to an AIAgent for a documentation conversation. DebugHistory displays tool calls and results. Open exercises\exercise-204.' $body '46' 'EXERCISE 204'
 
-        ConceptSlide 45 'MCP is a transport contract, not a trust boundary' `
+        ConceptSlide 47 'MCP is a transport contract, not a trust boundary' `
             'Exercise 205 hosts read-only tools; real deployments need explicit access controls.' `
             @('HOST THE CAPABILITY', 'DECIDE WHAT TO EXPOSE', 'TREAT RESULTS AS DATA') `
             @(
@@ -818,9 +842,9 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
                 ,@('Ask the Foundry agent for', 'the date or time; inspect calls', 'and results in session history.')
             ) `
             -takeaway 'MCP lets a console agent call DI-backed tools hosted by a separate ASP.NET process.'
-        SaveSlide 'slide-46.svg' 'Exercise 205: Host Date and Time MCP Tools' 'Part 2 exercise 205: host the current date and time MCP tools in a standalone ASP.NET Core server, inject TimeProvider into the tool class, and discover and call them from a separate console AIAgent client over Streamable HTTP. Open exercises\exercise-205.' $body '46' 'EXERCISE 205'
+        SaveSlide 'slide-48.svg' 'Exercise 205: Host Date and Time MCP Tools' 'Part 2 exercise 205: host the current date and time MCP tools in a standalone ASP.NET Core server, inject TimeProvider into the tool class, and discover and call them from a separate console AIAgent client over Streamable HTTP. Open exercises\exercise-205.' $body '48' 'EXERCISE 205'
 
-        ConceptSlide 47 'Lab 100 to Lab 200: fetch facts on demand' `
+        ConceptSlide 49 'Lab 100 to Lab 200: fetch facts on demand' `
             'Keep the assistant experience; move agenda data and deterministic lookups to the server.' `
             @('LAB 100 / FULL CONTEXT', 'LAB 200 / FOCUSED LOOKUPS', 'COMPARE THE REAL TRADEOFF') `
             @(
@@ -841,7 +865,7 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
                 ,@('Connect a console AIAgent;', 'let it call tools for answers.')
             ) `
             -takeaway 'The server keeps the full agenda; the agent receives only requested tool results.'
-        SaveSlide 'slide-48.svg' 'Lab 200: DevDays Buddy MCP Tools' 'Part 2 lab 200: embed the conference agenda in an ASP.NET MCP server, expose focused conference, speaker, and session lookup tools, and use them from a separate console AIAgent without putting the full agenda in its context.' $body '48' 'LAB 200'
+        SaveSlide 'slide-50.svg' 'Lab 200: DevDays Buddy MCP Tools' 'Part 2 lab 200: embed the conference agenda in an ASP.NET MCP server, expose focused conference, speaker, and session lookup tools, and use them from a separate console AIAgent without putting the full agenda in its context.' $body '50' 'LAB 200'
 
         $body = ExerciseBody -exerciseNumber '200' -badge 'LAB' -title 'Build the Agenda MCP Server' `
             -subtitle 'Expose six focused conference, speaker, and session tools.' `
@@ -853,7 +877,7 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
                 ,@('List sessions by date; find', 'details by title or date and time.')
             ) `
             -takeaway 'Clear tool contracts and ambiguity messages help the model ask better follow-ups.'
-        SaveSlide 'slide-49.svg' 'Lab 200: Build the Agenda MCP Server' 'Lab 200 MCP server tools: conference information and dates; the speaker list and speaker details by name; sessions for a date and session details by title or by date and starting time. Deterministic matching reports ambiguous results for clarification.' $body '49' 'LAB 200'
+        SaveSlide 'slide-51.svg' 'Lab 200: Build the Agenda MCP Server' 'Lab 200 MCP server tools: conference information and dates; the speaker list and speaker details by name; sessions for a date and session details by title or by date and starting time. Deterministic matching reports ambiguous results for clarification.' $body '51' 'LAB 200'
 
         $body = ExerciseBody -exerciseNumber '200' -badge 'LAB' -title 'Connect the DevDays Buddy Agent' `
             -subtitle 'Discover MCP tools and fetch only the agenda data the question needs.' `
@@ -865,7 +889,7 @@ for ($i = 0; $i -lt $sections.Count; $i++) {
                 ,@('Answer from selected tool results;', 'never embed the full agenda.')
             ) `
             -takeaway 'MCP separates agenda data and lookup logic from the conversational client.'
-        SaveSlide 'slide-50.svg' 'Lab 200: Connect the DevDays Buddy Agent' 'Lab 200 console client: discover and invoke the separate ASP.NET MCP server tools over Streamable HTTP, while the Foundry-backed AIAgent retains conversation history without receiving the entire embedded agenda.' $body '50' 'LAB 200'
+        SaveSlide 'slide-52.svg' 'Lab 200: Connect the DevDays Buddy Agent' 'Lab 200 console client: discover and invoke the separate ASP.NET MCP server tools over Streamable HTTP, while the Foundry-backed AIAgent retains conversation history without receiving the entire embedded agenda.' $body '52' 'LAB 200'
     }
 }
 
@@ -879,7 +903,7 @@ $body = ExerciseBody -exerciseNumber '301' -title 'Terrible Startup Pitch' `
         ,@('Pass the exact pitch text', 'to the Investor in a fresh session;', 'print its FUND or PASS verdict.')
     ) `
     -takeaway 'Two awaited agent calls are enough for a simple handoff; no workflow is required.'
-SaveSlide 'slide-52.svg' 'Exercise 301: Terrible Startup Pitch - Manual Orchestration' 'Part 3 exercise 301: create Founder and Investor agents with separate fresh sessions. Ordinary C# calls the Founder with a theme and forwards its exact response text to the Investor. No workflows, tools or revision loop.' $body '52' 'EXERCISE 301'
+SaveSlide 'slide-54.svg' 'Exercise 301: Terrible Startup Pitch - Manual Orchestration' 'Part 3 exercise 301: create Founder and Investor agents with separate fresh sessions. Ordinary C# calls the Founder with a theme and forwards its exact response text to the Investor. No workflows, tools or revision loop.' $body '54' 'EXERCISE 301'
 
 $body = ExerciseBody -exerciseNumber '302' -title 'Pitch with a Workflow' `
     -subtitle 'Keep the agents; let workflow edges deliver the pitch.' `
@@ -891,7 +915,7 @@ $body = ExerciseBody -exerciseNumber '302' -title 'Pitch with a Workflow' `
         ,@('Run the graph; print the pitch', 'from completion events and', 'the review from workflow output.')
     ) `
     -takeaway 'Same prompts and two model calls; the graph now owns the handoff and exposes events.'
-SaveSlide 'slide-53.svg' 'Exercise 302: Terrible Startup Pitch - Workflow' 'Part 3 exercise 302: keep exercise 301 agents and prompts, wrap each in an Executor<string, string>, connect them with WorkflowBuilder.AddEdge, and observe completion and final output events using InProcessExecution.RunStreamingAsync.' $body '53' 'EXERCISE 302'
+SaveSlide 'slide-55.svg' 'Exercise 302: Terrible Startup Pitch - Workflow' 'Part 3 exercise 302: keep exercise 301 agents and prompts, wrap each in an Executor<string, string>, connect them with WorkflowBuilder.AddEdge, and observe completion and final output events using InProcessExecution.RunStreamingAsync.' $body '55' 'EXERCISE 302'
 
 $body = ExerciseBody -exerciseNumber '300' -badge 'LAB' -title 'Plan My Conference Day' `
     -subtitle 'Coordinate three specialist agents with typed workflow handoffs.' `
@@ -903,7 +927,7 @@ $body = ExerciseBody -exerciseNumber '300' -badge 'LAB' -title 'Plan My Conferen
         ,@('Approve or route feedback back;', 'allow at most two revisions;', 'print each workflow handoff.')
     ) `
     -takeaway 'Agents judge relevance; C# validates constraints; workflow edges control the bounded loop.'
-SaveSlide 'slide-54.svg' 'Lab 300: Plan My Conference Day' 'Part 3 lab 300: build on Lab 200 with a Session Picker, Schedule Builder and Plan Reviewer in Microsoft Agent Framework Workflows. Pass structured session IDs, validate canonical agenda times in C#, and route rejected plans through at most two revisions.' $body '54' 'LAB 300'
+SaveSlide 'slide-56.svg' 'Lab 300: Plan My Conference Day' 'Part 3 lab 300: build on Lab 200 with a Session Picker, Schedule Builder and Plan Reviewer in Microsoft Agent Framework Workflows. Pass structured session IDs, validate canonical agenda times in C#, and route rejected plans through at most two revisions.' $body '56' 'LAB 300'
 
 $body = ExerciseBody -exerciseNumber '401' -title 'A Name Is Not Authentication' `
     -subtitle 'Whose secret snack stash can a chatbot open?' `
@@ -915,7 +939,7 @@ $body = ExerciseBody -exerciseNumber '401' -title 'A Name Is Not Authentication'
         ,@('The tool trusts userName.', 'No credentials are checked;', 'a chat claim is not identity.')
     ) `
     -takeaway 'Intentionally unsafe: the model can choose a name, but cannot authenticate that person.'
-SaveSlide 'slide-56.svg' 'Exercise 401: A Name Is Not Authentication' 'Part 4 exercise 401: the Secret Snack Stash tool accepts a model-supplied userName without authentication. Claim Alice or Bob to open their fictional stash. Intentionally vulnerable.' $body '56' 'EXERCISE 401'
+SaveSlide 'slide-58.svg' 'Exercise 401: A Name Is Not Authentication' 'Part 4 exercise 401: the Secret Snack Stash tool accepts a model-supplied userName without authentication. Claim Alice or Bob to open their fictional stash. Intentionally vulnerable.' $body '58' 'EXERCISE 401'
 
 $body = ExerciseBody -exerciseNumber '402' -title 'Sign In, Then Trust an ID?' `
     -subtitle 'Console authentication is only half of the boundary.' `
@@ -927,7 +951,7 @@ $body = ExerciseBody -exerciseNumber '402' -title 'Sign In, Then Trust an ID?' `
         ,@('Try another userId.', 'The tool checks no ownership;', 'a prompt rule is not security.')
     ) `
     -takeaway 'Still intentionally unsafe: a model-controlled userId is not proof of the authenticated owner.'
-SaveSlide 'slide-57.svg' 'Exercise 402: Authenticated but Model-Controlled Identity' 'Part 4 exercise 402: successful console /auth creates an agent with the signed-in userId in its system instructions. Questions are sent unchanged. The snack tool still accepts a model-controlled identity argument and cannot enforce ownership.' $body '57' 'EXERCISE 402'
+SaveSlide 'slide-59.svg' 'Exercise 402: Authenticated but Model-Controlled Identity' 'Part 4 exercise 402: successful console /auth creates an agent with the signed-in userId in its system instructions. Questions are sent unchanged. The snack tool still accepts a model-controlled identity argument and cannot enforce ownership.' $body '59' 'EXERCISE 402'
 
 $body = ExerciseBody -exerciseNumber '403' -title 'Trusted Identity Through DI' `
     -subtitle 'Keep the authenticated owner in application code, not tool arguments.' `
@@ -939,7 +963,7 @@ $body = ExerciseBody -exerciseNumber '403' -title 'Trusted Identity Through DI' 
         ,@('Claim to be another person.', 'The tool still reads the owner', 'from trusted DI context.')
     ) `
     -takeaway 'The model requests the operation; a user-scoped tool enforces identity and ownership.'
-SaveSlide 'slide-58.svg' 'Exercise 403: Trusted User Context Through DI' 'Part 4 exercise 403: console demo authentication sets a scoped UserContext. AsAIAgent supplies the scoped service provider to the static snack tool, which resolves that context. No identity parameter is exposed to the model. Signed-out and unknown owners are denied.' $body '58' 'EXERCISE 403'
+SaveSlide 'slide-60.svg' 'Exercise 403: Trusted User Context Through DI' 'Part 4 exercise 403: console demo authentication sets a scoped UserContext. AsAIAgent supplies the scoped service provider to the static snack tool, which resolves that context. No identity parameter is exposed to the model. Signed-out and unknown owners are denied.' $body '60' 'EXERCISE 403'
 
 $body = ExerciseBody -exerciseNumber '404' -title 'Authenticate Across MCP' `
     -subtitle 'Carry a protected bearer token, not a user name, over the process boundary.' `
@@ -951,13 +975,25 @@ $body = ExerciseBody -exerciseNumber '404' -title 'Authenticate Across MCP' `
         ,@('Inject context into the tool.', 'Stateless MCP isolates requests;', 'each user opens only their stash.')
     ) `
     -takeaway 'Demo login, real token validation: production needs HTTPS, an identity provider, and MCP OAuth.'
-SaveSlide 'slide-59.svg' 'Exercise 404: Authenticated MCP Tools' 'Part 4 exercise 404: an ASP.NET Core MCP server issues protected opaque bearer tokens after demo sign-in. Stateless authenticated MCP requests use a DI user context derived from validated claims, not model arguments. Loopback workshop login, not production OAuth.' $body '59' 'EXERCISE 404'
+SaveSlide 'slide-61.svg' 'Exercise 404: Authenticated MCP Tools' 'Part 4 exercise 404: an ASP.NET Core MCP server issues protected opaque bearer tokens after demo sign-in. Stateless authenticated MCP requests use a DI user context derived from validated claims, not model arguments. Loopback workshop login, not production OAuth.' $body '61' 'EXERCISE 404'
+
+$body = ExerciseBody -exerciseNumber '405' -title 'Call a Foundry Agent' `
+    -subtitle 'Invoke developerdays: the agent definition lives in Microsoft Foundry.' `
+    -projectPath 'exercises\exercise-405' `
+    -stepTitles @('Connect', 'Converse', 'Invoke') `
+    -stepDetails @(
+        ,@('Read the Foundry project endpoint.', 'Use DefaultAzureCredential;', 'agent endpoints do not accept keys.')
+        ,@('Reuse the agent-scoped pipeline', 'to create a server conversation.')
+        ,@('Bind its ID to the response client;', 'send Hi developerdays;', 'print the agent response.')
+    ) `
+    -takeaway 'Foundry owns the agent and conversation; the caller needs Microsoft Entra authorization.'
+SaveSlide 'slide-62.svg' 'Exercise 405: Call a Microsoft Foundry Agent' 'Part 4 exercise 405: use the configured FOUNDRY_ENDPOINT project URL and DefaultAzureCredential to call the existing developerdays agent. Agent endpoints do not support API keys. Reuse the agent pipeline for a server-side conversation and bind its ID to the response client.' $body '62' 'EXERCISE 405'
 
 $body = @(
     (Text 100 245 'Any questions?' 72 'heading')
     (Text 100 315 'Continue exploring the workshop materials' 30)
     "<a href='$repoUrl'><image x='690' y='370' width='540' height='540' href='$qrCode'/></a>"
 ) -join "`n"
-SaveSlide 'slide-60.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '60' 'THANK YOU'
+SaveSlide 'slide-63.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '63' 'THANK YOU'
 
 Write-Host "Built selected slides in $slides"

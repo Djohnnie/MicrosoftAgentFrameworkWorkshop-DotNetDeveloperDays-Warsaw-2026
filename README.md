@@ -10,63 +10,63 @@ deck with [`_tools\svg_to_pptx.ps1`](_tools/svg_to_pptx.ps1).
 ## Presentation slides
 
 ### Slide 1 - Hands-on building GenAI enabled .NET applications using the Microsoft Agent Framework
-![Slide 01](_slides/slide-01.svg)
+![Slide 1](_slides/slide-01.svg)
 
 > **TL;DR:** We are learning how to build GenAI-enabled .NET applications with the Microsoft Agent Framework.
 
 This workshop takes you from GenAI fundamentals to practical .NET applications built with the Microsoft Agent Framework. Across the session, you will move from calling an LLM to giving agents tools, coordinating their work, and making them more reliable.
 
 ### Slide 2 - About the speaker
-![Slide 02](_slides/slide-02.svg)
+![Slide 2](_slides/slide-02.svg)
 
 > **TL;DR:** You are learning from hands-on experience in .NET, Azure, and generative AI.
 
 Johnny Hooyberghs brings 18 years of software experience to the workshop, with a focus on .NET application development, Azure, and generative AI. He has been a Microsoft MVP in Developer Technologies and Azure since 2020, and works as a public speaker and trainer.
 
 ### Slide 3 - Follow along
-![Slide 03](_slides/slide-03.svg)
+![Slide 3](_slides/slide-03.svg)
 
 > **TL;DR:** Scan the QR code to open the workshop repository.
 
 Use the QR code to open the workshop repository and follow along with its slides and materials. The repository also contains the exercises you will use to try the concepts in code.
 
 ### Slide 4 - Full-day workshop agenda
-![Slide 04](_slides/slide-04.svg)
+![Slide 4](_slides/slide-04.svg)
 
 > **TL;DR:** You are following a full-day path from GenAI fundamentals to reliable, production-ready agents.
 
 The agenda starts with GenAI fundamentals, then moves through four workshop parts: building agents from LLM calls, giving agents tools and MCP capabilities, orchestrating agents and workflows, and improving reliability for production. Breaks and lunch separate the sessions across the day.
 
 ### Slide 5 - Introduction to GenAI
-![Slide 05](_slides/slide-05.svg)
+![Slide 5](_slides/slide-05.svg)
 
 > **TL;DR:** You are starting with the GenAI foundations for the hands-on workshop.
 
 This opening section introduces generative AI before you build applications and agents with the Microsoft Agent Framework. It sets up the core concepts that the later hands-on parts put into practice.
 
 ### Slide 6 - The evolution of AI
-![Slide 06](_slides/slide-06.svg)
+![Slide 6](_slides/slide-06.svg)
 
 > **TL;DR:** AI has progressed from hand-written rules to systems that learn and generate.
 
 The slide traces four approaches: people write rules, machine-learning models learn from examples, deep-learning networks learn richer representations, and generative models create new content such as text, images, audio, and code. This progression adds capabilities rather than making every earlier technique obsolete; the right approach depends on the task.
 
 ### Slide 7 - Types of machine learning
-![Slide 07](_slides/slide-07.svg)
+![Slide 7](_slides/slide-07.svg)
 
 > **TL;DR:** You are comparing learning methods by the feedback and objectives they use.
 
 The slide compares the feedback each method uses. Supervised learning learns a mapping from inputs to labeled answers, unsupervised learning finds structure such as clusters without answer labels, and reinforcement learning tries actions in an environment and uses rewards or penalties to improve outcomes over time.
 
 ### Slide 8 - The reinforcement loop
-![Slide 08](_slides/slide-08.svg)
+![Slide 8](_slides/slide-08.svg)
 
 > **TL;DR:** An agent improves by acting in an environment and learning from rewards.
 
 The diagram follows a repeated cycle: an agent chooses an action, that action changes the environment, and the environment returns a new state and reward. The reward scores the outcome and updates the agent's policy, shaping which actions it tries next.
 
 ### Slide 9 - AI is not one thing
-![Slide 09](_slides/slide-09.svg)
+![Slide 9](_slides/slide-09.svg)
 
 > **TL;DR:** AI combines many capabilities, and LLMs specialize in generating language.
 
@@ -104,7 +104,7 @@ Input includes instructions, the question, earlier messages, tool results, tool 
 
 Output includes generated text and tool-call arguments; reasoning models can also bill non-visible reasoning tokens as output. One agent run may make several model calls, so add the API-reported usage of every call. Exercise 001's local tokenizer is an estimate, not the bill.
 
-Adapted from [AI4Dev two-day workshop slide 205](https://github.com/Djohnnie/AI4Dev-Workshop-2026/blob/main/content/2-day/chapter-2/slide-205.svg) for direct API inference. Read [Azure OpenAI prompt caching](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/prompt-caching) and [reasoning token usage](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/reasoning). Azure OpenAI caching currently requires an identical prefix of at least 1,024 tokens. Retention, cache-write charges, explicit breakpoints, and supported parameters depend on the model family and deployment; do not copy newer cache options into an unsupported deployment.
+Adapted from [AI4Dev two-day workshop slide 205](https://github.com/Djohnnie/AI4Dev-Workshop-2026/blob/main/content/2-day/chapter-2/slide-207.svg) for direct API inference. Read [Azure OpenAI prompt caching](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/prompt-caching) and [reasoning token usage](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/reasoning). Azure OpenAI caching currently requires an identical prefix of at least 1,024 tokens. Retention, cache-write charges, explicit breakpoints, and supported parameters depend on the model family and deployment; do not copy newer cache options into an unsupported deployment.
 
 ### Slide 14 - Model pricing: measure the whole agent run
 ![Slide 14](_slides/slide-14.svg)
@@ -123,7 +123,7 @@ For an agenda-sized request with 20,000 total input tokens, including 16,000 cac
 
 The table uses short-context rates where a context tier applies. Newer models can have additional cache-write charges; apply the provider's billing rules rather than assuming the three-column formula covers every model. Longer contexts, regional processing, service tiers, and hosted tools may also change the bill. Choose a deployment by measured quality, latency, and total run cost, not price alone.
 
-Adapted from [AI4Dev two-day workshop slide 206](https://github.com/Djohnnie/AI4Dev-Workshop-2026/blob/main/content/2-day/chapter-2/slide-206.svg). Sources: [current OpenAI pricing](https://developers.openai.com/api/docs/pricing) and [Azure OpenAI pricing for this workshop](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/).
+Adapted from [AI4Dev two-day workshop slide 206](https://github.com/Djohnnie/AI4Dev-Workshop-2026/blob/main/content/2-day/chapter-2/slide-208.svg). Sources: [current OpenAI pricing](https://developers.openai.com/api/docs/pricing) and [Azure OpenAI pricing for this workshop](https://azure.microsoft.com/pricing/details/cognitive-services/openai-service/).
 
 ### Slide 15 - Why LLMs hallucinate
 ![Slide 15](_slides/slide-15.svg)
@@ -282,17 +282,35 @@ Read [AgentSession](https://learn.microsoft.com/en-us/agent-framework/agents/con
 
 > **TL;DR:** Create an agent with persona instructions and reuse a session to keep conversation context.
 
-Wrap the Foundry-backed `IChatClient` in an `AIAgent` using `ChatClientAgentOptions`, `InMemoryChatHistoryProvider`, and `ChatOptions.Instructions` for a cheerful persona whose age stays at 10. `RawRepresentationFactory` sets `CreateResponseOptions.StoredOutputEnabled = false` so history is kept in the local session, not continued through stored server responses. Create one `AgentSession` before the loop and pass it to each `RunAsync` call. After every reply, `DebugHistory` uses `TryGetInMemoryChatHistory` to print the actual local messages; they are still sent to Foundry for inference. This is the final exercise of Part 1; tools and workflows come later.
+Wrap the Foundry-backed `IChatClient` in an `AIAgent` using `ChatClientAgentOptions`, `InMemoryChatHistoryProvider`, and `ChatOptions.Instructions` for a cheerful persona whose age stays at 10. `RawRepresentationFactory` sets `CreateResponseOptions.StoredOutputEnabled = false` so history is kept in the local session, not continued through stored server responses. Create one `AgentSession` before the loop and pass it to each `RunAsync` call. After every reply, `DebugHistory` uses `TryGetInMemoryChatHistory` to print the actual local messages; they are still sent to Foundry for inference. Exercise 107 adds image input next; tools and workflows come later.
 
-### Slide 34 - Lab 100: ground answers with an agenda snapshot
+### Slide 34 - Exercise 107: Multimodal Images
 ![Slide 34](_slides/slide-34.svg)
+
+[Exercise 107 README](exercises/exercise-107/README.md)
+
+> **TL;DR:** Send text and an image together, either as a public URL or inline bytes.
+
+Use an image-capable Foundry deployment with the same Responses client and `AIAgent` setup as 106. A user `ChatMessage` combines the translation prompt in `TextContent` with `UriContent` for a public JPEG, then with `DataContent` for the bundled image bytes. Separate fresh sessions make the two requests independent. The agent returns text, not a generated image. A local file is still uploaded for cloud inference; image text is untrusted data, and translations need checking. There are no tools or workflows.
+
+### Slide 35 - Exercise 108: Multimodal Audio
+![Slide 35](_slides/slide-35.svg)
+
+[Exercise 108 README](exercises/exercise-108/README.md)
+
+> **TL;DR:** Transcribe speech in its original language, then translate the same audio into English.
+
+Use `AudioClient` with a Foundry Whisper deployment and the bundled original French WAV. `TranscribeAudioAsync` returns French text; `TranslateAudioAsync` independently processes the audio and returns English text. Reopen the file stream for the second request. This follows the reference's direct SDK approach: no `AIAgent`, conversation history, tools, Responses API, or generated speech. The deployment must support both audio operations; the chat deployment from 107 is not sufficient. Local audio is uploaded for cloud inference, and important details still need checking.
+
+### Slide 36 - Lab 100: ground answers with an agenda snapshot
+![Slide 36](_slides/slide-36.svg)
 
 > **TL;DR:** Direct context grounding is a useful first design, with a clear token and freshness tradeoff.
 
 Embed `agenda.json`, read it once at startup, and include it in the agent instructions. Tell the agent to use only that data, include day/time/room/speakers, respect Warsaw time, and admit missing evidence. This is direct grounding, not RAG: there is no retrieval stage. The whole agenda is still input each turn; cache hits may reduce computation cost but not context size. The data is a snapshot rather than a live agenda. Test a follow-up and an unsupported question, inspect `/debug`, and compare factual details with the local `agenda` table.
 
-### Slide 35 - Lab 100: DevDays Buddy
-![Slide 35](_slides/slide-35.svg)
+### Slide 37 - Lab 100: DevDays Buddy
+![Slide 37](_slides/slide-37.svg)
 
 [Lab 100 README](labs/lab-100/README.md)
 
@@ -300,15 +318,15 @@ Embed `agenda.json`, read it once at startup, and include it in the agent instru
 
 Combine everything from Part 1 in a lab with an empty `starter` and a possible `solution`. The conference description and the full Tuesday and Wednesday agenda—day, time, room, session title and description, and speaker names and descriptions—are hard-coded in `agenda.json`, compiled in as an embedded resource, and placed in the agent instructions as context. One `AgentSession` keeps follow-up questions in context, and Spectre.Console adds a banner, a thinking spinner, answer panels, and an `agenda` table. The whole agenda is sent with every request, which motivates the tools in Part 2.
 
-### Slide 36 - Part 2: Giving agents capabilities: tools and MCP
-![Slide 36](_slides/slide-36.svg)
+### Slide 38 - Part 2: Giving agents capabilities: tools and MCP
+![Slide 38](_slides/slide-38.svg)
 
 > **TL;DR:** Give agents tools and MCP capabilities so they can look up information instead of guessing.
 
 Part 2 builds on the session-based agent and gives it separate tools for the current date and time. The model chooses when to call a focused capability, while application code performs the actual lookup. The exercises then introduce dependency injection and MCP discovery and hosting. Lab 200 moves the conference agenda into a server with six focused lookup tools instead of placing the whole document in the client's instructions.
 
-### Slide 37 - The tool-call loop: the model proposes, code executes
-![Slide 37](_slides/slide-37.svg)
+### Slide 39 - The tool-call loop: the model proposes, code executes
+![Slide 39](_slides/slide-39.svg)
 
 > **TL;DR:** Tool selection is a model decision; function execution is application behavior.
 
@@ -316,8 +334,8 @@ The model receives tool descriptions and schemas, then may return a tool name, a
 
 Read [function tools](https://learn.microsoft.com/en-us/agent-framework/agents/tools/function-tools).
 
-### Slide 38 - Exercise 201: Chatbot Agent with Tools
-![Slide 38](_slides/slide-38.svg)
+### Slide 40 - Exercise 201: Chatbot Agent with Tools
+![Slide 40](_slides/slide-40.svg)
 
 [Exercise 201 README](exercises/exercise-201/README.md)
 
@@ -325,8 +343,8 @@ Read [function tools](https://learn.microsoft.com/en-us/agent-framework/agents/t
 
 Wrap the Foundry `IChatClient` in an `AIAgent`, create independent `get_current_time` and `get_current_date` functions with `AIFunctionFactory`, and make them available through the agent's `ChatClientAgentOptions`. An in-memory history provider retains context in an `AgentSession`; `StoredOutputEnabled = false` prevents a server-side conversation ID from conflicting with that local history, and `UseFunctionInvocation()` executes functions selected by the model. The tools return values from the computer running the app.
 
-### Slide 39 - Exercise 202: Local Chatbot with Tools
-![Slide 39](_slides/slide-39.svg)
+### Slide 41 - Exercise 202: Local Chatbot with Tools
+![Slide 41](_slides/slide-41.svg)
 
 [Exercise 202 README](exercises/exercise-202/README.md)
 
@@ -334,8 +352,8 @@ Wrap the Foundry `IChatClient` in an `AIAgent`, create independent `get_current_
 
 Keep the same agent, tool functions, and in-memory session history, but use `OllamaApiClient` with `qwen2.5:7b` on `http://localhost:11434`. No Foundry credentials are needed; Ollama and the model must be running locally.
 
-### Slide 40 - Tool contracts are part of the prompt
-![Slide 40](_slides/slide-40.svg)
+### Slide 42 - Tool contracts are part of the prompt
+![Slide 42](_slides/slide-42.svg)
 
 > **TL;DR:** Focused names and explicit input/output contracts make tools easier to select and safer to execute.
 
@@ -343,15 +361,15 @@ Keep the same agent, tool functions, and in-memory session history, but use `Oll
 
 Read [function tools](https://learn.microsoft.com/en-us/agent-framework/agents/tools/function-tools).
 
-### Slide 41 - Dependency injection belongs to the invocation layer
-![Slide 41](_slides/slide-41.svg)
+### Slide 43 - Dependency injection belongs to the invocation layer
+![Slide 43](_slides/slide-43.svg)
 
 > **TL;DR:** The model supplies business arguments; the application supplies trusted dependencies.
 
 Exercise 203 registers `TimeProvider.System` and passes its service provider to `AsAIAgent`. The tool's `IServiceProvider` parameter is supplied at invocation and is excluded from the model-facing schema. Omit the client-side `UseFunctionInvocation()` here so the agent creates the invocation layer with the configured provider; otherwise that earlier layer owns invocation. Replacing the registered clock with a fixed `TimeProvider` makes the same tool method predictable without modifying it. Exercise 205 applies the same separation through ASP.NET Core DI.
 
-### Slide 42 - Exercise 203: Dependency Injection for Agent Tools
-![Slide 42](_slides/slide-42.svg)
+### Slide 44 - Exercise 203: Dependency Injection for Agent Tools
+![Slide 44](_slides/slide-44.svg)
 
 [Exercise 203 README](exercises/exercise-203/README.md)
 
@@ -359,8 +377,8 @@ Exercise 203 registers `TimeProvider.System` and passes its service provider to 
 
 Register `TimeProvider` in a `ServiceCollection` and add `IServiceProvider` to the date/time tool method signatures. `AIFunctionFactory` keeps that parameter out of the model-facing schema; during invocation, the agent supplies its configured service provider. Do not put `UseFunctionInvocation()` in the chat-client pipeline here, because the agent needs to create the function-invocation layer that uses the provider passed to `AsAIAgent`. Disable Responses storage so server-side conversation IDs do not conflict with the local session history.
 
-### Slide 43 - MCP connects capabilities across a process boundary
-![Slide 43](_slides/slide-43.svg)
+### Slide 45 - MCP connects capabilities across a process boundary
+![Slide 45](_slides/slide-45.svg)
 
 > **TL;DR:** MCP standardizes tool discovery and calls while Agent Framework manages the conversation.
 
@@ -368,8 +386,8 @@ The agent application hosts an MCP client, connects over Streamable HTTP, discov
 
 Read [client-side MCP tools](https://learn.microsoft.com/en-us/agent-framework/agents/tools/local-mcp-tools).
 
-### Slide 44 - Exercise 204: Microsoft Learn MCP Agent
-![Slide 44](_slides/slide-44.svg)
+### Slide 46 - Exercise 204: Microsoft Learn MCP Agent
+![Slide 46](_slides/slide-46.svg)
 
 [Exercise 204 README](exercises/exercise-204/README.md)
 
@@ -377,8 +395,8 @@ Read [client-side MCP tools](https://learn.microsoft.com/en-us/agent-framework/a
 
 Connect to `https://learn.microsoft.com/api/mcp` over Streamable HTTP, call `ListToolsAsync`, and print each tool's name and description so the user can see what they can ask. Pass those MCP tools to an `AIAgent`; the agent can invoke them during the conversation. `DebugHistory` makes tool calls and results visible. The public endpoint requires no authentication or API key.
 
-### Slide 45 - MCP is a transport contract, not a trust boundary
-![Slide 45](_slides/slide-45.svg)
+### Slide 47 - MCP is a transport contract, not a trust boundary
+![Slide 47](_slides/slide-47.svg)
 
 > **TL;DR:** Standardized discovery does not establish authorization or make remote content trustworthy.
 
@@ -386,8 +404,8 @@ Exercise 205 registers attributed tools, injects `TimeProvider`, and maps `/mcp`
 
 Read [MCP security best practices](https://modelcontextprotocol.io/docs/tutorials/security/security_best_practices).
 
-### Slide 46 - Exercise 205: Host Date and Time MCP Tools
-![Slide 46](_slides/slide-46.svg)
+### Slide 48 - Exercise 205: Host Date and Time MCP Tools
+![Slide 48](_slides/slide-48.svg)
 
 [Exercise 205 README](exercises/exercise-205/README.md)
 
@@ -395,15 +413,15 @@ Read [MCP security best practices](https://modelcontextprotocol.io/docs/tutorial
 
 Exercise 205 splits MCP hosting and consumption into two projects. The ASP.NET server exposes the current local date and time through MCP over Streamable HTTP, with `TimeProvider` injected into the tool class by ASP.NET Core's DI container. The console client connects to `http://localhost:5285/mcp`, lists the server's tools, and provides them to a Foundry-backed `AIAgent`. Run the server first in one terminal, then the client in another.
 
-### Slide 47 - Lab 100 to Lab 200: fetch facts on demand
-![Slide 47](_slides/slide-47.svg)
+### Slide 49 - Lab 100 to Lab 200: fetch facts on demand
+![Slide 49](_slides/slide-49.svg)
 
 > **TL;DR:** Focused tools reduce agenda context, but total cost includes tool round trips and growing history.
 
 Lab 100 places the whole agenda in each request. Lab 200 keeps it only in the server, discovers six tools in the client, and sends short instructions plus selected results. Deterministic matching makes ambiguity explicit rather than asking the model to interpret the whole document. This can reduce agenda data per request, but tool schemas, network latency, additional model calls, and accumulated results still cost time and tokens. Compare total usage and accuracy across the same questions; do not assume MCP always makes a run cheaper. Use `/debug` to trace a speaker lookup and follow-up, then verify the returned room and Warsaw-local time.
 
-### Slide 48 - Lab 200: DevDays Buddy MCP Tools
-![Slide 48](_slides/slide-48.svg)
+### Slide 50 - Lab 200: DevDays Buddy MCP Tools
+![Slide 50](_slides/slide-50.svg)
 
 [Lab 200 README](labs/lab-200/README.md)
 
@@ -411,25 +429,25 @@ Lab 100 places the whole agenda in each request. Lab 200 keeps it only in the se
 
 Build an ASP.NET MCP server with an embedded `agenda.json` and six tools for conference information, dates, speakers, and sessions. A separate console agent discovers and invokes those tools; the entire agenda is never added to the agent's instructions.
 
-### Slide 49 - Lab 200: Build the Agenda MCP Server
-![Slide 49](_slides/slide-49.svg)
+### Slide 51 - Lab 200: Build the Agenda MCP Server
+![Slide 51](_slides/slide-51.svg)
 
 Implement tools for the conference name and description, dates, speaker list and speaker lookup, sessions by date, and session details by title or date and start time. Deterministic partial matching should return ambiguity candidates instead of silently selecting the wrong speaker or session.
 
-### Slide 50 - Lab 200: Connect the DevDays Buddy Agent
-![Slide 50](_slides/slide-50.svg)
+### Slide 52 - Lab 200: Connect the DevDays Buddy Agent
+![Slide 52](_slides/slide-52.svg)
 
 Run the MCP server and console client as separate processes. The client discovers tools over Streamable HTTP and supplies them to an `AIAgent`; only the selected tool results and conversation history are sent to the model, not the full agenda document.
 
-### Slide 51 - Part 3: Orchestrating agents and workflows
-![Slide 51](_slides/slide-51.svg)
+### Slide 53 - Part 3: Orchestrating agents and workflows
+![Slide 53](_slides/slide-53.svg)
 
 > **TL;DR:** Coordinate specialist agents and workflows to combine their work into one useful result.
 
 Part 3 starts with the Terrible Startup Pitch: exercise 301 manually forwards a Founder's pitch to an Investor, and 302 uses the same agents with workflow executors and an edge. Lab 300 then splits a conference-day planning request between a Session Picker, Schedule Builder, and Plan Reviewer, adding structured state, C# constraints, and conditional revision edges. Compare when workflow structure helps and when simple sequential calls are enough.
 
-### Slide 52 - Exercise 301: Terrible Startup Pitch - Manual Orchestration
-![Slide 52](_slides/slide-52.svg)
+### Slide 54 - Exercise 301: Terrible Startup Pitch - Manual Orchestration
+![Slide 54](_slides/slide-54.svg)
 
 [Exercise 301 README](exercises/exercise-301/README.md)
 
@@ -437,8 +455,8 @@ Part 3 starts with the Terrible Startup Pitch: exercise 301 manually forwards a 
 
 Create an enthusiastic Founder agent and a skeptical Investor agent using the same Foundry-backed `IChatClient`, but different instructions and fresh sessions. The Founder turns a theme into a ridiculous startup pitch; ordinary C# passes its exact `AgentResponse.Text` to the Investor, which returns a strength, objections, and a fictional FUND/PASS verdict. There are no workflows, tools, or revision loops.
 
-### Slide 53 - Exercise 302: Terrible Startup Pitch - Workflow
-![Slide 53](_slides/slide-53.svg)
+### Slide 55 - Exercise 302: Terrible Startup Pitch - Workflow
+![Slide 55](_slides/slide-55.svg)
 
 [Exercise 302 README](exercises/exercise-302/README.md)
 
@@ -446,8 +464,8 @@ Create an enthusiastic Founder agent and a skeptical Investor agent using the sa
 
 Wrap each agent in an `Executor<string, string>`, connect Founder to Investor with `WorkflowBuilder.AddEdge`, and register the Investor with `WithOutputFrom`. `InProcessExecution.RunStreamingAsync` runs the graph locally; executor completion shows the Founder's pitch and workflow output supplies the Investor's review. Both exercises use identical prompts, isolated sessions, and two agent invocations per completed round. The workflow makes the sequence observable rather than adding another model or a retry loop.
 
-### Slide 54 - Lab 300: Plan My Conference Day
-![Slide 54](_slides/slide-54.svg)
+### Slide 56 - Lab 300: Plan My Conference Day
+![Slide 56](_slides/slide-56.svg)
 
 [Lab 300 README](labs/lab-300/README.md)
 
@@ -455,15 +473,15 @@ Wrap each agent in an `Executor<string, string>`, connect Founder to Investor wi
 
 Build on Lab 200's MCP agenda server with a Session Picker, Schedule Builder, and Plan Reviewer. The console collects a conference date, availability, and interests; the workflow fetches one day's structured sessions through MCP and passes canonical IDs and recommendation reasons between agents. C# checks dates, time windows, duplicate IDs, candidate membership, and overlaps. Conditional edges send rejected plans back to the builder for at most two revisions, then return either an approved itinerary or an explicit no-approved-plan result. Stage panels expose handoffs and feedback. Starter and solution projects, plus deterministic graph checks without Foundry, are included.
 
-### Slide 55 - Part 4: Making agents reliable and production-ready
-![Slide 55](_slides/slide-55.svg)
+### Slide 57 - Part 4: Making agents reliable and production-ready
+![Slide 57](_slides/slide-57.svg)
 
 > **TL;DR:** Make agents reliable with validation, clear failure handling, logging, and tests.
 
-Part 4 improves agent reliability with input and data validation, understandable error handling, concise logging, and tests for important behavior. Exercises 401-404 use a tiny Secret Snack Stash to separate claimed identity, console authentication, trusted in-process user context, and authenticated MCP requests. Application code—not an unsupported model claim—must enforce who can access protected data.
+Part 4 improves agent reliability with input and data validation, understandable error handling, concise logging, and tests for important behavior. Exercises 401-404 use a tiny Secret Snack Stash to separate claimed identity, console authentication, trusted in-process user context, and authenticated MCP requests. Application code—not an unsupported model claim—must enforce who can access protected data. Exercise 405 then calls an existing Microsoft Foundry agent using Microsoft Entra authentication and a server-side conversation.
 
-### Slide 56 - Exercise 401: A Name Is Not Authentication
-![Slide 56](_slides/slide-56.svg)
+### Slide 58 - Exercise 401: A Name Is Not Authentication
+![Slide 58](_slides/slide-58.svg)
 
 [Exercise 401 README](exercises/exercise-401/README.md)
 
@@ -471,8 +489,8 @@ Part 4 improves agent reliability with input and data validation, understandable
 
 Alice keeps stroopwafels in her keyboard drawer; Bob keeps gummy bears behind his rubber duck. The intentionally vulnerable `get_secret_snack(string userName)` tool takes its owner name from the agent without verifying credentials. Claim to be either person and inspect the tool output. Knowing a name is not permission to open that person's private stash.
 
-### Slide 57 - Exercise 402: Authenticated but Model-Controlled Identity
-![Slide 57](_slides/slide-57.svg)
+### Slide 59 - Exercise 402: Authenticated but Model-Controlled Identity
+![Slide 59](_slides/slide-59.svg)
 
 [Exercise 402 README](exercises/exercise-402/README.md)
 
@@ -480,8 +498,8 @@ Alice keeps stroopwafels in her keyboard drawer; Bob keeps gummy bears behind hi
 
 The console's `/auth` command checks public demo credentials without sending the password to the model. After successful authentication, it creates an agent with the signed-in `userId` in its system instructions; questions are sent unchanged, and the agent supplies the ID to `get_secret_snack(string userId)`. This is still intentionally unsafe: the tool does not compare the supplied ID with trusted authentication state. System instructions and a model's refusal to substitute another ID are not an authorization boundary.
 
-### Slide 58 - Exercise 403: Trusted User Context Through DI
-![Slide 58](_slides/slide-58.svg)
+### Slide 60 - Exercise 403: Trusted User Context Through DI
+![Slide 60](_slides/slide-60.svg)
 
 [Exercise 403 README](exercises/exercise-403/README.md)
 
@@ -489,8 +507,8 @@ The console's `/auth` command checks public demo credentials without sending the
 
 Console `/auth` now populates a scoped `UserContext`. The scope's service provider is passed to `AsAIAgent`, which injects `IServiceProvider` into the static `SnackTools.GetSecretSnack` method, as in exercise 203. The tool resolves the context without exposing any model-facing parameters and denies signed-out or unknown users. A console scope belongs to one user at a time; sign-in attempts and sign-out clear conversation history to prevent cross-user leakage.
 
-### Slide 59 - Exercise 404: Authenticated MCP Tools
-![Slide 59](_slides/slide-59.svg)
+### Slide 61 - Exercise 404: Authenticated MCP Tools
+![Slide 61](_slides/slide-61.svg)
 
 [Exercise 404 README](exercises/exercise-404/README.md)
 
@@ -500,8 +518,17 @@ Run a separate ASP.NET Core server and console client. `/auth` posts demo creden
 
 The [authentication boundary checks](tests/AuthenticationExercises/README.md) demonstrate the intentional flaws and enforce the corrected boundaries without Foundry or model calls.
 
-### Slide 60 - Any questions?
-![Slide 60](_slides/slide-60.svg)
+### Slide 62 - Exercise 405: Call a Microsoft Foundry Agent
+![Slide 62](_slides/slide-62.svg)
+
+[Exercise 405 README](exercises/exercise-405/README.md)
+
+> **TL;DR:** Call the existing `developerdays` Foundry agent using its agent-scoped Responses client.
+
+Read the project URL from `FOUNDRY_ENDPOINT`, create an `AIProjectClient`, and select `developerdays` with `GetProjectResponsesClientForAgentEndpoint`. Reuse its pipeline and endpoint to create a server-side conversation, bind the conversation ID to a response client, and send `Hi developerdays`. The model, instructions, and tools live in Foundry. Unlike direct model inference, this agent endpoint requires Microsoft Entra ID (`DefaultAzureCredential`, locally via `az login`); `FOUNDRY_API_KEY` authentication is not supported, and no model deployment setting is needed.
+
+### Slide 63 - Any questions?
+![Slide 63](_slides/slide-63.svg)
 
 > **TL;DR:** You are wrapping up with time for questions and a link to the workshop materials.
 

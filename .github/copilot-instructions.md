@@ -69,6 +69,16 @@ interactive terminal; the simpler Part 1 loops also accept piped input.
   `StoredOutputEnabled = false` disables server-side Responses storage.
   `DebugHistory` reads the actual session with `TryGetInMemoryChatHistory`.
   History is local, but inference still sends it to Foundry.
+- **107:** An image-capable Foundry-backed `AIAgent` translates a JPEG using
+  `TextContent` plus `UriContent`, then `TextContent` plus `DataContent` loaded
+  from the bundled `quote.jpg`. The file is copied to the output directory.
+  Each request uses a fresh session for an independent comparison; local
+  history and disabled Responses storage match 106. No tools or workflows.
+- **108:** Direct OpenAI `AudioClient` calls, not an `AIAgent`, transcribe the
+  bundled original French `welcome-fr.wav` and translate it into English.
+  Reopen the file for each request. OpenAI 2.14.0 uses `/openai/v1` with
+  `OpenAIClientOptions`; `FOUNDRY_MODEL_DEPLOYMENT` must name a Whisper
+  deployment supporting both audio operations. No chat history or tools.
 - **Lab 100:** DevDays Buddy builds on 106. `agenda.json` (conference info plus
   every Tuesday/Wednesday slot with day, date, times, room, type, level,
   description, and speakers with name/title/description, scraped from the
@@ -116,14 +126,21 @@ a model catalog identifier. For API-key inference, project/resource endpoints
 are mapped to the resource's `/openai/v1`; a Foundry project URL does not turn
 these clients into `AIProjectClient` or enable project-level agent APIs.
 
+Exercise 405 is the exception: it reads the full project URL from
+`FOUNDRY_ENDPOINT` and calls the existing `developerdays` agent through
+`AIProjectClient` (Azure.AI.Projects 2.1.0-beta.4). Agent endpoints require
+Microsoft Entra ID via `DefaultAzureCredential` (Azure.Identity 1.21.0), not
+`FOUNDRY_API_KEY`; no model deployment setting is needed. Reuse the agent-scoped
+pipeline and endpoint for server-side conversations, not local chat history.
+
 Local `Properties\launchSettings.json` profiles are optional and explicitly
 ignored per exercise in `.gitignore`. They may contain real API keys: do not
 print their contents, embed their values in documentation, or commit them.
 When adding a cloud exercise or lab, add its profile path to `.gitignore` before
 copying local configuration.
 
-Exercises 001, 101-104, 106, and the lab 100 solution use OpenAI 2.14.0;
-101-104 use Microsoft.Extensions.AI/OpenAI 10.11.0; 106 and the lab 100
+Exercises 001, 101-104, 106-108, and the lab 100 solution use OpenAI 2.14.0;
+101-104 use Microsoft.Extensions.AI/OpenAI 10.11.0; 106-107 and the lab 100
 solution use Microsoft.Agents.AI 1.24.0 with the OpenAI adapter 10.11.0 (the
 lab 100 starter still references 106's older 1.0.0/10.4.0/2.9.1 versions).
 In 2.14.0, `ResponsesClient` takes `ResponsesClientOptions` (not
@@ -162,12 +179,12 @@ Raleway 700 headings, Open Sans body text, 100-unit horizontal margins,
 and a footer at y=985. Fonts and graphics are embedded from `_resources`.
 See `_tools\README.md` for layout and export details.
 
-Current exercise slides are 001 at 12 and 101-106 at 23, 25, 26, 29, 30, 33;
-lab 100 is at 35, and exercises 201-205 are at 38, 39, 42, 44, 46.
-Lab 200 uses slides 48-50
+Current exercise slides are 001 at 12 and 101-108 at 23, 25, 26, 29, 30, 33, 34, 35;
+lab 100 is at 37, and exercises 201-205 are at 40, 41, 44, 46, 48.
+Lab 200 uses slides 50-52
 (`ExerciseBody -badge 'LAB'`, header `LAB 200`); exercises 301-302 use slides
-52-53, and lab 300 is at 54 with header `LAB 300`. Section dividers are 51 and 55,
-exercises 401-404 use slides 56-59, and the closing slide is 60 (60 slides total).
+54-55, and lab 300 is at 56 with header `LAB 300`. Section dividers are 53 and 57,
+exercises 401-405 use slides 58-62, and the closing slide is 63 (63 slides total).
 Adding slides requires updating generator
 numbering, the shifted SVG outputs, root README headings/image references,
 and the deck, as well as slide-count references in tool documentation.

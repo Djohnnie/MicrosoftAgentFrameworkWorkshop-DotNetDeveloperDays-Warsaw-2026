@@ -6,7 +6,7 @@
 
 ## What you'll build
 
-The final exercise of Part 1 moves from direct `IChatClient` calls to a Microsoft Agent Framework `AIAgent`. It uses the same Foundry endpoint, API key, and model as exercises 101-104, gives the agent a cheerful 10-year-old persona, and keeps conversation context across questions.
+This exercise moves from direct `IChatClient` calls to a Microsoft Agent Framework `AIAgent`. It uses the same Foundry endpoint, API key, and model as exercises 101-104, gives the agent a cheerful 10-year-old persona, and keeps conversation context across questions. Exercise 107 then adds image input to an agent.
 
 Unlike exercise 103, the age stays at 10. The focus here is the agent concept, not changing the instructions on every turn. There are no tools or workflows yet.
 
