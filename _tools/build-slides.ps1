@@ -1154,22 +1154,34 @@ $body = ExerciseBody -exerciseNumber '404' -title 'Authenticate Across MCP' `
 SaveSlide 'slide-72.svg' 'Exercise 404: Authenticated MCP Tools' 'Part 4 exercise 404: an ASP.NET Core MCP server issues protected opaque bearer tokens after demo sign-in. Stateless authenticated MCP requests use a DI user context derived from validated claims, not model arguments. Loopback workshop login, not production OAuth.' $body '72' 'EXERCISE 404'
 
 $body = ExerciseBody -exerciseNumber '405' -title 'Call a Foundry Agent' `
-    -subtitle 'Invoke developerdays: the agent definition lives in Microsoft Foundry.' `
+    -subtitle 'Chat with a versioned Prompt Agent: its definition lives in Foundry.' `
     -projectPath 'exercises\exercise-405' `
-    -stepTitles @('Connect', 'Converse', 'Invoke') `
+    -stepTitles @('Authenticate', 'Connect', 'Converse') `
     -stepDetails @(
-        ,@('Read the Foundry project endpoint.', 'Use DefaultAzureCredential;', 'agent endpoints do not accept keys.')
-        ,@('Reuse the agent-scoped pipeline', 'to create a server conversation.')
-        ,@('Bind its ID to the response client;', 'send Hi developerdays;', 'print the agent response.')
+        ,@('Use ClientSecretCredential:', 'tenant ID, client ID, client secret.', 'Grant the app project access.')
+        ,@('Create AIProjectClient.', 'AsAIAgent: use name and version.', 'CreateConversationSessionAsync.')
+        ,@('Ask about capabilities first.', 'Print the conversation ID;', 'reuse the session until quit.')
     ) `
-    -takeaway 'Foundry owns the agent and conversation; the caller needs Microsoft Entra authorization.'
-SaveSlide 'slide-73.svg' 'Exercise 405: Call a Microsoft Foundry Agent' 'Part 4 exercise 405: use the configured FOUNDRY_ENDPOINT project URL and DefaultAzureCredential to call the existing developerdays agent. Agent endpoints do not support API keys. Reuse the agent pipeline for a server-side conversation and bind its ID to the response client.' $body '73' 'EXERCISE 405'
+    -takeaway 'Foundry owns the versioned agent and conversation. Managed identity removes the client secret.'
+SaveSlide 'slide-73.svg' 'Exercise 405: Call a Microsoft Foundry Agent' 'Part 4 exercise 405: authenticate with ClientSecretCredential and connect to a named/versioned Foundry Prompt Agent through AIProjectClient.AsAIAgent. CreateConversationSessionAsync creates server-side history for the capabilities prompt and interactive chat. The README also explains managed identity.' $body '73' 'EXERCISE 405'
+
+$body = ExerciseBody -exerciseNumber '400' -badge 'LAB' -title 'A Foundry-Powered Planner' `
+    -subtitle 'Keep Lab 300 workflows; host the Session Picker and its agenda in Foundry.' `
+    -projectPath 'labs\lab-400' `
+    -stepTitles @('Configure', 'Connect', 'Validate') `
+    -stepDetails @(
+        ,@('Attach agenda.json with File Search;', 'save a Prompt Agent version;', 'return session IDs and reasons.')
+        ,@('Use the Foundry agent as picker;', 'keep scheduler and reviewer local;', 'start fresh sessions per plan.')
+        ,@('Check IDs and times against JSON;', 'retain the two-revision limit;', 'show only approved itineraries.')
+    ) `
+    -takeaway 'Foundry owns retrieval and the picker; local workflow edges and C# still enforce the plan.'
+SaveSlide 'slide-74.svg' 'Lab 400: A Foundry-Powered Planner' 'Part 4 lab 400: build on Lab 300 with a named/versioned Foundry Prompt Agent using File Search over agenda.json as Session Picker. Keep Schedule Builder and Plan Reviewer as in-process agents, validate against the identical local snapshot, and preserve the bounded review workflow. No MCP server is required.' $body '74' 'LAB 400'
 
 $body = @(
     (Text 100 245 'Any questions?' 72 'heading')
     (Text 100 315 'Continue exploring the workshop materials' 30)
     "<a href='$repoUrl'><image x='690' y='370' width='540' height='540' href='$qrCode'/></a>"
 ) -join "`n"
-SaveSlide 'slide-74.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '74' 'THANK YOU'
+SaveSlide 'slide-75.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '75' 'THANK YOU'
 
 Write-Host "Built selected slides in $slides"

@@ -609,7 +609,7 @@ Build on Lab 200's MCP agenda server with a Session Picker, Schedule Builder, an
 
 > **TL;DR:** Make agents reliable with validation, clear failure handling, logging, and tests.
 
-Part 4 improves agent reliability with input and data validation, understandable error handling, concise logging, and tests for important behavior. Exercises 401-404 use a tiny Secret Snack Stash to separate claimed identity, console authentication, trusted in-process user context, and authenticated MCP requests. Application code—not an unsupported model claim—must enforce who can access protected data. Exercise 405 then calls an existing Microsoft Foundry agent using Microsoft Entra authentication and a server-side conversation.
+Part 4 improves agent reliability with input and data validation, understandable error handling, concise logging, and tests for important behavior. Exercises 401-404 use a tiny Secret Snack Stash to separate claimed identity, console authentication, trusted in-process user context, and authenticated MCP requests. Application code—not an unsupported model claim—must enforce who can access protected data. Exercise 405 then chats with an existing versioned Microsoft Foundry Prompt Agent using Microsoft Entra application authentication and a server-side conversation. Lab 400 applies that hosting boundary to Lab 300's planner: a Foundry Session Picker retrieves the agenda, while local agents and C# retain scheduling, review, and validation.
 
 ### Slide 69 - Exercise 401: A Name Is Not Authentication
 ![Slide 69](_slides/slide-69.svg)
@@ -654,12 +654,21 @@ Follow exercise 404's [manual boundary checks](exercises/exercise-404/README.md#
 
 [Exercise 405 README](exercises/exercise-405/README.md)
 
-> **TL;DR:** Call the existing `developerdays` Foundry agent using its agent-scoped Responses client.
+> **TL;DR:** Authenticate with a client secret, connect to a named/versioned Foundry Prompt Agent, and chat through one server-side conversation.
 
-Read the project URL from `FOUNDRY_ENDPOINT`, create an `AIProjectClient`, and select `developerdays` with `GetProjectResponsesClientForAgentEndpoint`. Reuse its pipeline and endpoint to create a server-side conversation, bind the conversation ID to a response client, and send `Hi developerdays`. The model, instructions, and tools live in Foundry. Unlike direct model inference, this agent endpoint requires Microsoft Entra ID (`DefaultAzureCredential`, locally via `az login`); `FOUNDRY_API_KEY` authentication is not supported, and no model deployment setting is needed.
+Read `TENANT_ID`, `CLIENT_ID`, `CLIENT_SECRET`, `FOUNDRY_ENDPOINT`, `FOUNDRY_AGENT_NAME`, and `FOUNDRY_AGENT_VERSION`. Create a `ClientSecretCredential` and `AIProjectClient`, then wrap the existing agent using `AsAIAgent(new AgentReference(name, version))` from `Microsoft.Agents.AI.Foundry`. Create a server-side session with `CreateConversationSessionAsync`, ask "What are your capabilities?", print the conversation ID, and reuse that session in the interactive loop. The model, instructions, and hosted tools live in Foundry; no API key or model deployment setting is needed. The exercise README covers Azure app registration, project RBAC, and a secretless managed-identity alternative. This preserves the reference sample's interaction without its obsolete classic-agent API.
 
-### Slide 74 - Any questions?
+### Slide 74 - Lab 400: A Foundry-Powered Planner
 ![Slide 74](_slides/slide-74.svg)
+
+[Lab 400 README](labs/lab-400/README.md)
+
+> **TL;DR:** Move the Session Picker and agenda retrieval to Foundry, not the workflow or its correctness checks.
+
+Build on Lab 300 with a versioned Foundry Prompt Agent configured with File Search over `agenda.json`. The first executor sends the attendee's request and expected result contract, enforces a per-call JSON schema, and validates candidate IDs against an identical local agenda snapshot; it never sends that catalog to the hosted picker. Schedule Builder and Plan Reviewer remain in-process `AIAgent` objects with cloud inference and fresh sessions. The local Agent Framework graph preserves C# date/time, membership and overlap checks, at most two revisions, visible handoffs, and an explicit no-approved-plan result. No MCP server is needed. The lab includes a buildable starter, complete solution, hosted-agent setup instructions, and deterministic graph checks without Azure credentials.
+
+### Slide 75 - Any questions?
+![Slide 75](_slides/slide-75.svg)
 
 > **TL;DR:** You are wrapping up with time for questions and a link to the workshop materials.
 

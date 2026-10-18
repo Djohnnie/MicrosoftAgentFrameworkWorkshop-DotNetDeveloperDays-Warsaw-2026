@@ -1,9 +1,10 @@
 # Presentation tools
 
-The 74 numbered SVG sources in `_slides` introduce the workshop, cover
+The 75 numbered SVG sources in `_slides` introduce the workshop, cover
 AI fundamentals, token usage and pricing, and interleave Agent Framework concepts
 with Part 1 and Part 2 exercises and labs, Part 3 orchestration exercises and lab,
-and Part 4 authentication exercises plus a Foundry agent invocation.
+and Part 4 authentication exercises, a Foundry agent invocation, and the hybrid
+Foundry/local-agent planner lab.
 They also introduce the remaining workshop sections. They can be exported as a
 full-bleed image-based PowerPoint. The
 tools use PowerShell and Microsoft Edge, with no Python, Node.js, or package
@@ -24,7 +25,7 @@ To regenerate only selected slides without touching the others:
 ```
 
 Edit the content and layouts in `build-slides.ps1` and rerun it. It generates
-`slide-01.svg` through `slide-74.svg`, embedding the fonts, conference logo,
+`slide-01.svg` through `slide-75.svg`, embedding the fonts, conference logo,
 Zure icon, speaker photo, and repository QR code from `_resources`. Use
 `-OnlySlides` with slide numbers to regenerate selected slides without
 touching the others.
@@ -34,7 +35,7 @@ important content within the 100-unit horizontal margins and above the footer
 at y=985. Use Raleway 700 for headings and Open Sans for body text. XML-escape
 text when editing the generator.
 
-Slides 2 through 74 include the repository link, Zure icon, and slide number in
+Slides 2 through 75 include the repository link, Zure icon, and slide number in
 the footer; the title slide has no footer.
 
 ## Exercise slide template
@@ -42,7 +43,7 @@ the footer; the title slide has no footer.
 Exercise 001 on slide 14, exercises 101-109 on slides 26, 28, 30, 32, 35, 37, 40, 42, and 43,
 lab 100 on slide 45, exercises 201-205 on slides 48, 51, 54, 56, and 59,
 lab 200 on slides 61-63, exercises 301-302 on slides 65-66,
-lab 300 on slide 67, and exercises 401-405 on slides 69-73 use
+lab 300 on slide 67, exercises 401-405 on slides 69-73, and lab 400 on slide 74 use
 `ExerciseBody` in `build-slides.ps1`: a hands-on
 banner, exercise number badge, three numbered action cards, a clickable project
 path, and a takeaway. Reuse this helper for future exercises and labs, supplying
@@ -102,7 +103,7 @@ the replaced legacy HTTP+SSE transport.
 
 Part 1 spans slides 24-45; Part 2 spans 46-63. The remaining section dividers are
 64 and 68. Exercises 301-302 are slides 65-66, Lab 300 is slide 67,
-Part 4 exercises are 69-73, and the closing slide is 74. When inserting
+Part 4 exercises are 69-73, Lab 400 is slide 74, and the closing slide is 75. When inserting
 slides, update the explicit section-divider numbers, all affected
 `SaveSlide` / `ConceptSlide` numbers,
 the root guide, and these references before regenerating the SVGs and deck.

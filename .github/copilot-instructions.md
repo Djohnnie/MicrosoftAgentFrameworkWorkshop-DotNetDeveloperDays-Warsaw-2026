@@ -115,6 +115,15 @@ interactive terminal; the simpler Part 1 loops also accept piped input.
   FUND/PASS is plain text, not a branch or revision trigger. No tools or third
   agent. Both use Agent Framework 1.24.0/OpenAI adapter 10.11.0/OpenAI 2.14.0;
   302 also uses Microsoft.Agents.AI.Workflows 1.24.0.
+- **Lab 400:** Builds on Lab 300's bounded workflow. A versioned Foundry Prompt
+  Agent with File Search over `labs\lab-400\agenda.json` is the Session Picker;
+  it receives the request and output contract, with a per-call candidate JSON
+  schema, never the local catalog. Schedule Builder and Plan Reviewer are local
+  agent definitions using cloud inference. No MCP server. Both projects embed
+  the same single agenda snapshot (identical to Lab 300) for canonical ID/time
+  checks. Every hosted invocation creates a fresh server-side conversation.
+  Uses exercise 405's Entra credentials plus API-key inference for local agents.
+  Deterministic checks live in `labs\lab-400\checks`.
 
 Keep Part 1 code short enough for participants to type. Preserve each
 exercise's teaching boundary: do not add history to 101, agents to 101-106,
@@ -130,11 +139,17 @@ are mapped to the resource's `/openai/v1`; a Foundry project URL does not turn
 these clients into `AIProjectClient` or enable project-level agent APIs.
 
 Exercise 405 is the exception: it reads the full project URL from
-`FOUNDRY_ENDPOINT` and calls the existing `developerdays` agent through
-`AIProjectClient` (Azure.AI.Projects 2.1.0-beta.4). Agent endpoints require
-Microsoft Entra ID via `DefaultAzureCredential` (Azure.Identity 1.21.0), not
-`FOUNDRY_API_KEY`; no model deployment setting is needed. Reuse the agent-scoped
-pipeline and endpoint for server-side conversations, not local chat history.
+`FOUNDRY_ENDPOINT` and wraps an existing Prompt Agent with
+`AIProjectClient.AsAIAgent(new AgentReference(name, version))`, reading
+`FOUNDRY_AGENT_NAME` and `FOUNDRY_AGENT_VERSION`. Do not use classic
+`asst_...` IDs or the obsolete persistent-agent adapter.
+`ClientSecretCredential` (Azure.Identity 1.21.0) reads `TENANT_ID`, `CLIENT_ID`,
+and `CLIENT_SECRET`; no API key or model deployment setting is needed.
+Microsoft.Agents.AI.Foundry 1.24.0-preview.261006.1 brings Agent Framework
+1.24.0 and Azure.AI.Projects 3.0.0-beta.3 transitively. Reuse one
+ChatClientAgentSession from CreateConversationSessionAsync for the capabilities
+prompt and interactive chat; history is a server-side conversation, not local storage.
+The README documents managed identity and local AzureCliCredential alternatives.
 
 Local `Properties\launchSettings.json` profiles are optional and ignored by
 `**/Properties/launchSettings.json` in `.gitignore`. They may contain real API keys: do not
@@ -187,7 +202,8 @@ lab 100 is at 45, and exercises 201-205 are at 48, 51, 54, 56, 59.
 Lab 200 uses slides 61-63
 (`ExerciseBody -badge 'LAB'`, header `LAB 200`); exercises 301-302 use slides
 65-66, and lab 300 is at 67 with header `LAB 300`. Section dividers are 64 and 68,
-exercises 401-405 use slides 69-73, and the closing slide is 74 (74 slides total).
+exercises 401-405 use slides 69-73, Lab 400 is at 74, and the closing slide is 75
+(75 slides total).
 Adding slides requires updating generator
 numbering, the shifted SVG outputs, root README headings/image references,
 and the deck, as well as slide-count references in tool documentation.

@@ -1,33 +1,45 @@
 using Azure.AI.Extensions.OpenAI;
 using Azure.AI.Projects;
 using Azure.Identity;
-using OpenAI;
-using OpenAI.Responses;
+using Microsoft.Agents.AI;
+using Microsoft.Agents.AI.Foundry;
 
-#pragma warning disable OPENAI001
-
+var tenantId = Environment.GetEnvironmentVariable("TENANT_ID")
+    ?? throw new InvalidOperationException("Set TENANT_ID");
+var clientId = Environment.GetEnvironmentVariable("CLIENT_ID")
+    ?? throw new InvalidOperationException("Set CLIENT_ID");
+var clientSecret = Environment.GetEnvironmentVariable("CLIENT_SECRET")
+    ?? throw new InvalidOperationException("Set CLIENT_SECRET");
 var endpoint = Environment.GetEnvironmentVariable("FOUNDRY_ENDPOINT")
     ?? throw new InvalidOperationException("Set FOUNDRY_ENDPOINT to your Foundry project endpoint");
-const string agentName = "developerdays";
-const string userMessage = "Hi developerdays";
+var agentName = Environment.GetEnvironmentVariable("FOUNDRY_AGENT_NAME")
+    ?? throw new InvalidOperationException("Set FOUNDRY_AGENT_NAME to your Foundry prompt agent's name");
+var agentVersion = Environment.GetEnvironmentVariable("FOUNDRY_AGENT_VERSION")
+    ?? throw new InvalidOperationException("Set FOUNDRY_AGENT_VERSION to an existing agent version");
 
-// Foundry agent endpoints require Microsoft Entra ID, not an API key.
-AIProjectClient projectClient = new(
-    endpoint: new Uri(endpoint),
-    tokenProvider: new DefaultAzureCredential());
+var credential = new ClientSecretCredential(tenantId, clientId, clientSecret);
+var projectClient = new AIProjectClient(new Uri(endpoint), credential);
+FoundryAgent agent = projectClient.AsAIAgent(new AgentReference(agentName, agentVersion));
+ChatClientAgentSession session = await agent.CreateConversationSessionAsync();
 
-ProjectResponsesClient agentClient =
-    projectClient.ProjectOpenAIClient.GetProjectResponsesClientForAgentEndpoint(agentName);
+Console.WriteLine("Foundry prompt agent. Type 'quit' to exit.");
 
-ProjectConversationsClient conversationClient = new(
-    agentClient.Pipeline,
-    new OpenAIClientOptions { Endpoint = agentClient.Endpoint });
-ProjectConversation conversation = await conversationClient.CreateProjectConversationAsync();
+Console.WriteLine($"Conversation: {session.ConversationId}");
 
-ProjectResponsesClient responseClient =
-    projectClient.ProjectOpenAIClient.GetProjectResponsesClientForAgentEndpoint(
-        agentName, defaultConversationId: conversation.Id);
+while (true)
+{
+    Console.Write("[USER]: ");
+    var input = Console.ReadLine();
+    if (input is null || input.Equals("quit", StringComparison.OrdinalIgnoreCase))
+        break;
 
-Console.WriteLine($"[USER]: {userMessage}");
-ResponseResult response = await responseClient.CreateResponseAsync(userMessage);
-Console.WriteLine($"[ASSISTANT]: {response.GetOutputText()}");
+    if (string.IsNullOrWhiteSpace(input))
+        continue;
+
+    var response = await agent.RunAsync(input, session);
+    foreach (var message in response.Messages)
+    {
+        if (!string.IsNullOrWhiteSpace(message.Text))
+            Console.WriteLine($"[ASSISTANT]: {message.Text}");
+    }
+}

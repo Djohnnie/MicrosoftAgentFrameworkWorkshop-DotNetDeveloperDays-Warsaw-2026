@@ -31,4 +31,14 @@
     <Project Path="lab-300\checks\WorkflowChecks.csproj" />
   </Folder>
   <Folder Name="/4. Making agents reliable and production-ready/" />
+  <Folder Name="/4. Making agents reliable and production-ready/400. DevDays Buddy Foundry planner/" />
+  <Folder Name="/4. Making agents reliable and production-ready/400. DevDays Buddy Foundry planner/1. Starter/">
+    <Project Path="lab-400\starter\DevDaysBuddy.Foundry.Starter.csproj" />
+  </Folder>
+  <Folder Name="/4. Making agents reliable and production-ready/400. DevDays Buddy Foundry planner/2. Solution/">
+    <Project Path="lab-400\solution\DevDaysBuddy.Foundry.csproj" />
+  </Folder>
+  <Folder Name="/4. Making agents reliable and production-ready/400. DevDays Buddy Foundry planner/3. Checks/">
+    <Project Path="lab-400\checks\WorkflowChecks.csproj" />
+  </Folder>
 </Solution>
