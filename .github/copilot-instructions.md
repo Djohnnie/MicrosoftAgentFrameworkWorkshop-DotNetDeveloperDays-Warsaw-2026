@@ -139,6 +139,22 @@ interactive terminal; the simpler Part 1 loops also accept piped input.
   agent session. `FOUNDRY_EMBEDDING_DEPLOYMENT` is required in addition to the
   normal API-key configuration. Vector storage/search are local, but embedding
   and inference use Foundry. No MCP or hosted agent; the index is rebuilt each run.
+- **407:** Local-history agent with explicit `/save`, `/load`, `/new`, and
+  `/history` commands. Use `SerializeSessionAsync`/`DeserializeSessionAsync` on
+  the owning agent, not a custom message DTO. Save plaintext `session.json`
+  beside the executable under ignored build output. Loading replaces the
+  session; startup is fresh. No hosted conversation or workflow checkpoint.
+- **408:** Built-in experimental `SummarizationCompactionStrategy` is adapted
+  with `AsChatReducer()` and attached to `InMemoryChatHistoryProvider`.
+  `AfterMessageAdded` reduces stored history when user turns exceed three,
+  targeting two remaining non-system groups before inserting the summary,
+  preserving the newest two groups, not two turns. Use
+  `minimumPreservedGroups` with SDK 1.24.0 and suppress `MAAI001`. Configure
+  disabled Responses storage on the shared chat client so it covers direct
+  summary calls too. History is lossy and local; summaries and answers use
+  Foundry. Use shared-client logging and reject empty model text so best-effort
+  summary failures are visible and retain the original history. No file
+  persistence or tools; console logging is the only additional package.
 - **Lab 400:** Builds on Lab 300's bounded workflow. A versioned Foundry Prompt
   Agent with File Search over `labs\lab-400\agenda.json` is the Session Picker;
   it receives the request and output contract, with a per-call candidate JSON
@@ -230,8 +246,8 @@ lab 100 is at 45, and exercises 201-206 are at 48, 51, 54, 56, 59, 60.
 Lab 200 uses slides 62-64
 (`ExerciseBody -badge 'LAB'`, header `LAB 200`); exercises 301-304 use slides
 66-69, and lab 300 is at 70 with header `LAB 300`. Section dividers are 65 and 71,
-exercises 401-406 use slides 72-77, Lab 400 is at 78, and the closing slide is 79
-(79 slides total).
+exercises 401-408 use slides 72-79, Lab 400 is at 80, and the closing slide is 81
+(81 slides total).
 Adding slides requires updating generator
 numbering, the shifted SVG outputs, root README headings/image references,
 and the deck, as well as slide-count references in tool documentation.

@@ -1,9 +1,10 @@
 # Presentation tools
 
-The 79 numbered SVG sources in `_slides` introduce the workshop, cover
+The 81 numbered SVG sources in `_slides` introduce the workshop, cover
 AI fundamentals, token usage and pricing, and interleave Agent Framework concepts
 with Part 1 and Part 2 exercises and labs, Part 3 orchestration exercises and lab,
-and Part 4 authentication exercises, a Foundry agent invocation, in-memory vector RAG, and the hybrid
+and Part 4 authentication exercises, a Foundry agent invocation, in-memory vector RAG,
+local session persistence and summarization, and the hybrid
 Foundry/local-agent planner lab.
 They also introduce the remaining workshop sections. They can be exported as a
 full-bleed image-based PowerPoint. The
@@ -25,7 +26,7 @@ To regenerate only selected slides without touching the others:
 ```
 
 Edit the content and layouts in `build-slides.ps1` and rerun it. It generates
-`slide-01.svg` through `slide-79.svg`, embedding the fonts, conference logo,
+`slide-01.svg` through `slide-81.svg`, embedding the fonts, conference logo,
 Zure icon, speaker photo, and repository QR code from `_resources`. Use
 `-OnlySlides` with slide numbers to regenerate selected slides without
 touching the others.
@@ -35,7 +36,7 @@ important content within the 100-unit horizontal margins and above the footer
 at y=985. Use Raleway 700 for headings and Open Sans for body text. XML-escape
 text when editing the generator.
 
-Slides 2 through 79 include the repository link, Zure icon, and slide number in
+Slides 2 through 81 include the repository link, Zure icon, and slide number in
 the footer; the title slide has no footer.
 
 ## Exercise slide template
@@ -43,7 +44,7 @@ the footer; the title slide has no footer.
 Exercise 001 on slide 14, exercises 101-109 on slides 26, 28, 30, 32, 35, 37, 40, 42, and 43,
 lab 100 on slide 45, exercises 201-206 on slides 48, 51, 54, 56, 59, and 60,
 lab 200 on slides 62-64, exercises 301-304 on slides 66-69,
-lab 300 on slide 70, exercises 401-406 on slides 72-77, and lab 400 on slide 78 use
+lab 300 on slide 70, exercises 401-408 on slides 72-79, and lab 400 on slide 80 use
 `ExerciseBody` in `build-slides.ps1`: a hands-on
 banner, exercise number badge, three numbered action cards, a clickable project
 path, and a takeaway. Reuse this helper for future exercises and labs, supplying
@@ -110,9 +111,15 @@ concurrent execution environment, and a fan-in barrier. Slide 77 demonstrates
 real embeddings and cosine retrieval in an ephemeral in-memory vector store;
 do not describe local storage as offline inference.
 
+Slide 78 demonstrates explicit session serialization and restoration, not
+serialization of an agent definition or a workflow checkpoint. Slide 79 uses
+experimental built-in summarization to replace older local history, preserving
+the newest two message groups. Keep the extra model call, information-loss risk,
+and client-wide disabled Responses storage explicit.
+
 Part 1 spans slides 24-45; Part 2 spans 46-64. The remaining section dividers are
 65 and 71. Exercises 301-304 are slides 66-69, Lab 300 is slide 70,
-Part 4 exercises are 72-77, Lab 400 is slide 78, and the closing slide is 79. When inserting
+Part 4 exercises are 72-79, Lab 400 is slide 80, and the closing slide is 81. When inserting
 slides, update the explicit section-divider numbers, all affected
 `SaveSlide` / `ConceptSlide` numbers,
 the root guide, and these references before regenerating the SVGs and deck.

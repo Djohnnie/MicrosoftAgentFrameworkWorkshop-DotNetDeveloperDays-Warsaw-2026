@@ -1213,6 +1213,30 @@ $body = ExerciseBody -exerciseNumber '406' -title 'RAG with Vectors in Memory' `
     -takeaway 'No database server is needed. In-memory search is local; embeddings and answers still use Foundry.'
 SaveSlide 'slide-77.svg' 'Exercise 406: Real RAG with an In-Memory Vector Store' 'Part 4 exercise 406: chunk the fictional Lab Hub handbook, generate real 1536-dimensional embeddings, store records in CommunityToolkit.VectorData.InMemory, and perform cosine vector search for each question. A fresh AIAgent session answers using only the top three excerpts with chunk citations. Requires a separate embedding deployment; no external database, MCP server, or hosted agent.' $body '77' 'EXERCISE 406'
 
+$body = ExerciseBody -exerciseNumber '407' -title 'Save and Restore a Session' `
+    -subtitle 'Persist local conversation state without hosting an agent in Foundry.' `
+    -projectPath 'exercises\exercise-407' `
+    -stepTitles @('Save', 'Reset', 'Restore') `
+    -stepDetails @(
+        ,@('Chat, then use /save;', 'SerializeSessionAsync writes', 'the session state to local JSON.')
+        ,@('Use /new or restart the app;', 'inspect the empty history;', 'the snapshot stays on disk.')
+        ,@('Use /load to deserialize;', 'ask about an earlier fact;', 'inspect the restored messages.')
+    ) `
+    -takeaway 'Persist session state, not the agent definition. Protect snapshots; restored history still goes to Foundry.'
+SaveSlide 'slide-78.svg' 'Exercise 407: Save and Restore a Local Agent Session' 'Part 4 exercise 407: explicitly serialize local AgentSession state using SerializeSessionAsync and restore it with DeserializeSessionAsync. Console /save, /load, /new, and /history show replacement and process-restart persistence. Local plaintext JSON is not a hosted conversation, agent definition, or workflow checkpoint.' $body '78' 'EXERCISE 407'
+
+$body = ExerciseBody -exerciseNumber '408' -title 'Summarize Growing History' `
+    -subtitle 'Keep recent messages; replace older conversation content with a summary.' `
+    -projectPath 'exercises\exercise-408' `
+    -stepTitles @('Configure', 'Compact', 'Inspect') `
+    -stepDetails @(
+        ,@('Use the built-in experimental', 'SummarizationCompactionStrategy', 'as the history provider reducer.')
+        ,@('After more than three user turns,', 'summarize older message groups;', 'preserve the newest two groups.')
+        ,@('Print the actual stored history;', 'check facts after compaction;', 'compare with saving a full session.')
+    ) `
+    -takeaway 'Compaction is lossy, not archival storage. Local history shrinks; summarization adds a Foundry call.'
+SaveSlide 'slide-79.svg' 'Exercise 408: Compact Local History with Summaries' 'Part 4 exercise 408: opt into experimental built-in compaction, adapt SummarizationCompactionStrategy with AsChatReducer, and run it after messages are added to InMemoryChatHistoryProvider. More than three stored user turns triggers summarization, protecting the newest two non-system groups. Print the actual reduced history; disable Responses storage for answer and summary calls. No persistence or tools.' $body '79' 'EXERCISE 408'
+
 $body = ExerciseBody -exerciseNumber '400' -badge 'LAB' -title 'A Foundry-Powered Planner' `
     -subtitle 'Keep Lab 300 workflows; host the Session Picker and its agenda in Foundry.' `
     -projectPath 'labs\lab-400' `
@@ -1223,13 +1247,13 @@ $body = ExerciseBody -exerciseNumber '400' -badge 'LAB' -title 'A Foundry-Powere
         ,@('Check IDs and times against JSON;', 'retain the two-revision limit;', 'show only approved itineraries.')
     ) `
     -takeaway 'Foundry owns retrieval and the picker; local workflow edges and C# still enforce the plan.'
-SaveSlide 'slide-78.svg' 'Lab 400: A Foundry-Powered Planner' 'Part 4 lab 400: build on Lab 300 with a named/versioned Foundry Prompt Agent using File Search over agenda.json as Session Picker. Keep Schedule Builder and Plan Reviewer as in-process agents, validate against the identical local snapshot, and preserve the bounded review workflow. No MCP server is required.' $body '78' 'LAB 400'
+SaveSlide 'slide-80.svg' 'Lab 400: A Foundry-Powered Planner' 'Part 4 lab 400: build on Lab 300 with a named/versioned Foundry Prompt Agent using File Search over agenda.json as Session Picker. Keep Schedule Builder and Plan Reviewer as in-process agents, validate against the identical local snapshot, and preserve the bounded review workflow. No MCP server is required.' $body '80' 'LAB 400'
 
 $body = @(
     (Text 100 245 'Any questions?' 72 'heading')
     (Text 100 315 'Continue exploring the workshop materials' 30)
     "<a href='$repoUrl'><image x='690' y='370' width='540' height='540' href='$qrCode'/></a>"
 ) -join "`n"
-SaveSlide 'slide-79.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '79' 'THANK YOU'
+SaveSlide 'slide-81.svg' 'Any questions?' 'Questions about the Microsoft Agent Framework workshop. Scan the QR code to open the workshop repository.' $body '81' 'THANK YOU'
 
 Write-Host "Built selected slides in $slides"

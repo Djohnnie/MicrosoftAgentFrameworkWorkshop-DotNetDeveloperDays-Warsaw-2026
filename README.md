@@ -636,7 +636,7 @@ Build on Lab 200's MCP agenda server with a Session Picker, Schedule Builder, an
 
 > **TL;DR:** Make agents reliable with validation, clear failure handling, logging, and tests.
 
-Part 4 improves agent reliability with input and data validation, understandable error handling, concise logging, and tests for important behavior. Exercises 401-404 use a tiny Secret Snack Stash to separate claimed identity, console authentication, trusted in-process user context, and authenticated MCP requests. Application code—not an unsupported model claim—must enforce who can access protected data. Exercise 405 then chats with an existing versioned Microsoft Foundry Prompt Agent using Microsoft Entra application authentication and a server-side conversation. Exercise 406 makes RAG explicit: chunk a fictional handbook, embed it into an in-memory vector store, and retrieve evidence before answering. Lab 400 applies the hosting boundary to Lab 300's planner: a Foundry Session Picker retrieves the agenda, while local agents and C# retain scheduling, review, and validation.
+Part 4 improves agent reliability with input and data validation, understandable error handling, concise logging, and tests for important behavior. Exercises 401-404 use a tiny Secret Snack Stash to separate claimed identity, console authentication, trusted in-process user context, and authenticated MCP requests. Application code—not an unsupported model claim—must enforce who can access protected data. Exercise 405 then chats with an existing versioned Microsoft Foundry Prompt Agent using Microsoft Entra application authentication and a server-side conversation. Exercise 406 makes RAG explicit: chunk a fictional handbook, embed it into an in-memory vector store, and retrieve evidence before answering. Exercises 407-408 return to local session history: save and restore it using the built-in serialization APIs, then compact it with experimental model-generated summaries. Lab 400 applies the hosting boundary to Lab 300's planner: a Foundry Session Picker retrieves the agenda, while local agents and C# retain scheduling, review, and validation.
 
 ### Slide 72 - Exercise 401: A Name Is Not Authentication
 ![Slide 72](_slides/slide-72.svg)
@@ -694,8 +694,26 @@ Read `TENANT_ID`, `CLIENT_ID`, `CLIENT_SECRET`, `FOUNDRY_ENDPOINT`, `FOUNDRY_AGE
 
 Split three bundled fictional Lab Hub documents into paragraph chunks, generate 1536-dimensional embeddings, and upsert vectors with their source text into `CommunityToolkit.VectorData.InMemory`. Embed each question with the same deployment and run cosine search for the top three chunks. Print the retrieved IDs, scores, and excerpts, then pass only those excerpts and the question to a fresh agent session for a cited answer or an admission of missing evidence. Configure `FOUNDRY_EMBEDDING_DEPLOYMENT` in addition to the normal Foundry variables. The index is local and ephemeral, not offline inference or managed File Search.
 
-### Slide 78 - Lab 400: A Foundry-Powered Planner
+### Slide 78 - Exercise 407: Save and Restore a Local Agent Session
 ![Slide 78](_slides/slide-78.svg)
+
+[Exercise 407 README](exercises/exercise-407/README.md)
+
+> **TL;DR:** Agent Framework can serialize local session history; disk storage and explicit restore are application choices.
+
+Use `/save` to call `SerializeSessionAsync` and write the session's JSON state beside the built executable. Use `/new` or restart the process to demonstrate empty history, then `/load` calls `DeserializeSessionAsync` and replaces the current session with the saved one. `/history` inspects the actual restored messages. The snapshot contains session/provider state, not the agent definition, credentials, or running code. Protect this plaintext conversation file and restore only trusted snapshots. Chat still sends the local history to Foundry; saving and loading need no model call.
+
+### Slide 79 - Exercise 408: Compact Local History with Summaries
+![Slide 79](_slides/slide-79.svg)
+
+[Exercise 408 README](exercises/exercise-408/README.md)
+
+> **TL;DR:** Built-in experimental summarization can replace older local history while preserving recent message groups.
+
+Configure `SummarizationCompactionStrategy` with `CompactionTriggers.TurnsExceed(3)`, `minimumPreservedGroups: 2`, and an explicit target of two remaining non-system groups before inserting the summary. Adapt it using `AsChatReducer()` and attach it to `InMemoryChatHistoryProvider`. After a turn adds messages, the provider summarizes when stored user turns exceed three. In this text-only example the protected groups are the latest user/assistant exchange. Print the actual stored summary and remaining messages, then ask about earlier facts. Client-level options disable Responses storage for both answers and the strategy's direct summary calls. This is lossy context reduction with extra Foundry latency/cost, not persistence, a hard token limit, or guaranteed factual memory.
+
+### Slide 80 - Lab 400: A Foundry-Powered Planner
+![Slide 80](_slides/slide-80.svg)
 
 [Lab 400 README](labs/lab-400/README.md)
 
@@ -703,8 +721,8 @@ Split three bundled fictional Lab Hub documents into paragraph chunks, generate 
 
 Build on Lab 300 with a versioned Foundry Prompt Agent configured with File Search over `agenda.json`. The first executor sends the attendee's request and expected result contract, enforces a per-call JSON schema, and validates candidate IDs against an identical local agenda snapshot; it never sends that catalog to the hosted picker. Schedule Builder and Plan Reviewer remain in-process `AIAgent` objects with cloud inference and fresh sessions. The local Agent Framework graph preserves C# date/time, membership and overlap checks, at most two revisions, visible handoffs, and an explicit no-approved-plan result. No MCP server is needed. The lab includes a buildable starter, complete solution, hosted-agent setup instructions, and deterministic graph checks without Azure credentials.
 
-### Slide 79 - Any questions?
-![Slide 79](_slides/slide-79.svg)
+### Slide 81 - Any questions?
+![Slide 81](_slides/slide-81.svg)
 
 > **TL;DR:** You are wrapping up with time for questions and a link to the workshop materials.
 

@@ -84,4 +84,10 @@
   <Folder Name="/4. Making agents reliable and production-ready/406. In-memory vector RAG/">
     <Project Path="exercise-406\InMemoryRag.csproj" />
   </Folder>
+  <Folder Name="/4. Making agents reliable and production-ready/407. Save and restore local sessions/">
+    <Project Path="exercise-407\SessionPersistence.csproj" />
+  </Folder>
+  <Folder Name="/4. Making agents reliable and production-ready/408. Summarize local history/">
+    <Project Path="exercise-408\HistoryCompaction.csproj" />
+  </Folder>
 </Solution>
