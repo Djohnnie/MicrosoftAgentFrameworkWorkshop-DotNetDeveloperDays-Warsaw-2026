@@ -48,12 +48,21 @@
     <Project Path="exercise-205\server\DateTimeMcpServer.csproj" />
     <Project Path="exercise-205\client\ChatbotAgentWithMcpServer.csproj" />
   </Folder>
+  <Folder Name="/2. Giving agents capabilities - tools and MCP/206. Tool approval/">
+    <Project Path="exercise-206\ChatbotAgentWithApproval.csproj" />
+  </Folder>
   <Folder Name="/3. Orchestrating agents and workflows/" />
   <Folder Name="/3. Orchestrating agents and workflows/301. Terrible startup pitch - manual orchestration/">
     <Project Path="exercise-301\StartupPitchManual.csproj" />
   </Folder>
   <Folder Name="/3. Orchestrating agents and workflows/302. Terrible startup pitch - workflow/">
     <Project Path="exercise-302\StartupPitchWorkflow.csproj" />
+  </Folder>
+  <Folder Name="/3. Orchestrating agents and workflows/303. Terrible startup pitch - human input pauses/">
+    <Project Path="exercise-303\StartupPitchHumanInput.csproj" />
+  </Folder>
+  <Folder Name="/3. Orchestrating agents and workflows/304. Terrible startup pitch - concurrent investors/">
+    <Project Path="exercise-304\StartupPitchConcurrent.csproj" />
   </Folder>
   <Folder Name="/4. Making agents reliable and production-ready/" />
   <Folder Name="/4. Making agents reliable and production-ready/401. A name is not authentication/">
@@ -71,5 +80,8 @@
   </Folder>
   <Folder Name="/4. Making agents reliable and production-ready/405. Microsoft Foundry agent/">
     <Project Path="exercise-405\FoundryAgent.csproj" />
+  </Folder>
+  <Folder Name="/4. Making agents reliable and production-ready/406. In-memory vector RAG/">
+    <Project Path="exercise-406\InMemoryRag.csproj" />
   </Folder>
 </Solution>

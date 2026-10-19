@@ -171,8 +171,9 @@ are added.
    Founder and its returned pitch into the Investor.
 3. Inspect `ExecutorCompletedEvent.ExecutorId` and `WorkflowOutputEvent.Data`.
 4. Enter a second theme. Confirm it starts a new workflow and fresh sessions.
-5. Continue with [Lab 300](../../labs/lab-300/README.md) for richer state and
-   conditional routing.
+5. Continue with [exercise 303](../exercise-303/README.md) to pause the workflow
+   for human input, or [Lab 300](../../labs/lab-300/README.md) for richer state
+   and conditional routing.
 
 This remains a fictional comedy competition. Prompted word limits and
 FUND/PASS formatting are not enforced by C#; outputs vary between runs.

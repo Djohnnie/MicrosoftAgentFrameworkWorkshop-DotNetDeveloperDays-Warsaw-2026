@@ -1,0 +1,5 @@
+Loan laptops can be borrowed from the Orbit desk in the fictional DevDays Buddy Lab Hub. Show your blue demo badge and sign the loan sheet. Loans are free, but laptops must be returned by 17:30 on the same day.
+
+Each loan laptop has the .NET 10 SDK and Visual Studio Code installed. Cloud credentials are not preconfigured. Use your own workshop deployment and never save API keys in source files.
+
+USB-C chargers and wired keyboards are available from the equipment cabinet beside the Orbit desk. Return accessories with the laptop. Personal devices remain the visitor's responsibility.

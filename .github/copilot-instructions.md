@@ -91,6 +91,12 @@ interactive terminal; the simpler Part 1 loops also accept piped input.
   panels, and an `agenda` table; input uses `Console.ReadLine`, so piped input
   works. The starter has the packages, the same `agenda.json`, and TODOs only.
   Keep both `agenda.json` copies identical; no tools in Part 1 labs.
+- **206:** Independent tool-approval example wraps exercise 201's unchanged
+  `get_current_time` and `get_current_date` tools in `ApprovalRequiredAIFunction`. Inspect every
+  `ToolApprovalRequestContent`, display exact arguments, and send correlated
+  decisions in the same `AgentSession`. Only `yes` approves; blank input denies.
+  Handle batches and subsequent approval requests. No new tool scenario, MCP,
+  workflows, side effects, or persistence.
 - **Lab 200:** DevDays Buddy moves the agenda into an ASP.NET Core MCP server.
   Keep the starter and solution server `agenda.json` files identical and
   embedded as `agenda.json`; the client must not contain or send the full
@@ -107,14 +113,32 @@ interactive terminal; the simpler Part 1 loops also accept piped input.
   schedule; conditional edges allow at most two revisions. No shared chat
   history: each invocation creates a fresh session. Deterministic checks live in
   `labs\lab-300\checks`; `--mcp` additionally checks a running Lab 300 server.
-- **301-302:** Independent Terrible Startup Pitch examples share identical
+- **301-303:** Independent Terrible Startup Pitch examples share identical
   Founder/Investor prompts and isolated fresh sessions. 301 manually calls the
   Founder and forwards its exact response text to the Investor; it has no
   workflow dependency. 302 wraps each agent in `Executor<string, string>`,
   connects them with `AddEdge`, and exposes only the Investor as workflow output.
+  303 inserts `RequestPort<string, string>` between them; the console handles
+  `RequestInfoEvent` and submits an accepted or replacement pitch with
+  `SendResponseAsync`. Quit/EOF at the pause exits without invoking the Investor.
+  This is in-process pause/resume, not durable checkpointing or tool approval.
   FUND/PASS is plain text, not a branch or revision trigger. No tools or third
-  agent. Both use Agent Framework 1.24.0/OpenAI adapter 10.11.0/OpenAI 2.14.0;
-  302 also uses Microsoft.Agents.AI.Workflows 1.24.0.
+  agent. All use Agent Framework 1.24.0/OpenAI adapter 10.11.0/OpenAI 2.14.0;
+  302-303 also use Microsoft.Agents.AI.Workflows 1.24.0.
+- **304:** Keeps the Founder prompt, then fans its exact pitch out to
+  HypeInvestor, BootstrapInvestor, and DoomsdayInvestor. Typed executors use
+  fresh isolated sessions; `InProcessExecution.Concurrent` enables overlap.
+  Bind executor factories; do not mark the mutable collector cross-run shareable.
+  A fan-in barrier releases individual reviews to a C# collector, which yields
+  one sorted array after all three. Four model calls, no summarizer agent,
+  tools, debate, or revision loop. Same package versions as 302.
+- **406:** Real RAG over three fictional Lab Hub text files. Paragraph chunks
+  receive real 1536-dimensional embeddings and are upserted into
+  CommunityToolkit.VectorData.InMemory 1.0.1. Each question is embedded with
+  the same model; cosine search returns three excerpts for a fresh answering
+  agent session. `FOUNDRY_EMBEDDING_DEPLOYMENT` is required in addition to the
+  normal API-key configuration. Vector storage/search are local, but embedding
+  and inference use Foundry. No MCP or hosted agent; the index is rebuilt each run.
 - **Lab 400:** Builds on Lab 300's bounded workflow. A versioned Foundry Prompt
   Agent with File Search over `labs\lab-400\agenda.json` is the Session Picker;
   it receives the request and output contract, with a per-call candidate JSON
@@ -137,6 +161,10 @@ Cloud exercises read `FOUNDRY_ENDPOINT`, `FOUNDRY_API_KEY`, and
 a model catalog identifier. For API-key inference, project/resource endpoints
 are mapped to the resource's `/openai/v1`; a Foundry project URL does not turn
 these clients into `AIProjectClient` or enable project-level agent APIs.
+
+Exercise 406 additionally reads `FOUNDRY_EMBEDDING_DEPLOYMENT` for a separate
+1536-dimensional embedding deployment on the same resource, such as
+text-embedding-3-small. Never substitute a chat deployment or mix embedding models.
 
 Exercise 405 is the exception: it reads the full project URL from
 `FOUNDRY_ENDPOINT` and wraps an existing Prompt Agent with
@@ -198,12 +226,12 @@ and a footer at y=985. Fonts and graphics are embedded from `_resources`.
 See `_tools\README.md` for layout and export details.
 
 Current exercise slides are 001 at 14 and 101-109 at 26, 28, 30, 32, 35, 37, 40, 42, 43;
-lab 100 is at 45, and exercises 201-205 are at 48, 51, 54, 56, 59.
-Lab 200 uses slides 61-63
-(`ExerciseBody -badge 'LAB'`, header `LAB 200`); exercises 301-302 use slides
-65-66, and lab 300 is at 67 with header `LAB 300`. Section dividers are 64 and 68,
-exercises 401-405 use slides 69-73, Lab 400 is at 74, and the closing slide is 75
-(75 slides total).
+lab 100 is at 45, and exercises 201-206 are at 48, 51, 54, 56, 59, 60.
+Lab 200 uses slides 62-64
+(`ExerciseBody -badge 'LAB'`, header `LAB 200`); exercises 301-304 use slides
+66-69, and lab 300 is at 70 with header `LAB 300`. Section dividers are 65 and 71,
+exercises 401-406 use slides 72-77, Lab 400 is at 78, and the closing slide is 79
+(79 slides total).
 Adding slides requires updating generator
 numbering, the shifted SVG outputs, root README headings/image references,
 and the deck, as well as slide-count references in tool documentation.

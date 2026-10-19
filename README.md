@@ -544,15 +544,24 @@ Read [the ASP.NET Core MCP hosting example](https://learn.microsoft.com/en-us/az
 
 Exercise 205 splits MCP hosting and consumption into two projects. The ASP.NET server exposes the current local date and time through MCP over Streamable HTTP, with `TimeProvider` injected into the tool class by ASP.NET Core's DI container. The console client connects to `http://localhost:5285/mcp`, lists the server's tools, and provides them to a Foundry-backed `AIAgent`. Run the server first in one terminal, then the client in another.
 
-### Slide 60 - Lab 100 to Lab 200: fetch facts on demand
+### Slide 60 - Exercise 206: Chatbot Agent with Tool Approval
 ![Slide 60](_slides/slide-60.svg)
+
+[Exercise 206 README](exercises/exercise-206/README.md)
+
+> **TL;DR:** The model proposes a tool call; a human decides whether the framework may execute it.
+
+Wrap exercise 201's unchanged `get_current_time` and `get_current_date` functions in `ApprovalRequiredAIFunction`. Inspect each `ToolApprovalRequestContent`, display the function name, call ID, and empty JSON arguments, then collect an explicit console decision. Send correlated approval or denial responses through the same `AgentSession`; approved calls execute, denied calls do not. Use breakpoints in the familiar clock tools to observe execution. Enter denies by default, invalid input asks again, and `quit` or EOF exits without submitting pending decisions. No new tool scenario, MCP server, or workflow is introduced.
+
+### Slide 61 - Lab 100 to Lab 200: fetch facts on demand
+![Slide 61](_slides/slide-61.svg)
 
 > **TL;DR:** Focused tools reduce agenda context, but total cost includes tool round trips and growing history.
 
 Lab 100 places the whole agenda in each request. Lab 200 keeps it only in the server, discovers six tools in the client, and sends short instructions plus selected results. Deterministic matching makes ambiguity explicit rather than asking the model to interpret the whole document. This can reduce agenda data per request, but tool schemas, network latency, additional model calls, and accumulated results still cost time and tokens. Compare total usage and accuracy across the same questions; do not assume MCP always makes a run cheaper. Use `/debug` to trace a speaker lookup and follow-up, then verify the returned room and Warsaw-local time.
 
-### Slide 61 - Lab 200: DevDays Buddy MCP Tools
-![Slide 61](_slides/slide-61.svg)
+### Slide 62 - Lab 200: DevDays Buddy MCP Tools
+![Slide 62](_slides/slide-62.svg)
 
 [Lab 200 README](labs/lab-200/README.md)
 
@@ -560,25 +569,25 @@ Lab 100 places the whole agenda in each request. Lab 200 keeps it only in the se
 
 Build an ASP.NET MCP server with an embedded `agenda.json` and six tools for conference information, dates, speakers, and sessions. A separate console agent discovers and invokes those tools; the entire agenda is never added to the agent's instructions.
 
-### Slide 62 - Lab 200: Build the Agenda MCP Server
-![Slide 62](_slides/slide-62.svg)
+### Slide 63 - Lab 200: Build the Agenda MCP Server
+![Slide 63](_slides/slide-63.svg)
 
 Implement tools for the conference name and description, dates, speaker list and speaker lookup, sessions by date, and session details by title or date and start time. Deterministic partial matching should return ambiguity candidates instead of silently selecting the wrong speaker or session.
 
-### Slide 63 - Lab 200: Connect the DevDays Buddy Agent
-![Slide 63](_slides/slide-63.svg)
+### Slide 64 - Lab 200: Connect the DevDays Buddy Agent
+![Slide 64](_slides/slide-64.svg)
 
 Run the MCP server and console client as separate processes. The client discovers tools over Streamable HTTP and supplies them to an `AIAgent`; only the selected tool results and conversation history are sent to the model, not the full agenda document.
 
-### Slide 64 - Part 3: Orchestrating agents and workflows
-![Slide 64](_slides/slide-64.svg)
+### Slide 65 - Part 3: Orchestrating agents and workflows
+![Slide 65](_slides/slide-65.svg)
 
 > **TL;DR:** Coordinate specialist agents and workflows to combine their work into one useful result.
 
-Part 3 starts with the Terrible Startup Pitch: exercise 301 manually forwards a Founder's pitch to an Investor, and 302 uses the same agents with workflow executors and an edge. Lab 300 then splits a conference-day planning request between a Session Picker, Schedule Builder, and Plan Reviewer, adding structured state, C# constraints, and conditional revision edges. Compare when workflow structure helps and when simple sequential calls are enough.
+Part 3 starts with the Terrible Startup Pitch: exercise 301 manually forwards a Founder's pitch to an Investor, and 302 uses the same agents with workflow executors and an edge. Exercise 303 inserts a human-input pause so a participant can accept or replace the pitch before the Investor runs. Exercise 304 fans one pitch out to three investors with contrasting personas, runs them concurrently, and collects their independent reviews. Lab 300 then splits a conference-day planning request between a Session Picker, Schedule Builder, and Plan Reviewer, adding structured state, C# constraints, and conditional revision edges. Compare when workflow structure helps and when simple sequential calls are enough.
 
-### Slide 65 - Exercise 301: Terrible Startup Pitch - Manual Orchestration
-![Slide 65](_slides/slide-65.svg)
+### Slide 66 - Exercise 301: Terrible Startup Pitch - Manual Orchestration
+![Slide 66](_slides/slide-66.svg)
 
 [Exercise 301 README](exercises/exercise-301/README.md)
 
@@ -586,8 +595,8 @@ Part 3 starts with the Terrible Startup Pitch: exercise 301 manually forwards a 
 
 Create an enthusiastic Founder agent and a skeptical Investor agent using the same Foundry-backed `IChatClient`, but different instructions and fresh sessions. The Founder turns a theme into a ridiculous startup pitch; ordinary C# passes its exact `AgentResponse.Text` to the Investor, which returns a strength, objections, and a fictional FUND/PASS verdict. There are no workflows, tools, or revision loops.
 
-### Slide 66 - Exercise 302: Terrible Startup Pitch - Workflow
-![Slide 66](_slides/slide-66.svg)
+### Slide 67 - Exercise 302: Terrible Startup Pitch - Workflow
+![Slide 67](_slides/slide-67.svg)
 
 [Exercise 302 README](exercises/exercise-302/README.md)
 
@@ -595,8 +604,26 @@ Create an enthusiastic Founder agent and a skeptical Investor agent using the sa
 
 Wrap each agent in an `Executor<string, string>`, connect Founder to Investor with `WorkflowBuilder.AddEdge`, and register the Investor with `WithOutputFrom`. `InProcessExecution.RunStreamingAsync` runs the graph locally; executor completion shows the Founder's pitch and workflow output supplies the Investor's review. Both exercises use identical prompts, isolated sessions, and two agent invocations per completed round. The workflow makes the sequence observable rather than adding another model or a retry loop.
 
-### Slide 67 - Lab 300: Plan My Conference Day
-![Slide 67](_slides/slide-67.svg)
+### Slide 68 - Exercise 303: Terrible Startup Pitch - Human Input Pauses
+![Slide 68](_slides/slide-68.svg)
+
+[Exercise 303 README](exercises/exercise-303/README.md)
+
+> **TL;DR:** Pause the workflow for a human decision, then resume the same run with a correlated response.
+
+Insert `RequestPort<string, string>` between the Founder and Investor. The console handles `RequestInfoEvent`, displays the pitch, and lets the participant accept it with Enter or type a complete replacement. `SendResponseAsync(request.Request.CreateResponse(reviewedPitch))` resumes the existing run and sends that exact pitch to the Investor. No Investor call occurs before human input; `quit` or EOF stops the pending run. This is an in-process workflow pause, not durable checkpointing or approval-required tool execution.
+
+### Slide 69 - Exercise 304: Terrible Startup Pitch - Concurrent Investors
+![Slide 69](_slides/slide-69.svg)
+
+[Exercise 304 README](exercises/exercise-304/README.md)
+
+> **TL;DR:** Give the same pitch to three independent investors at once, then collect their contrasting reviews.
+
+Keep the Founder, then fan its exact pitch out to HypeInvestor, BootstrapInvestor, and DoomsdayInvestor: a unicorn chaser, a penny-pinching accountant, and an offline-first prepper. `AddFanOutEdge` distributes the pitch and `InProcessExecution.Concurrent` enables overlapping execution. A fan-in barrier waits for all branches, then a C# collector yields three labelled reviews in stable display order. Each invocation has a fresh session. There are four model calls, no fifth summarizer agent, and no shared history, debate, or revision loop.
+
+### Slide 70 - Lab 300: Plan My Conference Day
+![Slide 70](_slides/slide-70.svg)
 
 [Lab 300 README](labs/lab-300/README.md)
 
@@ -604,15 +631,15 @@ Wrap each agent in an `Executor<string, string>`, connect Founder to Investor wi
 
 Build on Lab 200's MCP agenda server with a Session Picker, Schedule Builder, and Plan Reviewer. The console collects a conference date, availability, and interests; the workflow fetches one day's structured sessions through MCP and passes canonical IDs and recommendation reasons between agents. C# checks dates, time windows, duplicate IDs, candidate membership, and overlaps. Conditional edges send rejected plans back to the builder for at most two revisions, then return either an approved itinerary or an explicit no-approved-plan result. Stage panels expose handoffs and feedback. Starter and solution projects, plus deterministic graph checks without Foundry, are included.
 
-### Slide 68 - Part 4: Making agents reliable and production-ready
-![Slide 68](_slides/slide-68.svg)
+### Slide 71 - Part 4: Making agents reliable and production-ready
+![Slide 71](_slides/slide-71.svg)
 
 > **TL;DR:** Make agents reliable with validation, clear failure handling, logging, and tests.
 
-Part 4 improves agent reliability with input and data validation, understandable error handling, concise logging, and tests for important behavior. Exercises 401-404 use a tiny Secret Snack Stash to separate claimed identity, console authentication, trusted in-process user context, and authenticated MCP requests. Application code—not an unsupported model claim—must enforce who can access protected data. Exercise 405 then chats with an existing versioned Microsoft Foundry Prompt Agent using Microsoft Entra application authentication and a server-side conversation. Lab 400 applies that hosting boundary to Lab 300's planner: a Foundry Session Picker retrieves the agenda, while local agents and C# retain scheduling, review, and validation.
+Part 4 improves agent reliability with input and data validation, understandable error handling, concise logging, and tests for important behavior. Exercises 401-404 use a tiny Secret Snack Stash to separate claimed identity, console authentication, trusted in-process user context, and authenticated MCP requests. Application code—not an unsupported model claim—must enforce who can access protected data. Exercise 405 then chats with an existing versioned Microsoft Foundry Prompt Agent using Microsoft Entra application authentication and a server-side conversation. Exercise 406 makes RAG explicit: chunk a fictional handbook, embed it into an in-memory vector store, and retrieve evidence before answering. Lab 400 applies the hosting boundary to Lab 300's planner: a Foundry Session Picker retrieves the agenda, while local agents and C# retain scheduling, review, and validation.
 
-### Slide 69 - Exercise 401: A Name Is Not Authentication
-![Slide 69](_slides/slide-69.svg)
+### Slide 72 - Exercise 401: A Name Is Not Authentication
+![Slide 72](_slides/slide-72.svg)
 
 [Exercise 401 README](exercises/exercise-401/README.md)
 
@@ -620,8 +647,8 @@ Part 4 improves agent reliability with input and data validation, understandable
 
 Alice keeps stroopwafels in her keyboard drawer; Bob keeps gummy bears behind his rubber duck. The intentionally vulnerable `get_secret_snack(string userName)` tool takes its owner name from the agent without verifying credentials. Claim to be either person and inspect the tool output. Knowing a name is not permission to open that person's private stash.
 
-### Slide 70 - Exercise 402: Authenticated but Model-Controlled Identity
-![Slide 70](_slides/slide-70.svg)
+### Slide 73 - Exercise 402: Authenticated but Model-Controlled Identity
+![Slide 73](_slides/slide-73.svg)
 
 [Exercise 402 README](exercises/exercise-402/README.md)
 
@@ -629,8 +656,8 @@ Alice keeps stroopwafels in her keyboard drawer; Bob keeps gummy bears behind hi
 
 The console's `/auth` command checks public demo credentials without sending the password to the model. After successful authentication, it creates an agent with the signed-in `userId` in its system instructions; questions are sent unchanged, and the agent supplies the ID to `get_secret_snack(string userId)`. This is still intentionally unsafe: the tool does not compare the supplied ID with trusted authentication state. System instructions and a model's refusal to substitute another ID are not an authorization boundary.
 
-### Slide 71 - Exercise 403: Trusted User Context Through DI
-![Slide 71](_slides/slide-71.svg)
+### Slide 74 - Exercise 403: Trusted User Context Through DI
+![Slide 74](_slides/slide-74.svg)
 
 [Exercise 403 README](exercises/exercise-403/README.md)
 
@@ -638,8 +665,8 @@ The console's `/auth` command checks public demo credentials without sending the
 
 Console `/auth` now populates a scoped `UserContext`. The scope's service provider is passed to `AsAIAgent`, which injects `IServiceProvider` into the static `SnackTools.GetSecretSnack` method, as in exercise 203. The tool resolves the context without exposing any model-facing parameters and denies signed-out or unknown users. A console scope belongs to one user at a time; sign-in attempts and sign-out clear conversation history to prevent cross-user leakage.
 
-### Slide 72 - Exercise 404: Authenticated MCP Tools
-![Slide 72](_slides/slide-72.svg)
+### Slide 75 - Exercise 404: Authenticated MCP Tools
+![Slide 75](_slides/slide-75.svg)
 
 [Exercise 404 README](exercises/exercise-404/README.md)
 
@@ -649,8 +676,8 @@ Run a separate ASP.NET Core server and console client. `/auth` posts demo creden
 
 Follow exercise 404's [manual boundary checks](exercises/exercise-404/README.md#try-the-boundary), including the unauthenticated HTTP request that needs no Foundry deployment. The agent-based checks require the configured client; no automated authentication-check project is included.
 
-### Slide 73 - Exercise 405: Call a Microsoft Foundry Agent
-![Slide 73](_slides/slide-73.svg)
+### Slide 76 - Exercise 405: Call a Microsoft Foundry Agent
+![Slide 76](_slides/slide-76.svg)
 
 [Exercise 405 README](exercises/exercise-405/README.md)
 
@@ -658,8 +685,17 @@ Follow exercise 404's [manual boundary checks](exercises/exercise-404/README.md#
 
 Read `TENANT_ID`, `CLIENT_ID`, `CLIENT_SECRET`, `FOUNDRY_ENDPOINT`, `FOUNDRY_AGENT_NAME`, and `FOUNDRY_AGENT_VERSION`. Create a `ClientSecretCredential` and `AIProjectClient`, then wrap the existing agent using `AsAIAgent(new AgentReference(name, version))` from `Microsoft.Agents.AI.Foundry`. Create a server-side session with `CreateConversationSessionAsync`, ask "What are your capabilities?", print the conversation ID, and reuse that session in the interactive loop. The model, instructions, and hosted tools live in Foundry; no API key or model deployment setting is needed. The exercise README covers Azure app registration, project RBAC, and a secretless managed-identity alternative. This preserves the reference sample's interaction without its obsolete classic-agent API.
 
-### Slide 74 - Lab 400: A Foundry-Powered Planner
-![Slide 74](_slides/slide-74.svg)
+### Slide 77 - Exercise 406: Real RAG with an In-Memory Vector Store
+![Slide 77](_slides/slide-77.svg)
+
+[Exercise 406 README](exercises/exercise-406/README.md)
+
+> **TL;DR:** Real vector retrieval needs no database server for a small demo; embeddings and answer generation still use Foundry.
+
+Split three bundled fictional Lab Hub documents into paragraph chunks, generate 1536-dimensional embeddings, and upsert vectors with their source text into `CommunityToolkit.VectorData.InMemory`. Embed each question with the same deployment and run cosine search for the top three chunks. Print the retrieved IDs, scores, and excerpts, then pass only those excerpts and the question to a fresh agent session for a cited answer or an admission of missing evidence. Configure `FOUNDRY_EMBEDDING_DEPLOYMENT` in addition to the normal Foundry variables. The index is local and ephemeral, not offline inference or managed File Search.
+
+### Slide 78 - Lab 400: A Foundry-Powered Planner
+![Slide 78](_slides/slide-78.svg)
 
 [Lab 400 README](labs/lab-400/README.md)
 
@@ -667,8 +703,8 @@ Read `TENANT_ID`, `CLIENT_ID`, `CLIENT_SECRET`, `FOUNDRY_ENDPOINT`, `FOUNDRY_AGE
 
 Build on Lab 300 with a versioned Foundry Prompt Agent configured with File Search over `agenda.json`. The first executor sends the attendee's request and expected result contract, enforces a per-call JSON schema, and validates candidate IDs against an identical local agenda snapshot; it never sends that catalog to the hosted picker. Schedule Builder and Plan Reviewer remain in-process `AIAgent` objects with cloud inference and fresh sessions. The local Agent Framework graph preserves C# date/time, membership and overlap checks, at most two revisions, visible handoffs, and an explicit no-approved-plan result. No MCP server is needed. The lab includes a buildable starter, complete solution, hosted-agent setup instructions, and deterministic graph checks without Azure credentials.
 
-### Slide 75 - Any questions?
-![Slide 75](_slides/slide-75.svg)
+### Slide 79 - Any questions?
+![Slide 79](_slides/slide-79.svg)
 
 > **TL;DR:** You are wrapping up with time for questions and a link to the workshop materials.
 

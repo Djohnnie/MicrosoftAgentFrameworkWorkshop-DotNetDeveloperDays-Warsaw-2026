@@ -1,0 +1,5 @@
+The fictional DevDays Buddy Lab Hub runs a debugging clinic in the Collaboration Room from 14:00 to 15:00. Bring a minimal reproduction and the exact error message. Remove API keys, tokens, and personal data before sharing logs.
+
+For a lost demo badge, visit the Orbit desk. Staff will check the original loan sheet or registration note before issuing a replacement. A replacement badge is green rather than blue.
+
+The Lab Hub feedback station is beside the east entrance. Feedback is collected on paper cards and reviewed after the practice day. No catering menu, Wi-Fi password, or real conference schedule is included in this demo handbook.
